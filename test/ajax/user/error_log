@@ -1,0 +1,18 @@
+[24-Aug-2013 16:56:52 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/collecwo/public_html/ajax/user/send.php on line 40
+[24-Aug-2013 16:56:54 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/collecwo/public_html/ajax/user/send.php on line 40
+[24-Aug-2013 17:12:56 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/collecwo/public_html/ajax/user/send.php on line 40
+[24-Aug-2013 17:12:57 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/collecwo/public_html/ajax/user/send.php on line 40
+[24-Aug-2013 17:16:16 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/collecwo/public_html/ajax/user/send.php on line 40
+[24-Aug-2013 17:16:16 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/collecwo/public_html/ajax/user/send.php on line 40
+[24-Aug-2013 17:16:18 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/collecwo/public_html/ajax/user/send.php on line 40
+[24-Aug-2013 17:16:22 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/collecwo/public_html/ajax/user/send.php on line 40
+[24-Aug-2013 17:18:23 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/collecwo/public_html/ajax/user/send.php on line 40
+[24-Aug-2013 17:23:03 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/collecwo/public_html/ajax/user/send.php on line 40
+[24-Aug-2013 17:25:36 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/collecwo/public_html/ajax/user/send.php on line 40
+[24-Aug-2013 17:27:26 America/New_York] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home/collecwo/public_html/lang/email/email_es.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/collecwo/public_html/ajax/user/send.php on line 44
+[29-Aug-2013 03:03:26 America/New_York] PHP Fatal error:  Call to undefined function base_url() in /home/collecwo/public_html/ajax/user/user_phonecards.php on line 228
+[29-Aug-2013 03:03:36 America/New_York] PHP Fatal error:  Call to undefined function base_url() in /home/collecwo/public_html/ajax/user/user_phonecards.php on line 228
+[29-Aug-2013 03:05:15 America/New_York] PHP Fatal error:  Call to undefined function base_url() in /home/collecwo/public_html/ajax/user/user_phonecards.php on line 228
+[29-Aug-2013 03:07:06 America/New_York] PHP Fatal error:  Call to undefined function base_url() in /home/collecwo/public_html/ajax/user/user_phonecards.php on line 230
+[29-Aug-2013 03:08:41 America/New_York] PHP Fatal error:  Call to undefined function base_url() in /home/collecwo/public_html/ajax/user/user_phonecards.php on line 229
+[29-Aug-2013 03:10:09 America/New_York] PHP Fatal error:  Call to undefined function base_url() in /home/collecwo/public_html/ajax/user/user_phonecards.php on line 229

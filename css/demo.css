@@ -1,0 +1,39 @@
+
+
+/* jContent demos */
+#demo1.jc-horizontal a.prev,
+#demo1.jc-horizontal a.next,
+#demo7.jc-horizontal a.prev,
+#demo7.jc-horizontal a.next
+{
+	margin-top:10px;
+	margin-bottom:15px;
+}
+
+.jContent div .slides
+{
+	height: 170px;
+	width:540px;
+}
+
+.jContent p.title
+{
+	padding: 10px 20px 0px 25px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.jContent p.txt
+{
+	padding: 10px 20px 0px 20px;
+	font-size: 14px;
+}
+
+.jContent p.txt img
+{
+	float: left;
+	display: block;
+	border: 5px solid #ffffff;
+	margin: 0px 15px 5px 0px;
+}
+

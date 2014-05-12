@@ -1,0 +1,6 @@
+[20-Aug-2013 16:33:04 America/New_York] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/collecwo/public_html/ajax/account/c_phonecards_catalogs.php on line 37
+[20-Aug-2013 16:34:13 America/New_York] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/collecwo/public_html/ajax/account/c_phonecards_catalogs.php on line 37
+[23-Aug-2013 15:32:05 America/New_York] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/collecwo/public_html/ajax/account/overview.php on line 38
+[23-Aug-2013 15:32:05 America/New_York] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/collecwo/public_html/ajax/account/collections.php on line 43
+[23-Aug-2013 15:32:07 America/New_York] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/collecwo/public_html/ajax/account/overview.php on line 38
+[23-Aug-2013 19:02:46 America/New_York] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/collecwo/public_html/ajax/account/c_phonecards.php on line 69

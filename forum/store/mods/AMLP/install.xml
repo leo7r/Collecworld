@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="./modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: https://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at https://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+		
+		<title lang="en">Advanced Multi Language Pack Support MOD</title>
+		
+		<description lang="en">
+Features:
+- enables the browser language detection for guest users not to use the default language of the board
+- adds a language selection dropdown box and a language selection flag bar using SESSIONS_TABLE insteat of cookies or POST/GET variables
+- grabs missing language variables from en (British English) or the default board language (language inheritance) 
+
+This MOD is based on following MODs:
+- Enable Browser Language Detection MOD - http://www.phpbb.com/customise/db/mod/enable_browser_language_detection/ by Martin Truckenbrodt
+- Inherited translation - http://www.phpbb.com/customise/db/mod/inherited_translation/ by Alek$
+
+This MOD supports following MODs automatically:
+- Mutiple Newsletters Add On - https://www.phpbb.com/customise/db/mod/multiple_newsletters_add_on
+- phpBB Gallery MOD - https://www.phpbb.com/customise/db/mod/phpbb_gallery
+- Hotschi's Download MOD - http://phpbb3.oxpus.net/downloads.php?view=detail&amp;df_id=1
+- phpBB Calendar MOD - https://www.phpbb.com/customise/db/mod/phpbb_calendar - needs to be installed with UMIL installer - https://www.phpbb.com/community/viewtopic.php?f=70&amp;t=666195&amp;start=3975#p13189971
+- th23 CMS - https://www.phpbb.com/customise/db/mod/th23_cms_(content_management_system)
+- Phpbb Primetime - http://www.mylatterdays.com
+- DM Linkx - http://area53.die-muellers.org/dm_eds/showcat.php?id=1
+- DM Easy Download System - http://area53.die-muellers.org/dm_eds/showcat.php?id=1
+- DM Music Charts - http://area53.die-muellers.org/dm_eds/showcat.php?id=1
+- DM Video - http://area53.die-muellers.org/dm_eds/showcat.php?id=1
+- DM Partners - http://area53.die-muellers.org/dm_eds/showcat.php?id=1
+- DM Quotes Collection - http://area53.die-muellers.org/dm_eds/showcat.php?id=1
+- User Blog MOD - https://www.phpbb.com/customise/db/mod/user_blog_mod
+- Classifieds MOD - http://phpbb3hacks.com/modifications.php?name=Classifieds
+
+Also Handyman` MOD version check is supported - https://www.phpbb.com/customise/db/mod/mod_version_check</description>
+
+		<author-notes lang="en">First upload language/*.*, styles/*.*, umil/*.* and umil_auto_amls.php and run the umil_auto_amls.php installer! And then upload the other new and edited files!
+New ACP settings you will find under BOARD CONFIGURATION -> Board settings.
+If your board default language is different to British English and if you are selecting your board default language for language inheritance then be sure that all installed MODs are fully translated for your board default language!
+The MOD is using free flag images taken from http://www.free-country-flags.com .</author-notes>
+		<author-group>
+			<author>
+				<realname>Martin Truckenbrodt</realname>
+				<username>Martin Truckenbrodt</username>
+				<homepage>http://www.martin-truckenbrodt.com</homepage>
+			</author>
+		</author-group>
+		
+		<mod-version>1.0.3</mod-version>
+		
+		<installation>
+			<level>intermediate</level>
+			<time>600</time>
+			<target-version>3.0.11</target-version>
+		</installation>
+		
+		<history>
+			<entry>
+				<date>2012-06-16</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en-gb">
+					<change>first release</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2012-06-26</date>
+				<rev-version>1.0.1</rev-version>
+				<changelog lang="en-gb">
+					<change>error messages in UMIL installer fixed - http://www.phpbb.com/community/viewtopic.php?f=70&amp;t=2156113#p13155914</change>
+					<change>problem with underscores in lang_iso name for language inheritance fixed - http://www.phpbb.com/customise/db/mod/inherited_translation/support/feedback-t_99576-p_251624#p251624</change>
+					<change>check for installed language packs added to session_lang check</change>
+					<change>czech translation added - special thanks to Leschek!</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2012-10-30</date>
+				<rev-version>1.0.2</rev-version>
+				<changelog lang="en-gb">
+					<change>some issues fixed found while MOD validation</change>
+					<change>flag gifs replaced with smaller ones</change>
+					<change>UMIL compatibility issue workaround</change>
+					<change>auto-support for several Add-Ons (large MODs) added</change>
+					<change>support for Handyman` MOD version check added</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2012-12-24</date>
+				<rev-version>1.0.3</rev-version>
+				<changelog lang="en-gb">
+					<change>fixed user language can not been changed from UCP -> Board preferences - https://www.phpbb.com/community/viewtopic.php?f=70&amp;t=2156113&amp;start=30#p13196582</change>
+					<change>UMIL 1.0.5 update</change>
+					<change>MODX 1.2.6 update</change>
+				</changelog>
+			</entry>
+		</history>
+		<link-group>
+			<link type="contrib" href="contrib/AMLS_update_1.0.2_to_1.0.3.xml" lang="en">Update AMLS 1.0.2 to 1.0.3</link>
+			<link type="language" href="contrib/languages/de.xml" lang="en">german</link>
+			<link type="language" href="contrib/languages/cs.xml" lang="en">czech</link>
+			<link type="template" href="contrib/templates/subsilver2.xml" lang="en">subsilver2</link>
+		</link-group>
+	</header>
+	
+	<action-group>
+		<copy>
+			<file from="root/adm/mods/amls_check_version.php" to="adm/mods/amls_check_version.php" />
+			<file from="root/language/en/mods/umil_auto_amls.php" to="language/en/mods/umil_auto_amls.php" />
+			<file from="root/styles/prosilver/imageset/*.*" to="styles/prosilver/imageset/*.*" />
+			<file from="root/umil_auto_amls.php" to="umil_auto_amls.php" />
+			<file from="root/umil/*.*" to="umil/*.*" />
+		</copy>
+		<open src="includes/acp/acp_board.php">
+			<edit>
+				<find><![CDATA[						'default_lang'			=> array('lang' => 'DEFAULT_LANGUAGE',		'validate' => 'lang',	'type' => 'select', 'function' => 'language_select', 'params' => array('{CONFIG_VALUE}'), 'explain' => false),]]></find>
+				<action type="after-add"><![CDATA[						'inherit_lang'			=> array('lang' => 'INHERIT_LANG',			'validate' => 'int',	'type' => 'custom', 'method' => 'select_inherit_lang', 'explain' => true),
+						'detect_lang_enable'	=> array('lang' => 'DETECT_LANG_ENABLE',	'validate' => 'bool',	'type' => 'radio:yes_no', 'explain' => true),
+						'lang_select_enable'	=> array('lang' => 'LANG_SELECT_ENABLE',	'validate' => 'bool',	'type' => 'radio:yes_no', 'explain' => true),
+						'lang_click_enable'		=> array('lang' => 'LANG_CLICK_ENABLE',		'validate' => 'bool',	'type' => 'radio:yes_no', 'explain' => true),]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[	/**
+	* Maximum/Minimum username length]]></find>
+				<action type="before-add"><![CDATA[	/**
+	* Select inherited language method
+	*/
+	function select_inherit_lang($value, $key = '')
+	{
+		global $user, $config, $db;
+
+		$radio_ary[INHERIT_LANG_DEFAULT] = 'DEFAULT_LANGUAGE';
+
+		$sql = 'SELECT lang_iso
+			FROM ' . LANG_TABLE . "
+			WHERE lang_iso = 'en'";
+		$result = $db->sql_query_limit($sql, 1);
+
+		if ($row = $db->sql_fetchrow($result))
+		{
+			$radio_ary[INHERIT_LANG_EN] = 'LANG_EN';
+		}
+
+		$radio_ary[INHERIT_LANG_NONE] = 'LANG_NONE';
+
+		$db->sql_freeresult($result);
+
+		$radio_text = h_radio('config[inherit_lang]', $radio_ary, $value, 'inherit_lang', $key, '<br />');
+
+		return $radio_text;
+	}
+]]></action>
+			</edit>
+		</open>
+		<open src="includes/constants.php">
+			<edit>
+				<find><![CDATA[// Additional constants]]></find>
+				<action type="after-add"><![CDATA[define('INHERIT_LANG_NONE', 0);
+define('INHERIT_LANG_EN', 1);
+define('INHERIT_LANG_DEFAULT', 2);]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA[/**
+* Pick a template/theme combo,]]></find>
+				<action type="before-add"><![CDATA[/**
+* Pick a language, any language for the session_lang from the dropdown box
+*/
+function session_lang_select($default = '')
+{
+	global $db;
+
+	$sql = 'SELECT lang_iso, lang_local_name
+		FROM ' . LANG_TABLE . '
+		ORDER BY lang_english_name';
+	$result = $db->sql_query($sql);
+
+	$lang_options = '';
+	while ($row = $db->sql_fetchrow($result))
+	{
+		$selected = ($row['lang_iso'] == $default) ? ' selected="selected"' : '';
+		$lang_options .= '<option value="' . $row['lang_iso'] . '"' . $selected . '>' . $row['lang_local_name'] . '</option>';
+	}
+	$db->sql_freeresult($result);
+
+	return $lang_options;
+}
+
+/**
+* Pick a language, any language for the session_lang from the language flags bar
+*/
+function session_lang_click($default = '', $query_string)
+{
+	global $db, $user, $phpbb_root_path;
+
+	$sql = 'SELECT lang_iso, lang_local_name
+		FROM ' . LANG_TABLE . '
+		ORDER BY lang_english_name';
+	$result = $db->sql_query($sql);
+
+	$lang_options = '';
+
+	while ($row = $db->sql_fetchrow($result))
+	{
+		if ($row['lang_iso'] !== $default)
+		{
+			$lang_options .= ' <a href="' . $user->page['root_script_path'] . $user->page['page_name'] . '?session_lang=' . $row['lang_iso'] . $query_string . '" onclick="document.getElementById(session_lang);submit();" title="' . $row['lang_local_name'] . '"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/' . $row['lang_iso'] . '/icon_lang_flag.gif" alt="' . $row['lang_local_name'] . '" /></a> ';
+		}
+	}
+	$db->sql_freeresult($result);
+
+	return $lang_options;
+}
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[	// The following assigns all _common_ variables that may be used at any point in a template.]]></find>
+				<action type="before-add"><![CDATA[	// Advanced Multi Language Pack Support MOD
+	// don't parse actions again - so just post again only the main variables
+	// and disable language selection bar on posting pages
+	// it's quick & dirty code, but it's easy to add to the core - make it a core feature and then do it in a better way please ;)
+	// maybe a better implementation will come with the next generation of AMLS - but then MOD support wil need to edit MOD files and perhaps MOD core file edits, too
+	// if you know other candidates then please contact AMLS MOD author under webmaster@martin-truckenbrodt.com
+	$s_hidden_string_fields = array();
+	$value_found = $query_string = '';
+	$query_string_array = explode('&', $user->page['query_string']);
+	$page_name = str_replace('.' . $phpEx, '', $user->page['page_name']);
+
+	// phpBB3 core pages
+	// variables posted again
+	$keys_array = array('sid', 's', 'mode', 'i', 'folder', 'search_id', 'u', 'f', 't', 'p', 'sg');
+	// values - e.g. for mode - for not to show the language selection bar
+	$values_array = array('email');
+	// pages for not to show the language selection bar
+	$pages_array = array('posting', 'search');
+
+	// Auto MOD support
+	// Mutiple Newsletters Add On - https://www.phpbb.com/customise/db/mod/multiple_newsletters_add_on
+	if (array_key_exists('mnewsletter_version', $config) && $config['mnewsletter_version'])
+	{
+		$keys_array = array_merge($keys_array, array('n', 'e'));
+		$pages_array = array_merge($pages_array, array('newsletter_sending'));
+	}
+	// phpBB Gallery MOD - https://www.phpbb.com/customise/db/mod/phpbb_gallery
+	if (array_key_exists('phpbb_gallery_version', $config) && $config['phpbb_gallery_version'])
+	{
+		$keys_array = array_merge($keys_array, array('album_id', 'image_id'));
+		$pages_array = array_merge($pages_array, array('gallery/posting', 'gallery/comment'));
+		$values_array = array_merge($values_array, array('upload'));
+	}
+	// Hotschi's Download MOD - http://phpbb3.oxpus.net/downloads.php?view=detail&df_id=1
+	if (array_key_exists('dl_mod_version', $config) && $config['dl_mod_version'])
+	{
+		$keys_array = array_merge($keys_array, array('cat', 'view', 'df_id'));
+	}
+	// phpBB Calendar MOD - https://www.phpbb.com/customise/db/mod/phpbb_calendar
+	// needs to be installed with UMIL installer - https://www.phpbb.com/community/viewtopic.php?f=70&t=666195&start=3975#p13189971
+	
+	if (array_key_exists('calendar_version', $config) && $config['calendar_version'])
+	{
+		$keys_array = array_merge($keys_array, array('calWatch', 'calEid', 'calD', 'calM', 'calY'));
+		$pages_array = array_merge($pages_array, array('calendarpost'));
+	}
+	// th23 CMS - https://www.phpbb.com/customise/db/mod/th23_cms_(content_management_system)
+	if (array_key_exists('th23_cms', $config) && $config['th23_cms'])
+	{
+		$keys_array = array_merge($keys_array, array('cms', 'page'));
+	}
+	// Phpbb Primetime - http://www.mylatterdays.com
+	if (array_key_exists('core_version', $config) && $config['core_version'])
+	{
+		$values_array = array_merge($values_array, array('post'));
+	}
+	// DM Linkx - http://area53.die-muellers.org/dm_eds/showcat.php?id=1
+	if (array_key_exists('dm_linkx_version', $config) && $config['dm_linkx_version'])
+	{
+		$keys_array = array_merge($keys_array, array('v', 'c'));
+		$values_array = array_merge($values_array, array('new'));
+		$pages_array = array_merge($pages_array, array('dm_linkx/postlinkx'));
+	}
+	// DM Easy Download System - http://area53.die-muellers.org/dm_eds/showcat.php?id=1
+	if (array_key_exists('dm_eds_version', $config) && $config['dm_eds_version'])
+	{
+		$keys_array = array_merge($keys_array, array('id'));
+	}
+	// DM Music Charts - http://area53.die-muellers.org/dm_eds/showcat.php?id=1
+	if (array_key_exists('dm_music_charts_version', $config) && $config['dm_music_charts_version'])
+	{
+		$values_array = array_merge($values_array, array('add'));
+		$pages_array = array_merge($pages_array, array('dm_music_charts'));
+	}
+	// DM Video - http://area53.die-muellers.org/dm_eds/showcat.php?id=1
+	if (array_key_exists('dm_video_version', $config) && $config['dm_video_version'])
+	{
+		$keys_array = array_merge($keys_array, array('v', 'c', 'sk', 'sd', 'start'));
+		$values_array = array_merge($values_array, array('new'));
+		$pages_array = array_merge($pages_array, array('dm_video/postvideo'));
+	}
+	// DM Partners - http://area53.die-muellers.org/dm_eds/showcat.php?id=1
+	if (array_key_exists('dm_partners_version', $config) && $config['dm_partners_version'])
+	{
+		$keys_array = array_merge($keys_array, array('id'));
+		$values_array = array_merge($values_array, array('add'));
+	}
+	// DM Quotes Collection - http://area53.die-muellers.org/dm_eds/showcat.php?id=1
+	if (array_key_exists('dm_qc_version', $config) && $config['dm_qc_version'])
+	{
+		$keys_array = array_merge($keys_array, array('id'));
+		$values_array = array_merge($values_array, array('add'));
+	}
+	// User Blog MOD - https://www.phpbb.com/customise/db/mod/user_blog_mod
+	if (array_key_exists('user_blog_version', $config) && $config['user_blog_version'])
+	{
+		$keys_array = array_merge($keys_array, array('b', 'c', 'r'));
+		$values_array = array_merge($values_array, array('add', 'edit', 'quote'));
+		// not fully supported for blog.php - activate following line if you want
+		// $pages_array = array_merge($pages_array, array('blog'));
+	}
+	// Classifieds MOD - http://phpbb3hacks.com/modifications.php?name=Classifieds
+	if (array_key_exists('user_blog_version', $config) && $config['user_blog_version'])
+	{
+		$keys_array = array_merge($keys_array, array('id', 'ad_id'));
+		$values_array = array_merge($values_array, array('create_ad', 'edit_ad'));
+		$pages_array = array_merge($pages_array, array('buysell/single_ad'));
+	}
+
+	$keys_array = array_unique($keys_array);
+	$values_array = array_unique($values_array);
+	$pages_array = array_unique($pages_array);
+
+	foreach ($query_string_array as $url_param)
+	{
+		$url_param = explode('=', $url_param, 2);
+		if (in_array($url_param[0], $keys_array) && !empty($url_param[1]))
+		{
+			$s_hidden_string_fields[$url_param[0]] = $url_param[1];
+			$query_string .= '&amp;' . $url_param[0] . '=' . $url_param[1];
+		}
+		if (!empty($url_param[1]) && in_array((string) $url_param[1], $values_array))
+		{
+			$value_found = true;
+		}
+	}
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		'S_TOPIC_ID'			=> $topic_id,]]></find>
+				<action type="after-add"><![CDATA[		'S_SESSION_LANG_ENABLE'	=> (($config['lang_select_enable'] || $config['lang_click_enable']) && !in_array($page_name, $pages_array) && $value_found != true) ? true : false,
+		'S_SESSION_LANG_SELECT'	=> ($config['lang_select_enable']) ? session_lang_select($user->data['user_lang']) : false,
+		'S_SESSION_LANG_CLICK'	=> ($config['lang_click_enable']) ? session_lang_click($user->data['user_lang'], $query_string) : false,
+		'S_HIDDEN_STRING_FIELDS'	=> build_hidden_fields($s_hidden_string_fields),]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions_messenger.php">
+			<edit>
+				<find><![CDATA[			$tpl = &$this->tpl_msg[$template_lang . $template_file];
+
+			$fallback_template_path = false;]]></find>
+				<action type="after-add"><![CDATA[			if ($config['inherit_lang'] == INHERIT_LANG_EN)
+			{
+				$fallback_template_path = ((!empty($user->lang_path)) ? $user->lang_path : $phpbb_root_path . 'language/') . 'en/email';
+			}
+			elseif ($config['inherit_lang'] == INHERIT_LANG_DEFAULT)
+			{
+				$fallback_template_path = ((!empty($user->lang_path)) ? $user->lang_path : $phpbb_root_path . 'language/') . $config['default_lang'] . '/email';
+			}]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[					$fallback_template_path = (!empty($user->lang_path)) ? $user->lang_path : $phpbb_root_path . 'language/';
+					$fallback_template_path .= basename($config['default_lang']) . '/email';]]></find>
+				<action type="after-add"><![CDATA[
+					if(!file_exists($fallback_template_path."/$template_file.txt"))
+					{
+						$fallback_template_path = (!empty($user->lang_path)) ? $user->lang_path : $phpbb_root_path . 'language/';
+						if ($config['inherit_lang'] == INHERIT_LANG_EN)
+						{
+							$fallback_template_path .= 'en/email';
+						}
+						elseif ($config['inherit_lang'] == INHERIT_LANG_DEFAULT)
+						{
+							$fallback_template_path .= $config['default_lang'] . '/email';
+						}
+					}]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions_module.php">
+			<edit>
+				<find><![CDATA[	function add_mod_info($module_class)
+	{
+		global $user, $phpEx;]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[		global $user, $phpEx]]></inline-find>
+					<inline-action type="after-add"><![CDATA[, $config]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[		if (file_exists($user->lang_path . $user->lang_name . '/mods'))
+		{
+			$add_files = array();]]></find>
+				<action type="before-add"><![CDATA[		if ($config['inherit_lang'] == INHERIT_LANG_EN)
+		{
+			$fallback_lang = 'en';
+		}
+		elseif ($config['inherit_lang'] == INHERIT_LANG_DEFAULT)
+		{
+			$fallback_lang = $config['default_lang'];
+		}
+		else
+		{
+			$fallback_lang = '';
+		}
+
+		if (file_exists($user->lang_path . '/' . $fallback_lang . '/mods'))
+		{
+			$add_files = array();
+
+			$dir = @opendir($user->lang_path . '/' . $fallback_lang . '/mods');
+
+			if ($dir)
+			{
+				while (($entry = readdir($dir)) !== false)
+				{
+					if (strpos($entry, 'info_' . strtolower($module_class) . '_') === 0 && substr(strrchr($entry, '.'), 1) == $phpEx)
+					{
+						$add_files[] = 'mods/' . substr(basename($entry), 0, -(strlen($phpEx) + 1));
+					}
+				}
+				closedir($dir);
+			}
+
+			if (sizeof($add_files))
+			{
+				$user->add_lang($add_files);
+			}
+		}
+]]></action>
+			</edit>
+		</open>
+		<open src="includes/session.php">
+			<edit>
+				<find><![CDATA[			'session_viewonline'	=> ($viewonline) ? 1 : 0,]]></find>
+				<action type="after-add"><![CDATA[			'session_lang'			=> (string) $this->lang_name,]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		global $db, $template, $config, $auth, $phpEx, $phpbb_root_path, $cache;
+]]></find>
+				<action type="after-add"><![CDATA[		$session_lang = '';
+
+		if (!isset($config['lang_select_enable']) || !isset($config['lang_click_enable'])|| !isset($config['inherit_lang']))
+		{
+			$config['lang_select_enable'] = $config['lang_click_enable'] = $config['inherit_lang'] = 0;
+		}
+
+		if ($config['lang_select_enable'] || $config['lang_click_enable'])
+		{
+			$session_lang_save = request_var('session_lang_save', false);
+			if (isset($session_lang_save) && $session_lang_save && $this->data['session_lang'])
+			{
+				$sql = 'UPDATE ' . USERS_TABLE . "
+					SET user_lang = '" . $db->sql_escape($this->data['session_lang']) . "'
+					WHERE user_id = " . (int) $this->data['user_id'];
+				$db->sql_query($sql);
+			}
+
+			$session_lang_reset = request_var('session_lang_reset', false);
+			if (isset($session_lang_reset) && $session_lang_reset)
+			{
+				$session_lang = '';
+			}
+			else
+			{
+				$session_lang = request_var('session_lang', '');
+			}
+
+			if ((isset($session_lang) && $session_lang) || $session_lang_reset)
+			{
+				$sql = 'UPDATE ' . SESSIONS_TABLE . "
+					SET session_lang = '" . $db->sql_escape($session_lang) . "'
+					WHERE session_id = '" . $db->sql_escape($this->session_id) . "'";
+				$db->sql_query($sql);
+			}
+			elseif (isset($this->data['session_lang']) && $this->data['session_lang'])
+			{
+				$session_lang = $this->data['session_lang'];
+			}
+		}
+
+		if (($config['lang_select_enable'] || $config['lang_click_enable']) && isset($session_lang) && $session_lang)
+		{
+			$this->data['user_lang'] = $session_lang;
+			$this->lang_name = (file_exists($this->lang_path . $this->data['user_lang'] . "/common.$phpEx")) ? $this->data['user_lang'] : basename($config['default_lang']);
+
+			if ($this->data['user_id'] != ANONYMOUS)
+			{
+				$this->date_format = $this->data['user_dateformat'];
+				$this->timezone = $this->data['user_timezone'] * 3600;
+				$this->dst = $this->data['user_dst'] * 3600;
+			}
+			else
+			{
+				$this->date_format = $config['default_dateformat'];
+				$this->timezone = $config['board_timezone'] * 3600;
+				$this->dst = $config['board_dst'] * 3600;
+			}
+		}]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		if ($this->data['user_id'] != ANONYMOUS)
+		{
+			$this->lang_name = (file_exists($this->lang_path . $this->data['user_lang'] . "/common.$phpEx")) ? $this->data['user_lang'] : basename($config['default_lang']);]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[if ($this->data['user_id']]]></inline-find>
+					<inline-action type="before-add"><![CDATA[else ]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[			/**
+			* If a guest user is surfing, we try to guess his/her language first by obtaining the browser language
+			* If re-enabled we need to make sure only those languages installed are checked
+			* Commented out so we do not loose the code.]]></find>
+				<action type="after-add"><![CDATA[			* language checking added 2008-08-15 by Martin Truckenbrodt
+			**/]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[			if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ && $config['detect_lang_enable']]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[				$accept_lang_ary = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);]]></find>
+				<action type="before-add"><![CDATA[				$lang_iso_xx_yy = array();
+				$lang_iso_xx = array();
+				$accept_lang_xx_yy = array();
+				$accept_lang_xx = array();
+
+				$sql = 'SELECT lang_iso FROM ' . LANG_TABLE;
+				$result = $db->sql_query($sql, 3600);
+
+				while ($row = $db->sql_fetchrow($result))
+				{
+					if (file_exists($phpbb_root_path . 'language/' . $row['lang_iso'] . "/common.$phpEx"))
+					{
+						$lang_iso_xx_yy[] = $row['lang_iso'];
+						if (strlen($row['lang_iso']) > 4)
+						{
+							$lang_iso_xx[$row['lang_iso']] = substr($row['lang_iso'], 0, 2);
+						}
+					}
+				}
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[				{
+					// Set correct format ... guess full xx_YY form
+					$accept_lang = substr($accept_lang, 0, 2) . '_' . strtoupper(substr($accept_lang, 3, 2));
+					$accept_lang = basename($accept_lang);
+
+					if (file_exists($this->lang_path . $accept_lang . "/common.$phpEx"))
+					{
+						$this->lang_name = $config['default_lang'] = $accept_lang;
+						break;
+					}
+					else
+					{
+						// No match on xx_YY so try xx
+						$accept_lang = substr($accept_lang, 0, 2);
+						$accept_lang = basename($accept_lang);
+
+						if (file_exists($this->lang_path . $accept_lang . "/common.$phpEx"))
+						{
+							$this->lang_name = $config['default_lang'] = $accept_lang;
+							break;
+						}
+					}
+				}]]></find>
+				<action type="replace-with"><![CDATA[				{
+					// Set correct format ... guess full xx_yy form
+					$accept_lang_xx_yy = basename(substr($accept_lang, 0, 2) . '_' . strtolower(substr($accept_lang, 3, 2)));
+					// Set correct format ... guess only xx form
+					$accept_lang_xx = basename(substr($accept_lang, 0, 2));
+
+					// browser xx-YY == board xx_yy and
+					// browser xx == board xx
+					if (in_array($accept_lang_xx_yy, $lang_iso_xx_yy))
+					{
+						$this->lang_name = $config['default_lang'] = $accept_lang_xx_yy;
+						break;
+					}
+					// browser xx-YY => xx == board xx
+					else if (in_array($accept_lang_xx, $lang_iso_xx_yy))
+					{
+						$this->lang_name = $config['default_lang'] = $accept_lang_xx;
+						break;
+					}
+					// browser xx == board xx_yy => xx
+					else if (in_array($accept_lang_xx, $lang_iso_xx) && $lang_iso_xx != '')
+					{
+						$this->lang_name = $config['default_lang'] = array_search($accept_lang_xx, $lang_iso_xx);
+						break;
+					}
+					// board default language
+					else
+					{
+						$this->lang_name = $config['default_lang'];
+					}
+				}
+				$this->data['user_lang'] = $this->lang_name;]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[			*/
+		}
+
+		// We include common language file here to not load it every time a custom language file is included]]></find>
+				<action type="before-add"><![CDATA[			/*]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		$include_result = (defined('DEBUG_EXTRA')) ? (include $this->lang_path . $this->lang_name . "/common.$phpEx") : (@include $this->lang_path . $this->lang_name . "/common.$phpEx");]]></find>
+				<action type="replace-with"><![CDATA[		$include_result = false;
+		if ($config['inherit_lang'] == INHERIT_LANG_EN)
+		{
+			$include_result = (defined('DEBUG_EXTRA')) ? (include $this->lang_path . "en/common.$phpEx") : (@include $this->lang_path . "en/common.$phpEx");
+		}
+		elseif ($config['inherit_lang'] == INHERIT_LANG_DEFAULT)
+		{
+			$include_result = (defined('DEBUG_EXTRA')) ? (include $this->lang_path . $config['default_lang'] . "/common.$phpEx") : (@include $this->lang_path . $config['default_lang'] . "/common.$phpEx");
+		}
+		$include_result |= (defined('DEBUG_EXTRA')) ? (include $this->lang_path . $this->lang_name . "/common.$phpEx") : (@include $this->lang_path . $this->lang_name . "/common.$phpEx");]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[	function set_lang(&$lang, &$help, $lang_file, $use_db = false, $use_help = false)
+	{
+		global $phpEx;]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[global $phpEx]]></inline-find>
+					<inline-action type="after-add"><![CDATA[, $config]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[		if (!$this->lang_name)
+		{
+			global $config;]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[			global]]></inline-find>
+					<inline-action type="before-add"><![CDATA[//]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[			if (!file_exists($language_filename))
+			{
+				global $config;]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[				global]]></inline-find>
+					<inline-action type="before-add"><![CDATA[//]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[			// Do not suppress error if in DEBUG_EXTRA mode]]></find>
+				<action type="before-add"><![CDATA[			// Get english translation alternate
+			$en_language_filename = preg_replace('#'.$this->lang_path.'[a-z_]+/#', $this->lang_path . 'en/', $language_filename);
+			$default_language_filename = preg_replace('#'.$this->lang_path.'[a-z_]+/#', $this->lang_path . $config['default_lang'] . '/', $language_filename);
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[			$include_result = (defined('DEBUG_EXTRA')) ? (include $language_filename) : (@include $language_filename);]]></find>
+				<action type="replace-with"><![CDATA[			$include_result = false;
+			if ($config['inherit_lang'] == INHERIT_LANG_EN && !defined('UMIL_AUTO'))
+			{
+				$include_result = (defined('DEBUG_EXTRA')) ? (include $en_language_filename) : (@include $en_language_filename);
+			}
+			elseif ($config['inherit_lang'] == INHERIT_LANG_DEFAULT && !defined('UMIL_AUTO'))
+			{
+				$include_result = (defined('DEBUG_EXTRA')) ? (include $default_language_filename) : (@include $default_language_filename);
+			}
+			$include_result |= (defined('DEBUG_EXTRA')) ? (include $language_filename) : (@include $language_filename);]]></action>
+			</edit>
+		</open>
+		<open src="includes/ucp/ucp_prefs.php">
+			<edit>
+				<find><![CDATA[							'user_style'			=> $data['style'],
+						);
+
+						$sql = 'UPDATE ' . USERS_TABLE . '
+							SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
+							WHERE user_id = ' . $user->data['user_id'];
+						$db->sql_query($sql);]]></find>
+				<action type="after-add"><![CDATA[
+						if ($config['lang_select_enable'] || $config['lang_click_enable'])
+						{
+							$sql = 'UPDATE ' . SESSIONS_TABLE . "
+								SET session_lang = '' 
+								WHERE session_user_id = " . $user->data['user_id'];
+							$db->sql_query($sql);
+						}]]></action>
+			</edit>
+		</open>
+		<open src="language/en/acp/board.php">
+			<edit>
+				<find><![CDATA[?>]]></find>
+				<action type="before-add"><![CDATA[// Advanced Multi Language Pack Support MOD
+$lang = array_merge($lang, array(
+	'DETECT_LANG_ENABLE'			=> 'Enable browser language detection',
+	'DETECT_LANG_ENABLE_EXPLAIN'	=> 'The language settings submitted by the browser will be used to find the most suitable language pack. <strong>It\'s only used for guests.</strong>',
+	'INHERIT_LANG'					=> 'Pass on missing language variables and language files',
+	'INHERIT_LANG_EXPLAIN'			=> 'Missing language variables of not fully translated Modifications are passed from the board default language pack or the phpBB core default language pack.',
+	'LANG_EN'						=> 'British English (phpBB default)',
+	'LANG_NONE'						=> 'None',
+	'LANG_SELECT_ENABLE'			=> 'Enable language selection dropdown menue',
+	'LANG_SELECT_ENABLE_EXPLAIN'	=> 'Guests and registered users can change the user language for the recent session.',
+	'LANG_CLICK_ENABLE'				=> 'Enable language clickable flags bar',
+	'LANG_CLICK_ENABLE_EXPLAIN'		=> 'Guests and registered users can change the user language for the recent session.',
+));
+
+]]></action>
+			</edit>
+		</open>
+		<open src="language/en/common.php">
+			<edit>
+				<find><![CDATA[	'SEND_PRIVATE_MESSAGE'		=> 'Send private message',]]></find>
+				<action type="after-add"><![CDATA[	'SESSION_LANGUAGE'			=> 'Select language',
+	'SESSION_LANGUAGE_SAVE'		=> 'Save',]]></action>
+			</edit>
+		</open>
+		<open src="style.php">
+			<edit>
+				<find><![CDATA[$id = (isset($_GET['id'])) ? intval($_GET['id']) : 0;]]></find>
+				<action type="after-add"><![CDATA[$lang = (isset($_GET['lang'])) ? strval($_GET['lang']) : '';]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		$user['user_lang'] = $config['default_lang'];]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[		$user['user_lang'] = $config['default_lang']]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ = $lang]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/overall_header.html">
+			<edit>
+				<find><![CDATA[		<div class="navbar">
+			<div class="inner"><span class="corners-top"><span></span></span>
+]]></find>
+				<action type="after-add"><![CDATA[			<!-- IF S_SESSION_LANG_ENABLE-->
+			<ul class="linklist navlinks">
+				<!-- IF S_SESSION_LANG_CLICK-->
+				<li class="leftside" style="max-width: 55%;">
+					{S_SESSION_LANG_CLICK}
+				</li>
+				<!-- ENDIF -->
+
+				<li class="rightside" style="min-width: 35%; white-space: nowrap;">					<form id="session_lang_select" action="" method="get">
+						<fieldset>
+							<!-- IF S_SESSION_LANG_SELECT-->
+								<label for="session_lang">{L_SESSION_LANGUAGE}:</label> <select name="session_lang" id="session_lang" onchange="document.getElementById('session_lang_select').submit()">{S_SESSION_LANG_SELECT}</select>
+							<!-- ENDIF -->
+							<input type="submit" name="session_lang_reset" value="{L_RESET}" class="button2" /> 
+							<!-- IF S_REGISTERED_USER --><input type="submit" name="session_lang_save" value="{L_SESSION_LANGUAGE_SAVE}" class="button2" /> <!-- ENDIF -->
+							{S_HIDDEN_STRING_FIELDS}
+							<noscript><div style="display: inline;"><input type="submit" name="submit" value="OK" class="button2" /></div></noscript>
+						</fieldset>
+					</form>
+				</li>
+			</ul>
+			<!-- ENDIF -->
+]]></action>
+			</edit>
+		</open>
+
+		<php-installer>umil_auto_amls.php</php-installer>
+
+		<diy-instructions lang="en"></diy-instructions>
+	</action-group>
+</mod>

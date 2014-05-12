@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="./modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: https://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at https://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator 1.0.1 by tumba25 (phpBB version)"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[Czech translation for MOD "Advanced Multi Language Pack Support MOD 1.0.1"]]></title>
+		<title lang="cs"><![CDATA[Český překlad MODu "Advanced Multi Language Pack Support MOD 1.0.1"]]></title>
+		<description lang="en"><![CDATA[Czech translation for MOD "Advanced Multi Language Pack Support MOD 1.0.1"]]></description>
+		<description lang="cs"><![CDATA[Český překlad MODu "Advanced Multi Language Pack Support MOD 1.0.1"]]></description>
+		<author-group>
+			<author>
+				<username><![CDATA[leschek]]></username>
+				<homepage><![CDATA[http://angrezphoto.com]]></homepage>
+			</author>
+		</author-group>
+		<mod-version>1.0.3</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>300</time>
+			<target-version>3.0.11</target-version>
+		</installation>
+		<history>
+			<entry>
+				<date>2012-06-26</date>
+				<rev-version>1.0.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[First version of translation]]></change>
+				</changelog>
+				<changelog lang="cs">
+					<change><![CDATA[První verze překladu]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2012-12-24</date>
+				<rev-version>1.0.3</rev-version>
+				<changelog lang="en">
+					<change>MODX 1.2.6 update</change>
+				</changelog>
+			</entry>
+		</history>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/language/cs/mods/umil_auto_amls.php" to="language/cs/mods/umil_auto_amls.php"/>
+		</copy>
+		<open src="language/cs/common.php">
+			<edit>
+				<find><![CDATA[	'SEND_PRIVATE_MESSAGE'			=> 'Poslat soukromou zprávu',]]></find>
+				<action type="after-add"><![CDATA[	'SESSION_LANGUAGE'			=> 'Vybrat jazyk',
+	'SESSION_LANGUAGE_SAVE'		=> 'Uložit',]]></action>
+			</edit>
+		</open>
+		<open src="language/cs/acp/board.php">
+			<edit>
+				<find><![CDATA[?>]]></find>
+				<action type="before-add"><![CDATA[// Advanced Multi Language Pack Support MOD
+$lang = array_merge($lang, array(
+	'DETECT_LANG_ENABLE'			=> 'Povolit detekci jazyka prohlížeče',
+	'DETECT_LANG_ENABLE_EXPLAIN'	=> 'Nastavení jazyka prohlížeče bude použito pro nalezení nejvhodnějšího jazyka pro fórum. <strong>Používá se jen pro nepřihlášené návštěvníky.</strong>',
+	'INHERIT_LANG'					=> 'Pro chybějící jazykové proměnné a jazykové soubory použít',
+	'INHERIT_LANG_EXPLAIN'			=> 'Vyberte, jestli chcete použít chybějící jazykové proměnné neúplně přeložených MODů z výchozího jazyka fóra nebo z výchozího jazyka phpBB (britská angličtina).',
+	'LANG_EN'						=> 'Britská angličtina (výchozí jazyk phpBB)',
+	'LANG_NONE'						=> 'Nic',
+	'LANG_SELECT_ENABLE'			=> 'Povolit výběr jazyka pomocí rozbalovacího meníčka',
+	'LANG_SELECT_ENABLE_EXPLAIN'	=> 'Návštěvníci a registrovaní uživatelé můžou změnit jazyk fóra pro aktuální session.',
+	'LANG_CLICK_ENABLE'				=> 'Povolit lištu s vlajkami pro výběr jazyka',
+	'LANG_CLICK_ENABLE_EXPLAIN'		=> 'Návštěvníci a registrovaní uživatelé můžou změnit jazyk fóra pro aktuální session.',
+));
+]]></action>
+			</edit>
+		</open>
+		<diy-instructions lang="en"><![CDATA[Enjoy]]></diy-instructions>
+		<diy-instructions lang="cs"><![CDATA[Užij si to!]]></diy-instructions>
+	</action-group>
+</mod>

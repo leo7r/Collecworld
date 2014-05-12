@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="./modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: https://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at https://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+		<title lang="en">Advanced Multi Language Pack Support MOD - subsilver2 style</title>
+		<description lang="en">Subsilver2 style support for the Advanced Multi Language Pack Support MOD.</description>
+
+		<author-notes lang="en"></author-notes>
+
+		<author-group>
+			<author>
+				<realname>Martin Truckenbrodt</realname>
+				<username>Martin Truckenbrodt</username>
+				<homepage>http://www.martin-truckenbrodt.com</homepage>
+			</author>
+		</author-group>
+
+		<mod-version>1.0.3</mod-version>
+
+		<installation>
+			<level>easy</level>
+			<time>60</time>
+			<target-version>3.0.11</target-version>
+		</installation>
+
+		<history>
+			<entry>
+				<date>2012-06-15</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change>first release</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2012-10-31</date>
+				<rev-version>1.0.2</rev-version>
+				<changelog lang="en">
+					<change>fixed release</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2012-12-24</date>
+				<rev-version>1.0.3</rev-version>
+				<changelog lang="en">
+					<change>MODX 1.2.6 update</change>
+				</changelog>
+			</entry>
+		</history>
+		<link-group>
+			<link type="parent" href="../../install.xml" lang="en">Advanced Multi Language Pack Support MOD - Main package</link>
+		</link-group>
+	</header>
+
+	<action-group>
+		<copy>
+			<file from="root/styles/subsilver2/imageset/*.*" to="styles/subsilver2/imageset/*.*" />
+		</copy>
+		<open src="styles/subsilver2/template/overall_header.html">
+			<edit>
+				<find><![CDATA[		<tr>
+			<td class="genmed">
+				<!-- IF not S_IS_BOT --><a href="{U_LOGIN_LOGOUT}"><img src="{T_THEME_PATH}/images/icon_mini_login.gif" width="12" height="13" alt="*" /> {L_LOGIN_LOGOUT}</a>&nbsp;<!-- ENDIF -->]]></find>
+				<action type="before-add"><![CDATA[		<!-- IF S_SESSION_LANG_ENABLE -->
+		<table width="100%" cellspacing="0">
+		<tr>
+			<!-- IF S_SESSION_LANG_CLICK -->
+			<td class="genmed">
+				{S_SESSION_LANG_CLICK}
+			</td>
+			<!-- ENDIF -->
+			<td class="genmed" nowrap="nowrap" align="{S_CONTENT_FLOW_END}">
+				<form id="session_lang_select" action="" method="get">
+					<!-- IF S_SESSION_LANG_SELECT -->
+						{L_SESSION_LANGUAGE}: <select name="session_lang" onchange="document.getElementById('session_lang_select').submit()">{S_SESSION_LANG_SELECT}</select>
+					<!-- ENDIF -->
+					<input type="submit" name="session_lang_reset" value="{L_RESET}" class="btnlite" /> 
+					<!-- IF S_REGISTERED_USER --><input type="submit" name="session_lang_save" value="{L_SESSION_LANGUAGE_SAVE}" class="btnlite" /> <!-- ENDIF -->
+					{S_HIDDEN_STRING_FIELDS}
+					<noscript><div style="display: inline;"><input type="submit" name="submit" value="OK" class="btnlite" /></div></noscript>
+				</form>
+			</td>
+		</tr>
+		</table>
+		<!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+	</action-group>
+</mod>

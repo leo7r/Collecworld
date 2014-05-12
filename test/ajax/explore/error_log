@@ -1,0 +1,2 @@
+[05-Sep-2013 12:25:40 America/New_York] PHP Warning:  strpos() expects parameter 1 to be string, array given in /home/collecwo/public_html/ajax/explore/yearsByCompanies.php on line 75
+[05-Sep-2013 12:25:42 America/New_York] PHP Warning:  strpos() expects parameter 1 to be string, array given in /home/collecwo/public_html/ajax/explore/yearsByCompanies.php on line 75

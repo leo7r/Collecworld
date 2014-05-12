@@ -1,0 +1,7 @@
+
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} ^hola\.collecworld\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.hola\.collecworld\.com$
+RewriteRule ^/?$ "http\:\/\/collecworld\.com\/test" [R=301,L]
+
