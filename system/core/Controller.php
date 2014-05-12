@@ -203,6 +203,8 @@ class CW_Controller extends CI_Controller{
 	/* Obtener las notificaciones del usuario */
 	public function getUserNotifications(){
 		
+		@session_start();
+		
 		if ( isset($_SESSION['user']) ){
 			$this->load->model('user_model');
 			return $this->user_model->getNotifications();
