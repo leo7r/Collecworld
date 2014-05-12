@@ -1,0 +1,1 @@
+[01-Apr-2014 18:06:33 America/New_York] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/collecwo/public_html/ajax/explore/coin/yearsForCoin.php on line 41

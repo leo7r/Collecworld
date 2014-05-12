@@ -1,0 +1,105 @@
+div.jContent
+{
+	float: left;
+		
+}
+
+div.jContent p
+{
+	padding: 0px 0px 0px 0px;	
+	margin: 0px 0px 0px 0px;
+}
+
+div.jContent a
+{
+	float: left;
+	display: block;	
+}
+
+div.jContent a.hide
+{
+	visibility: hidden;
+}
+
+/* horizontal */
+div.jc-horizontal
+{
+}
+
+
+div.jc-horizontal a
+{
+	width: 35px;
+	height: 18px;
+}
+
+
+div.jc-horizontal a .prev
+{
+	text-decoration:none;
+}
+
+div.jc-horizontal a.prev:hover
+{
+}
+
+.next-right
+{
+	text-decoration:none;
+	background:url(../img/right-mod.png) no-repeat;
+	height:30px;
+	width:15px;
+	
+}
+
+div.jc-horizontal a.next:hover
+{
+}
+
+/* vertical */
+div.jc-vertical
+{
+	margin: 10px 10px 20px 55px; 
+}
+
+
+div.jc-vertical a
+{
+	width: 655px; 
+	height: 34px;
+}
+
+div.jc-vertical a.prev
+{
+	margin: 0px 0px 5px 0px;
+	background: url('../img/arrows/wup.png') no-repeat top center;
+}
+
+div.jc-vertical a.prev:hover
+{
+	background: url('../img/arrows/bup.png') no-repeat top center;
+}
+
+div.jc-vertical a.next
+{
+	margin: 5px 0px 0px 0px;
+	background: url('../img/arrows/wdown.png') no-repeat top center;
+}
+
+div.jc-vertical a.bottom-arr:hover
+{
+	background: url('../img/arrows/bdown.png') no-repeat top center;
+}
+
+/* auto and circle */
+div.jc-auto
+{
+	margin: 20px 0px 40px 63px; 
+}
+
+
+div.js-circle
+{
+	
+}
+
