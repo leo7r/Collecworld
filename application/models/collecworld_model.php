@@ -258,7 +258,6 @@ class Collecworld_model extends CI_Model {
 	public function getUnasweredFeedbacks(){
 		
 		$this->db->where('status',0);
-		$this->db->where('user <> ""');
 		$query = $this->db->get('feedback');
 		
 		return $query->result_array();

@@ -182,6 +182,33 @@ class CW_Controller extends CI_Controller{
 			}
 		}	
 	}
+	
+	/*
+		Verificacion de si el usuario paso la verificacion
+		del landing page.
+	*/
+	public function landingPageVerification(){
+		
+		if ( !isset($_SESSION['init']) ){
+		
+			if ( isset($_COOKIE['init']) ){
+				$_SESSION['init'] = $_COOKIE['init'];
+			}
+			else{
+				header('Location: '.base_url());
+			}
+		}	
+	}
+	
+	/* Obtener las notificaciones del usuario */
+	public function getUserNotifications(){
+		
+		if ( isset($_SESSION['user']) ){
+			$this->load->model('user_model');
+			return $this->user_model->getNotifications();
+		}
+	}
+	
 }
 
 // END Controller class
