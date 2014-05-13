@@ -80,8 +80,7 @@
 
 								echo $_SESSION['name'];
 
-								
-
+							
 								if ( $notifications ){
 
 								?>
