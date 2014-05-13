@@ -155,8 +155,7 @@ switch ($lang){
 				gt.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
 
 				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gt, s);
-
-				google1();
+ 
 
 			});
 

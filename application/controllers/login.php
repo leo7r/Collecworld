@@ -12,7 +12,7 @@ class Login extends CW_Controller {
 		$data['title'] = 'Login / Sign up';
 		
 		if ( isset($_SESSION['user']) ){
-			header('Location: '.base_url().'index.php/init');
+			header('Location: '.base_url().'init');
 		}
 		
 		$this->load->model('phonecard_model');

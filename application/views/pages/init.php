@@ -15,11 +15,7 @@
 
 		document.getElementById('main-activity-content').innerHTML = '<div id="loading_div"><img src="'+path+'img/ajax-loader.gif" /></div>';
 
-		// Refresca actividad reciente cada minuto
-		setInterval(function(){
-			$("#main-activity-content").load(path+'ajax/user_activity.php');
-		},1000*60);
-
+		 
 	});
 
 	function sendFb( user ){
@@ -54,7 +50,7 @@
 
 						<div class="item location">
 
-							&nbsp;<a href="<?php echo base_url(); ?>index.php/init"><?php echo $this->lang->line('inicio'); ?></a>&nbsp;&raquo;
+							&nbsp;<a href="<?php echo base_url(); ?>init"><?php echo $this->lang->line('inicio'); ?></a>&nbsp;&raquo;
 
 						</div>
 
@@ -92,7 +88,7 @@
 
 									<span class="notification-out">
 
-								<a href="<?php echo base_url(); ?>index.php/account/#sec=6">
+								<a href="<?php echo base_url(); ?>account/#sec=6">
 
 											<span title="<?php echo $this->lang->line('nueva_notificacion'); ?>" class="notification"><?php echo count($notifications); ?></span>
 
@@ -134,7 +130,7 @@
 
 					<script>
 
-						$("#modal-signin").load(path+'ajax/signup/index.php',{path:path});
+						//$("#modal-signin").load(path+'ajax/signup/index.php',{path:path});
 
 					</script>
 
@@ -198,7 +194,7 @@
 
 														<tr>
 
-															<td><a href="<?php echo base_url(); ?>index.php/forgot_password"><?php echo $this->lang->line('olvidar_contrasena'); ?></a></td>
+															<td><a href="<?php echo base_url(); ?>forgot_password"><?php echo $this->lang->line('olvidar_contrasena'); ?></a></td>
 
 															<td><input type="submit" value="<?php echo $this->lang->line('iniciar_sesion'); ?>" class="google-button google-button-blue" /></td>
 
@@ -250,7 +246,7 @@
 
 								<div id="r-info">
 
-									<a href="<?php echo base_url(); ?>index.php/explore">
+									<a href="<?php echo base_url(); ?>explore">
 
 										<div class="r-info-item box1">
 
@@ -262,7 +258,7 @@
 
 									</a>
 
-									<a href="<?php echo base_url(); ?>index.php/upload">
+									<a href="<?php echo base_url(); ?>upload">
 
 										<div class="r-info-item box1">
 
@@ -274,7 +270,7 @@
 
 									</a>
 
-									<a href="<?php echo base_url(); ?>index.php/event/events_list">
+									<a href="<?php echo base_url(); ?>event/events_list">
 
 										<div class="r-info-item box1">
 
@@ -286,7 +282,7 @@
 
 									</a>
 
-									<a href="<?php echo base_url(); ?>index.php/help">
+									<a href="<?php echo base_url(); ?>help">
 
 										<div class="r-info-item box1">
 

@@ -17,7 +17,7 @@ class Welcome extends CW_Controller {
 			@session_start();
 			$_SESSION['init'] = $user;
 			setcookie("init", $user, time()+(3600*10));
-			header("Location: ".base_url().'index.php/init');	
+			header("Location: ".base_url().'init');	
 		}
 		else{
 			if ( ! file_exists('application/views/pages/welcome.php')){

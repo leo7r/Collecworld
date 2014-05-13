@@ -25,15 +25,21 @@
 		pageInit();
 		
 		$(window).ready(function(){
-			<?php
-				if ( isset($_SESSION['selected_lang']) && strcmp($_SESSION['selected_lang'],'other') == 0 ){
-					?>
-						var gt = document.createElement('script'); gt.type = 'text/javascript'; gt.async = true;
-						gt.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-						var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gt, s);
-					<?php
-				}
-			?>	
+			
+			
+			setTimeout(function(){
+
+				
+
+				var gt = document.createElement('script'); gt.type = 'text/javascript'; gt.async = true;
+
+				gt.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gt, s);
+ 
+
+			});
+			
 		});
 		
 	</script>
@@ -65,7 +71,7 @@
         <table>
             <tr valign="middle">
                 <td>
-                    <a href="<?php echo base_url(); ?>index.php/init"><img id="logo" src="<?php echo base_url(); ?>img/logo.png" height="40" width="80" alt="logo" /></a>
+                    <a href="<?php echo base_url(); ?>init"><img id="logo" src="<?php echo base_url(); ?>img/logo.png" height="40" width="80" alt="logo" /></a>
                 </td>
                 <td>
                     <select style="width:160px;" onChange="switch_languaje(this);">
@@ -87,7 +93,7 @@
                 <?php
                     if ( isset($_SESSION['user']) && $_SESSION['status'] == 1 && isset($num_feedbacks) && $num_feedbacks > 0 ){
                         ?>
-                        <a href="<?php echo base_url(); ?>index.php/answer_feedback">Sugerencias (<?php echo $num_feedbacks; ?>)</a>
+                        <a href="<?php echo base_url(); ?>answer_feedback">Sugerencias (<?php echo $num_feedbacks; ?>)</a>
                         <?php	
                     }
                 ?>

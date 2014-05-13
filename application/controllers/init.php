@@ -38,10 +38,10 @@ class Init extends CW_Controller {
 			$this->load->model('user_model');
 
 			if ( $this->user_model->login($user,$pass) ){
-				header('Location: '.base_url().'index.php/init');
+				header('Location: '.base_url().'init');
 			}
 			else{
-				header('Location: '.base_url().'index.php/init?err=0');
+				header('Location: '.base_url().'init?err=0');
 			}
 		}
 		else{		
@@ -71,7 +71,7 @@ class Init extends CW_Controller {
 			$_SESSION['init'] = 'antonio';
 		}
 
-		header('Location: '.base_url().'index.php/init');
+		header('Location: '.base_url().'init');
 	}
 
 }
