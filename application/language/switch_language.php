@@ -8,9 +8,9 @@ if ( isset($_SESSION['selected_lang']) && strlen($_SESSION['selected_lang']) > 0
 else{
 	$language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 }
-
+ 
 if ( strpos($_SERVER['DOCUMENT_ROOT'],'wamp') == false ) {
-
+ 
 	switch($language){
 	
 	case 'es':

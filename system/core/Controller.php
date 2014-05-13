@@ -139,7 +139,7 @@ class CW_Controller extends CI_Controller{
 	public function iniLanguage(){
 		
 		//TRADUCCION
-		
+				
 		if ( !isset($_SESSION['selected_lang']) && isset($_COOKIE['selected_lang']) ){
 			$_SESSION['selected_lang'] = $_COOKIE['selected_lang'];	
 		}
@@ -151,7 +151,6 @@ class CW_Controller extends CI_Controller{
 			$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 		}
 		
-				
 		switch($lang){
 		
 		case 'es':

@@ -83,6 +83,20 @@ function errorInit(){
 		}		
 }
 
+//Funcion que guarda el lenguaje seleccionado en session y luego traduce la pagina
+function switch_languaje( dom ){
+	
+	val = $(dom).val();
+	
+	var div = document.createElement('div');
+	 
+	$(div).load(path+'switch_languaje',{lang:val},function(){
+		  
+		location.href = path+'change_language';
+	});
+	
+}
+
 // Funcion que genera el modal para Tarjetas telefonicas
 function modalPhonecard( _p ){
 	$("#modal-phonecard").load(path+'ajax/showPhonecard.php',{p:_p},function(){

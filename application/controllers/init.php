@@ -6,10 +6,7 @@ class Init extends CW_Controller {
 		parent::__construct();
 		error_reporting(0);
 	}
-
-	public function change_language( ){
-		$this->load->view('pages/goBack');
-	}
+	
 	
 	/* Funcion para hacer pruebas. Borra la pizarra luego de terminar :) */
 	public function test(){
@@ -19,6 +16,31 @@ class Init extends CW_Controller {
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/test',$data);
 		$this->load->view('templates/footer', $data);
+	}
+	
+	public function change_language( ){
+		echo $_SESSION['selected_lang'];
+		$this->load->view('pages/goBack');
+	}
+	
+	/* Funcion para guardar en session el idioma seleccionado por el usuario */
+	public function switch_language( ){
+		
+		//no se como recibir la variable del js, no me funciono con nada :/
+		$lang =  $this->input->request_headers('lang');
+	
+		@session_start();
+		
+		if ( $lang == -1 || strcmp($lang,'-1') == 0 ){
+			$_SESSION['selected_lang'] = '';
+			setcookie("selected_lang", "", time()+(10 * 365 * 24 * 60 * 60));
+		}
+		else{ 
+			$_SESSION['selected_lang'] = $lang;
+			setcookie("selected_lang", $lang, time()+(10 * 365 * 24 * 60 * 60));
+		}
+		 
+
 	}
 	
 	/* Funcion para controlar la entrada a la pagina principal */
