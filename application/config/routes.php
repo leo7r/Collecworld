@@ -1,3 +1,4 @@
+
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /*
@@ -185,6 +186,8 @@ $route['sendFeedback'] = "user/sendFeedback";
 $route['(:any)/pdf/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)'] = "user/show_phonecard_collection_pdf/$1/$2/$3/$4/$5/$6/$7/$8";
 $route['(:any)/xls/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)'] = "user/show_phonecard_collection_xls/$1/$2/$3/$4/$5/$6/$7/$8";
 $route['(:any)/collection/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)'] = "user/show_phonecard_collection/$1/$2/$3/$4/$5/$6/$7/$8";
+
+$route['profile/collection'] = "user/profileCollection";
 $route['(:any)'] = "user/view/$1"; // ESTA SIEMPRE DEBE IR DE ULTIMO, SIRVE PARA DIRIGIR A LOS USUARIOS A SU PAGINA
 
 

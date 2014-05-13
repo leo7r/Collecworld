@@ -1034,9 +1034,7 @@ function goPhonecards( pag ){
 */
 
 
-	setHash('pag='+pag);
-
-	
+	setHash('pag='+pag); 
 
 	if ( sql_phonecards.search('countries') == -1 || sql_phonecards.search('companies') == -1 || sql_phonecards.search('systems') == -1 ){
 

@@ -4,6 +4,7 @@ class User extends CW_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		$this->load->model('user_model');
 	}
 	
 	public function getGeneralFeedback(){
@@ -21,8 +22,7 @@ class User extends CW_Controller {
 	
 	public function userVerif(){
 		
-		$user = $this->input->post('user');
-		$this->load->model('user_model');
+		$user = $this->input->post('user'); 
 		
 		$usr = $this->user_model->isUser( array('user' => $user) );
 		
@@ -41,12 +41,11 @@ class User extends CW_Controller {
 		$country = $this->input->post('country');
 
 		if ( $name and $email and $usr and $pass and $country and ( strcmp($email,$email2) == 0 ) ){
-
-			$this->load->model('user_model');
+ 
 			$res = $this->user_model->insertUser( $name , $email , $usr , $pass , $country );
 
 			if ( !$res ){
-				header('Location: '.base_url().'index.php/init?err=1');
+				header('Location: '.base_url().'init?err=1');
 				return;
 			}
 
@@ -99,6 +98,80 @@ class User extends CW_Controller {
 			echo 'error';
 		}
 
+	}
+	
+	public function view( $user ){  
+	
+		$this->landingPageVerification();
+		$data['collectibles_count'] = $this->getCollectiblesCount(); 
+		/*
+		if ( isset($_SESSION['user']) ){
+
+			$data['not_readed'] = $this->user_model->getUnreadedMessages( $_SESSION['id_users'] );
+
+		}
+ */
+		$data['user'] = $this->user_model->isUser(array('user'=>$user)); 
+		
+		//mientras no hay inicio de session
+		@session_start();
+		$_SESSION['user'] = $data['user']['user'];
+		// hasta aqui
+		
+		$data['title'] = ucfirst($data['user']['user']); 
+		
+		if ( isset($_SESSION['user']) )
+
+			$logged = $_SESSION['user'];
+
+		else
+
+			$logged = NULL;
+   
+		if ( ($data['user']) && (isset($_SESSION['user']))){ 
+			
+			$this->load->view('templates/header',$data); 
+
+			if ( strcmp($user,$logged) == 0 ){
+				/*
+				$data['activity'] = $this->user_model->get_activity( array("id_users" => $_SESSION['id_users']));
+
+				$data['notifications'] = $this->user_model->getNotifications();
+
+				$data['intro_profile'] = $data['user']['intro_profile'];
+				 */
+				
+
+			}else{				
+				 /*
+				if ( isset($_SESSION['id_users']) ){
+
+					$data['notifications'] = $this->user_model->getNotifications();
+
+					$data['isFriend'] = $this->user_model->isFriend($_SESSION['id_users'],$u['id_users']);
+					
+				}*/
+				 
+
+			}
+			
+			$this->load->view('pages/user/profile/profile',$data);
+
+			$this->load->view('templates/footer',$data);
+
+
+		}else{
+
+			header("Location: ".base_url()."login");
+
+		}
+
+	}
+	
+	public function profileCollection(){ 
+	
+	echo 'as';
+	
 	}
 
 }

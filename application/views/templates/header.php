@@ -91,11 +91,11 @@
             <div id="search-top">
                 
                 <?php
-                    if ( isset($_SESSION['user']) && $_SESSION['status'] == 1 && isset($num_feedbacks) && $num_feedbacks > 0 ){
+                   /* if ( isset($_SESSION['user']) && $_SESSION['status'] == 1 && isset($num_feedbacks) && $num_feedbacks > 0 ){
                         ?>
                         <a href="<?php echo base_url(); ?>answer_feedback">Sugerencias (<?php echo $num_feedbacks; ?>)</a>
                         <?php	
-                    }
+                    }*/
                 ?>
                 
                 <img id="search-go" src="<?php echo base_url(); ?>img/search2.png" onClick="if(searchTop()=='true'){showGlobalInfo('<?php echo  $this->lang->line('palabras_con_3_caracteres'); ?>');}" />

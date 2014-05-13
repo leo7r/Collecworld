@@ -16,7 +16,7 @@ class Login extends CW_Controller {
 		}
 		
 		$this->load->model('phonecard_model');
-		$data['countries'] = $this->phonecard_model->get_countries();
+		//$data['countries'] = $this->phonecard_model->get_countries();
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/login', $data);
