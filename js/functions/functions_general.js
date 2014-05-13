@@ -84,15 +84,19 @@ function errorInit(){
 }
 
 //Funcion que guarda el lenguaje seleccionado en session y luego traduce la pagina
-function switch_languaje( dom ){
+function switch_language( dom ){
 	
-	val = $(dom).val();
+	lang = $(dom).val(); 
 	
-	var div = document.createElement('div');
-	 
-	$(div).load(path+'switch_languaje',{lang:val},function(){
-		  
+	$.ajax({
+		type: "POST",
+		url: path+"switch_language",
+		data: { lang: lang }
+	}).done(function( msg ) {
+		//alert("MSG: " + msg); 
+		
 		location.href = path+'change_language';
+		 
 	});
 	
 }

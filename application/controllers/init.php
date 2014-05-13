@@ -25,9 +25,8 @@ class Init extends CW_Controller {
 	
 	/* Funcion para guardar en session el idioma seleccionado por el usuario */
 	public function switch_language( ){
-		
-		//no se como recibir la variable del js, no me funciono con nada :/
-		$lang =  $this->input->request_headers('lang');
+		 
+		$lang =  $this->input->post('lang');
 	
 		@session_start();
 		

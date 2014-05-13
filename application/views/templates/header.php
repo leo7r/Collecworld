@@ -74,7 +74,7 @@
                     <a href="<?php echo base_url(); ?>init"><img id="logo" src="<?php echo base_url(); ?>img/logo.png" height="40" width="80" alt="logo" /></a>
                 </td>
                 <td>
-                    <select style="width:160px;" onChange="switch_languaje(this);">
+                    <select style="width:160px;" onChange="switch_language(this);">
                         <option value="-1">Seleccionar idioma</option>
                         <option <?php if ( isset($_SESSION['selected_lang']) && strcmp($_SESSION['selected_lang'],'en') == 0) echo 'selected="selected"' ?> value="en">English</option>
                         <option <?php if ( isset($_SESSION['selected_lang']) && strcmp($_SESSION['selected_lang'],'es') == 0) echo 'selected="selected"' ?> value="es">Espa&ntilde;ol</option>
@@ -82,7 +82,7 @@
                     </select>
                 </td>
                 <td>
-                    <div id="google_translate_element"></div>
+                    <?php if ( isset($_SESSION['selected_lang']) && strcmp($_SESSION['selected_lang'],'other') == 0){ ?><div id="google_translate_element"></div> <?php } ?>
                 </td>
             </tr>
         </table>

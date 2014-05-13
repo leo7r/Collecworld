@@ -9,7 +9,7 @@
 
 	$(window).ready(function(){
 		
-		$("#modal-signin").load(path+'index.php/modal_signup');
+		$("#modal-signin").load(path+'modal_signup');
 		
 		return; // Comentar para hacer la actividad
 		
@@ -357,7 +357,7 @@
 
 							</a>
 
-							
+							<!--
 
 							<a href="#">
 
@@ -411,8 +411,7 @@
 								</div>
 
 							</a>
-
-                            <br />
+                            --> 
 
 
 

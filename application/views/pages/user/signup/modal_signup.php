@@ -158,7 +158,7 @@
 		
 		$.ajax({
 			type: "POST",
-			url: path+"index.php/user_verif",
+			url: path+"user_verif",
   			data: { user: user }
 		}).done(function( msg ) {
 			//alert("MSG: " + msg);
