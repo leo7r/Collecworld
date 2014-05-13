@@ -7,12 +7,10 @@
 
 <script type="text/javascript">
 
-	function googleTranslateElementInit() {
-		new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
-	}
-
 	$(window).ready(function(){
-
+		
+		return; // Comentar para hacer la actividad
+		
 		document.getElementById('main-activity-content').innerHTML = '<div id="loading_div"><img src="'+path+'img/ajax-loader.gif" /></div>';
 
 		 

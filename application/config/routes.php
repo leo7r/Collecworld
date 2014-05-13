@@ -166,6 +166,9 @@ $route['search/phonecards/(:any)/(:num)'] = "search/phonecards/$1/$2";
 $route['search/coins/(:any)/(:num)'] = "search/coins/$1/$2";
 $route['search/(:any)'] = "search/view/$1";
 
+/* Seccion Feedback */
+$route['general_feedback'] = "user/getGeneralFeedback";
+
 /* Seccion usuario */
 $route['forgot_password'] = "user/forgot_password";
 $route['reset_password/(:num)/(:any)'] = "user/reset_password/$1/$2";
