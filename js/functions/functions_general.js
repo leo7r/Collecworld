@@ -90,6 +90,14 @@ function modalPhonecard( _p ){
 	});
 }
 
+// Funcion que genera el modal para Feedback
+function modalFeedback( ){
+	
+	$("#modal-feedback").load(path+'general_feedback',{},function(){
+		$("#modalF").click();
+	});
+}
+
 // Funcion para colocar el placeHolder de un campo de texto
 function setPlaceHolder( id ){
 	
@@ -113,4 +121,31 @@ function setPlaceHolder( id ){
 		}
 	);	
 
+}
+
+// Funcion para cerrar el menu de usuario
+function closeMenu(){
+	$(".menu-drop").fadeOut('fast');
+}
+
+// Funcion para cargar la traduccion de Google
+function googleTranslateElementInit() {
+	new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+}
+
+// Funcion para enviar un feedback, debe estar abierto el modal de feedback
+function sendFb( user ){
+	text = $("#feedback-content-in").val();
+	
+	if ( text.length > 10 ){
+		url = document.URL.split('?');
+		url = url[0];
+		$("#onFinish").val(url);
+		document.getElementById('feedback-form').submit();
+		
+	}
+	else{
+		alert('Feedback too short');
+	}
+	
 }
