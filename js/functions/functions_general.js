@@ -149,3 +149,30 @@ function sendFb( user ){
 	}
 	
 }
+
+// Funcion para mostrar mensaje en el top de la pagina.
+function showGlobalInfo( info ){
+
+	div_out = document.createElement('div');
+	div_out.className='glob';
+
+	$(".glob").remove();
+
+	div = document.createElement('div');
+	div.innerHTML = info;
+	div.className = 'glob-info';
+	
+	div_out.appendChild(div);
+	document.getElementById('top').appendChild(div_out);
+	
+	$(div_out).css({top:-10});
+	$(div_out).animate({top:+10},100);
+
+	$(div_out).click(function(){
+		$(".glob").animate({opacity:0},300,function(){
+
+			$(this).remove();									 
+
+		});
+	});
+}

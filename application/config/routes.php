@@ -84,6 +84,8 @@ $route['change_language'] = "init/change_language";
 /* Iniciar y Cerrar sesion */
 $route['login'] = "login/view";
 $route['out'] = "init/logout";
+$route['modal_signup'] = "user/modalSignUp";
+$route['user_verif'] = "user/userVerif";
 
 /* Seccion Inicio y Test */
 $route['init'] = "init/view";

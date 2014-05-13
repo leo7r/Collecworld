@@ -8,7 +8,7 @@ class User_model extends CI_Model {
 	public function login( $user , $pass ){
 		
 		$this->db->where('status >= 0');
-		$query = $this->db->get_where('users', array('user' => $user , 'password' => $pass) );
+		$query = $this->db->get_where('users', array('user' => $user , 'password' => 'Md5("'.$pass.'")') );
 		
 		if ( $query->num_rows() > 0 ){
 			
@@ -99,7 +99,7 @@ class User_model extends CI_Model {
 		if ( $query->num_rows() == 1 ){
 			$res = $query->row_array();
 			
-			$this->db->where('id_users = '.$res['id_users']);
+			/*$this->db->where('id_users = '.$res['id_users']);
 			$this->db->where('calification = 1');
 			$query2 = $this->db->get('trade_users');
 			
@@ -108,7 +108,7 @@ class User_model extends CI_Model {
 			$query3 = $this->db->get('trade_users');
 			
 			$res['num_trades'] = $query3->num_rows();
-			$res['good_trades'] = $query2->num_rows();
+			$res['good_trades'] = $query2->num_rows();*/
 			
 			return $res;
 		}
@@ -175,15 +175,9 @@ class User_model extends CI_Model {
 			'name' => $name,
 			'email' => $email,
 			'user' => $user,
-			'password' => $pass,
+			'password' => 'Md5("'.$pass.'")',
 			'id_countries' => $country,
-			'registration_date' => time(),
-			'status' => -1,
-			'image' => 'user-default.jpg',
-			'email_message' => 1,
-			'email_event' => 1,
-			'email_friend' => 1,
-			'email_trade' => 1
+			'status' => -1
 		);
 		
 		return $this->db->insert('users',$params);		

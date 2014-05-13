@@ -290,6 +290,20 @@ class Collecworld_model extends CI_Model {
 		$this->db->update('feedback',array("status"=>1),array("id"=>$fb_id));	
 	}
 	
+	public function get_countries( $where = NULL ){
+
+		if ( !$where ){
+			$query = $this->db->get('countries');
+		}
+		else{
+			$query = $this->db->get_where('countries', $where );
+		}
+		
+		$this->db->order_by('name','asc');
+		
+		return $query->result_array();
+	}
+	
 }
 
 ?>

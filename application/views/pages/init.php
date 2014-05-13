@@ -9,10 +9,12 @@
 
 	$(window).ready(function(){
 		
+		$("#modal-signin").load(path+'index.php/modal_signup');
+		
 		return; // Comentar para hacer la actividad
 		
 		document.getElementById('main-activity-content').innerHTML = '<div id="loading_div"><img src="'+path+'img/ajax-loader.gif" /></div>';
-
+	
 		 
 	});
 
@@ -124,17 +126,7 @@
 
 								
 
-				<div id="modal-signin">
-
-					<script>
-
-						//$("#modal-signin").load(path+'ajax/signup/index.php',{path:path});
-
-					</script>
-
-				</div>
-
-				
+				<div id="modal-signin"></div>
 
 				<div id="content-in">
 

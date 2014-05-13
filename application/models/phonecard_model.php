@@ -232,36 +232,6 @@ class Phonecard_model extends CI_Model {
 
 	}
 
-	
-
-	public function get_countries( $where = NULL ){
-
-		
-
-		$this->db->order_by('name','asc');
-
-		
-
-		if ( !$where ){
-
-			$query = $this->db->get('countries');
-
-		}
-
-		else{
-
-			$query = $this->db->get_where('countries', $where );
-
-		}
-
-		
-
-		return $query->result_array();		
-
-	}
-
-	
-
 	public function get_countries2(){
 
 		
