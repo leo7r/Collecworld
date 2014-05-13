@@ -17,26 +17,12 @@
 	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.js" ></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.getUrlParam.js"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>js/functions.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>js/functions/functions_general.js"></script>
 	
 	<!-- on Ready -->
 	
 	<script>
-		
-		var logged_in = <?php @session_start; if ( isset($_SESSION['user']) ) echo 'true'; else echo 'false'; ?>;
-		
-		$(document).ready(function(){
-			
-			setPlaceHolder('search');
-			
-			var info = $(document).getUrlParam("info");
-			
-			if ( info ){
-				info = info.replace(/%20/g,' ');
-				showGlobalInfo(info);
-			}
-			
-		});
+		pageInit();
 		
 		$(window).ready(function(){
 			<?php
@@ -76,7 +62,6 @@
 
 <div id="top">
     <div class="in">
-        
         <table>
             <tr valign="middle">
                 <td>

@@ -1,230 +1,42 @@
 <!--To Start-->
-
 <script type="text/javascript">
-
-	
-
-	function modalPhonecard( _p ){
-
-		$("#modal-phonecard").load(path+'ajax/showPhonecard.php',{p:_p,backs:backs},function(){
-
-			$("#modalP").click();
-
-		});
-
-	
-
-	}
-
-	
-
-	$(document).ready(function(){
-
-	
-
-		$('a[rel*=leanModal]').leanModal({ top : 40, closeButton: ".modal-close" });
-
-		$('.input0').click(function(){					
-
-			//
-
-		});
-
-		
-
-		$('#modal-close').click(function(){
-
-			$("#lean_overlay").click();
-
-		});
-
-		
-
-		$("#lean_overlay").click(function(){
-
-			deleteHash('sig');
-
-		});
-
-		
-
-						
-
-		$("#content-in,#top").click(function(){
-
-			closeMenu();
-
-		});
-
-		
-
-		var showPc =  parseInt($(document).getUrlParam("showPhonecard"));
-
-		
-
-		if ( showPc ){
-
-			modalPhonecard(showPc);
-
-			showGlobalInfo('New image uploaded!');
-
-		}
-
-		
-
-		var err = parseInt($(document).getUrlParam("err"));
-
-		
-
-		switch ( err ){
-
-			case 0:
-
-				showGlobalInfo('User or password not valid.');
-
-				break;
-
-			case 1:
-
-				showGlobalInfo('The email you submited is already registered.');
-
-				break;
-
-		}
-
-		
-
-		query = getHash('q');
-
-		
-
-		if ( query ){
-
-			q2 = query.replace('+',',');
-
-			document.getElementById('search').value = q2;
-
-			searchTop( 'search' , '' );
-
-		}
-
-		
-
-	});
-
-	
-
-	$(window).ready(function(){
-
-	
-
-		if ( getHash('sig') ){
-
-			setTimeout(function(){$("#go").click();},500);
-
-		}
-
-		
-
-		
-
-		
-
-	});
-
-	
-
+	modalInit();
+	errorInit();
 </script>
-
-
-
 <!-- Google -->
 
-
-
 <script type="text/javascript">
 
-	
-
-	function google1(){
-
-		var _gaq = _gaq || [];
-
-		_gaq.push(['_setAccount', 'UA-35549594-1']);
-
-		_gaq.push(['_trackPageview']);
-
-		
-
-		(function() {
-
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-
-		})();
-
-	}
-
-	
-
 	function googleTranslateElementInit() {
-
 		new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
-
 	}
-
-	
 
 	$(window).ready(function(){
 
 		document.getElementById('main-activity-content').innerHTML = '<div id="loading_div"><img src="'+path+'img/ajax-loader.gif" /></div>';
 
-
-
+		// Refresca actividad reciente cada minuto
 		setInterval(function(){
 			$("#main-activity-content").load(path+'ajax/user_activity.php');
-			google1();
-
-		},1000);
+		},1000*60);
 
 	});
 
-	
-
 	function sendFb( user ){
-
-		
 
 		text = $("#feedback-content-in").val();
 
-		
-
 		if ( text.length > 10 ){
-
 			url = document.URL.split('?');
-
 			url = url[0];
-
 			$("#onFinish").val(url);
-
 			document.getElementById('feedback-form').submit();
-
 		}
-
 		else{
-
 			alert('Feedback too short');
-
 		}
-
-		
 
 	}
-
-	
 
 </script>
 
@@ -639,20 +451,11 @@
 
 							</div>
 
-							 <!--<div id="activity-refresh"><span class="google-button"><?php echo $this->lang->line('init_actualizar'); ?></span></div>		-->
-
 						</div>
 
 					</div>
-
-                    
-
-                        <div style="clear:both"></div>
-
-					
+                    <div style="clear:both"></div>
 
 				</div>
-
-			
 
 		</div>
