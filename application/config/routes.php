@@ -79,7 +79,8 @@
 
 /* Seccion general de Collecworld */
 $route['default_controller'] = "welcome/view";
-$route['404_override'] = "welcome/view"; 
+$route['404_override'] = "welcome/view";
+$route['loadTranslation'] = "collecworld/loadTranslation";
 
 /* Seccion idioma */
 $route['change_language'] = "init/change_language";

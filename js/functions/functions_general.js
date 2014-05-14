@@ -26,6 +26,13 @@ Happy coding
 /* Variables globales */
 var local = true;
 var path = local ? 'http://localhost/collecworld/' : 'http://collecworld.com/';
+var first = true;
+var menu0;
+
+// TRADUCCIONES
+var translations = ['mi_cuenta','mis_colecciones','amigos','eventos','comercios','mensajes','configuracion','ayuda','cerrar_sesion','no_es_buena_idea','es_una_idea_corta','informacion_sistema_pronto_disponible','informacion_logo_pronto_disponible','gracias_por_suscribirte','correo_ya_suscrito','correo_invalido','pais_compania_sistema_campo_obligatorio','explorar_memoria_remota_ano_obligatorio','cerrar','error','articulo_agregado','escribe_una_nota','estado_tarjeta','nueva','usada_perfecta','usada_buena','usada_danada','agregar_otra','listo','imagen','coleccion','deseo','intercambio','venta','eliminar','cancelar','activado','desactivado','seguro_deseas_eliminar_a','de_tus_amigos','selecciona_categoria_primero','catalogo_sistema_pais_compania_obligatorio','memoria_remota','chip','sistema_inducido','sistema_optico','banda_magnetica','tarjetas_fecha','tarjetas_sin_fecha','tarjetas_uso_interno','tarjetas_especiales','explore_phonecards_todos_ano','explore_phonecards_desconocido','comentario_debe_tener','ya_escribiste_ese_comentario','escribe_mensaje','mensaje_enviado','editada','lista_no_puede_editar','lista_creada','lista_ya_existe','pais_titulo_obligatorio'];
+var translation;
+loadTranslation();
 
 // Funcion que se llama en todas las paginas, maneja JS generales tipo el menu de usuario, etc.
 // Agregar mas cosas si es necesario en todas las paginas
@@ -193,4 +200,94 @@ function showGlobalInfo( info ){
 
 		});
 	});
+}
+
+// Funcion para mostrar el menu de usuario
+function launchMenu(){
+	
+	dom = document.getElementById('user-in');
+
+	if ( first ){
+		
+		first = false;
+		var div = document.createElement('div');
+		div.className = 'menu-drop';
+		$(div).css({top:'30px',right:'80px'});
+		$(div).animate({top:'40px'},150);
+
+						
+
+		for ( i=0  ; i < menu0.length ; i++ ){
+			
+			tok = menu0[i].split('$');
+			var a_itm = document.createElement('a');
+			a_itm.href = tok[1];
+			var itm = document.createElement('div');
+
+			itm.style.cursor = 'pointer';
+			itm.className = 'menu-item';
+
+			if ( i % 2 == 0 ){
+				itm.className = itm.className+' odd';
+			}
+			itm.innerHTML = tok[0];
+			a_itm.appendChild(itm);
+			div.appendChild(a_itm);
+
+		}
+		
+		dom.appendChild(div);
+	}
+	else{
+		$(".menu-drop").fadeOut('fast');
+		first = true;
+	}
+
+}
+
+// Carga las traducciones para ser usadas en el js
+function loadTranslation(){
+	
+	div = document.createElement('div');
+	
+	loadTranslation
+	
+	$.ajax({
+		type: "POST",
+		url: path+"loadTranslation",
+		data: { trans: translations.join('$') }
+	}).done(function( msg ) {
+		translation = JSON.parse(msg);
+		
+		menu0 = [
+			translation.mi_cuenta+"$"+path+"index.php/account",
+			translation.mis_colecciones+"$"+path+"index.php/account/#sec=1",
+			translation.amigos+"$"+path+"index.php/account/#sec=2",
+			translation.eventos+"$"+path+"index.php/account/#sec=3",
+			translation.comercios+"$"+path+"index.php/account/#sec=4",
+			translation.mensajes+"$"+path+"index.php/account/#sec=5",
+			translation.configuracion+"$"+path+"index.php/account/#sec=7",
+			translation.ayuda+"$"+path+"index.php/help",
+			translation.cerrar_sesion+"$"+path+"index.php/out"
+			];
+	});
+	
+	
+	/*$(div).load(path+'ajax/loadTranslation.php',{ trans: translations.join('$') },function(){
+		
+		translation = JSON.parse(div.innerHTML);
+		
+		menu0 = [
+			translation.mi_cuenta+"$"+path+"index.php/account",
+			translation.mis_colecciones+"$"+path+"index.php/account/#sec=1",
+			translation.amigos+"$"+path+"index.php/account/#sec=2",
+			translation.eventos+"$"+path+"index.php/account/#sec=3",
+			translation.comercios+"$"+path+"index.php/account/#sec=4",
+			translation.mensajes+"$"+path+"index.php/account/#sec=5",
+			translation.configuracion+"$"+path+"index.php/account/#sec=7",
+			translation.ayuda+"$"+path+"index.php/help",
+			translation.cerrar_sesion+"$"+path+"index.php/out"
+			];
+	});
+	*/
 }

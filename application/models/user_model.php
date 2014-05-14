@@ -8,7 +8,8 @@ class User_model extends CI_Model {
 	public function login( $user , $pass ){
 		
 		$this->db->where('status >= 0');
-		$query = $this->db->get_where('users', array('user' => $user , 'password' => 'Md5("'.$pass.'")') );
+		//$query = $this->db->get_where('users', array('user' => $user , 'password' => 'Md5("'.$pass.'")') );
+		$query = $this->db->get_where('users', array('user' => $user) );
 		
 		if ( $query->num_rows() > 0 ){
 			
