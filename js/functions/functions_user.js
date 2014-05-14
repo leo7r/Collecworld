@@ -157,35 +157,28 @@ function createList( category ){
 	var div = document.createElement('div');
 
 	$(div).load(path+'profile/collection/insert_list',{category:category, name:name, priv:priv, id_user:id_user},function(){
-	
-	alert(div.innerHTML);
-
-/*
-	
-		if(div.innerHTML.search('error')!=-1){
+	 
+		if(div.innerHTML==false){
 			
 			showGlobalInfo(translation.lista_ya_existe);
-		}else{
-			switch(category){
-				case 1 : var category_name = 'phonecards';
-				break;
-				case 2 : var category_name = 'coins';
-				break;
-				case 3 : var category_name = 'banknotes';
-				break;
-				case 4 : var category_name = 'stamps';
-				break;
-				
-			}
-			$("#account-content-right").load(path+'ajax/account/collections/c_'+category_name+'.php',{list:div.innerHTML},function(){
-				
+			
+		}else{ 
+			
+			$("#account-content-right").load(path+'profile/collection/view_list',{id_lists:div.innerHTML, category:category},function(){ 
 				showGlobalInfo(translation.lista_creada);
+			
 			});
-
-		}*/
+		} 
 
 	});
 
+}
+
+function viewList( dom ){
+	
+	list = $(dom).val(); 
+	
+	$("#account-content-right").load(path+'profile/collection/view_list',{list:list});
 }
 
 

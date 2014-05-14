@@ -88,10 +88,5 @@ case 4:
 		</tr>
      </table>
 <br />
-
-
-		<div id="info-info">
-			<?php echo $this->lang->line('nueva_lista_esta_vacia'); ?>
-			<br />
-			<?php echo $this->lang->line('tu_puedes'); ?> <a href="<?php echo base_url(); ?>explore/<?php echo $explore; ?>"><?php echo $this->lang->line('explorar'); ?></a> <?php echo $this->lang->line('para_completar_tu_coleccion'); ?>
-		</div>
+<hr>
+	 

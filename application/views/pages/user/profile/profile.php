@@ -48,7 +48,7 @@ function gp_click(){
 			profileMenu(parseInt(sec));
 		}
 		else{
-			profileMenu(0);
+			profileMenu(1);
 		}
 		
 		don = getHash('don');

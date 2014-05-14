@@ -163,8 +163,10 @@ class User extends CW_Controller {
 	}
 	
 	public function profileCollection(){ 
+		 
+		$data['phonecards_list'] = $this->user_model->select_list(array("id_categories" => 1, "id_users" => $_SESSION['id_users']));
 	
-		$this->load->view('pages/user/profile/collections');
+		$this->load->view('pages/user/profile/collections',$data);
 	
 	}
 	
@@ -180,8 +182,37 @@ class User extends CW_Controller {
 		$data['privacy'] = $this->input->post('privacy');
 		$data['id_user'] = $this->input->post('id_user');
 		
-		echo $list = $this->user_model->select_list($data['category'], $data['name'], $data['id_user']);
+		//verifica que el nombre no este entre las listas por defecto
+		$default_list = array("coleccion", "colección", "deseo", "intercambio", "venta");
 		 
+		 if (in_array($data['name'], $default_list)) {
+			echo false;
+			return; 
+		 }
+		
+		//verifica que la lista no exista
+		$list = $this->user_model->select_list(array("id_categories" => $data['category'], "id_users" => $data['id_user'], "name" => $data['name']));
+		 
+		if($list == false){
+			
+			//inserta la lista
+			$this->user_model->insert_list($data['category'], $data['name'], $data['privacy'], $data['id_user']);
+			
+			echo true;
+			
+		}else{
+			
+			echo false;
+			
+		}
+	
+	}
+	
+	public function viewList(){ 
+		$data['category'] = $this->input->post('category');	
+		$data['id_lists'] = $this->input->post('id_lists');	
+		
+		$this->load->view('pages/user/profile/collections_view_list',$data);
 	
 	}
 

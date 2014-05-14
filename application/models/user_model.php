@@ -699,17 +699,13 @@ class User_model extends CI_Model {
 
 	}
 	
-	public function select_list($category, $name, $id_user){
+	public function select_list($where){
 		
-		$this->db->select('*');
-		$this->db->from('lists');
-		$this->db->where('category',$category);
-		$this->db->where('name',$name);
-		$this->db->where('id_users',$id_user);
-		$query = $this->db->get();
+		$this->db->select('*'); 
+		$query = $this->db->get_where('lists', $where ); 
 		
-		if ( $query->num_rows() == 1 ){
-			$res = $query->row_array(); 
+		if ( $query->num_rows() >= 1 ){
+			$res = $query->result_array(); 
 			
 			return $res;
 		}else{
@@ -718,10 +714,23 @@ class User_model extends CI_Model {
 		
 	}
 	
-	public function insert_list(){
+	public function insert_list($category, $name, $privacy, $id_user){
 		
+		$params = array(
+			'id_users' => $id_user,
+			'id_categories' => $category,
+			'name' => $name,
+			'privacy' => $privacy 
+		);
+		
+		$this->db->insert('lists',$params);
+		
+		return mysql_insert_id(); 
 		
 	}
+	
+ 
+	
 	
 }
 
