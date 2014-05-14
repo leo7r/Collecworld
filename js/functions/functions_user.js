@@ -148,5 +148,41 @@ function newList( category ){
 }
 
 
+function createList( category ){	
+
+	var list = document.getElementById('list_name').value;
+	var priv = document.getElementById('list_priv').value;
+	var id_user = document.getElementById('id_user').value;
+	
+	var div = document.createElement('div');
+
+	$(div).load(path+'profile/collection/insert_list',{category:category, list:list, priv:priv, id_user:id_user},function(){
+/*
+		if(div.innerHTML.search('error')!=-1){
+			
+			showGlobalInfo(translation.lista_ya_existe);
+		}else{
+			switch(category){
+				case 1 : var category_name = 'phonecards';
+				break;
+				case 2 : var category_name = 'coins';
+				break;
+				case 3 : var category_name = 'banknotes';
+				break;
+				case 4 : var category_name = 'stamps';
+				break;
+				
+			}
+			$("#account-content-right").load(path+'ajax/account/collections/c_'+category_name+'.php',{list:div.innerHTML},function(){
+				
+				showGlobalInfo(translation.lista_creada);
+			});
+
+		}*/
+
+	});
+
+}
+
 
 

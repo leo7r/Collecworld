@@ -104,7 +104,7 @@ class User extends CW_Controller {
 	
 		$this->landingPageVerification();
 		$data['collectibles_count'] = $this->getCollectiblesCount(); 
-		/*
+		 /*
 		if ( isset($_SESSION['user']) ){
 
 			$data['not_readed'] = $this->user_model->getUnreadedMessages( $_SESSION['id_users'] );
@@ -112,12 +112,7 @@ class User extends CW_Controller {
 		}
  */
 		$data['user'] = $this->user_model->isUser(array('user'=>$user)); 
-		
-		//mientras no hay inicio de session
-		@session_start();
-		$_SESSION['user'] = $data['user']['user'];
-		// hasta aqui
-		
+		 		
 		$data['title'] = ucfirst($data['user']['user']); 
 		
 		if ( isset($_SESSION['user']) )
@@ -133,24 +128,23 @@ class User extends CW_Controller {
 			$this->load->view('templates/header',$data); 
 
 			if ( strcmp($user,$logged) == 0 ){
-				/*
-				$data['activity'] = $this->user_model->get_activity( array("id_users" => $_SESSION['id_users']));
-
+				
 				$data['notifications'] = $this->user_model->getNotifications();
+				
+				//$data['activity'] = $this->user_model->get_activity( array("id_users" => $_SESSION['id_users']));
 
-				$data['intro_profile'] = $data['user']['intro_profile'];
-				 */
+				//$data['intro_profile'] = $data['user']['intro_profile'];
+				 
 				
 
-			}else{				
-				 /*
+			}else{	 
 				if ( isset($_SESSION['id_users']) ){
 
 					$data['notifications'] = $this->user_model->getNotifications();
 
-					$data['isFriend'] = $this->user_model->isFriend($_SESSION['id_users'],$u['id_users']);
+					//$data['isFriend'] = $this->user_model->isFriend($_SESSION['id_users'],$u['id_users']);
 					
-				}*/
+				} 
 				 
 
 			}
@@ -182,7 +176,10 @@ class User extends CW_Controller {
 	
 	public function insertList(){ 
 		$data['category'] = $this->input->post('category');
-		$this->load->view('pages/user/profile/collections_new_list',$data);
+		$data['list'] = $this->input->post('list');
+		$data['privacy'] = $this->input->post('privacy');
+		$data['id_user'] = $this->input->post('id_user');
+		 
 	
 	}
 

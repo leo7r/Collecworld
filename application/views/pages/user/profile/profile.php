@@ -128,21 +128,30 @@ function gp_click(){
 				
 				<span id="user-name">
 					<?php 
-						//echo $_SESSION['name'];
-							/*					
+						echo $_SESSION['name'];
+											
 						if ( $notifications ){
-							?>
-							<span class="notification-out">
-								<a href="<?php echo base_url(); ?>index.php/account/#sec=6">
-									<span title="<?php echo $this->lang->line('nueva_notificacion'); ?>" class="notification"><?php echo count($notifications); ?></span>
-								</a>
-							</span>
-							<?php
-						}*/
+
+								?>
+
+									<span class="notification-out">
+
+								<a href="<?php echo base_url(); ?>account/#sec=6">
+
+											<span title="<?php echo $this->lang->line('nueva_notificacion'); ?>" class="notification"><?php echo count($notifications); ?></span>
+
+										</a>
+
+									</span>
+
+								<?php
+
+								}
+
 					?>
 				</span>
 				
-				<img height="35" width="35" id="user-image" alt="user image" src="<?php echo base_url(); ?>users/img/<?php // echo $_SESSION['img']; ?>" />	
+				<img height="35" width="35" id="user-image" alt="user image" src="<?php echo base_url(); ?>users/img/<?php echo $_SESSION['img']; ?>" />	
 			</div>
 		<?php
 			}
