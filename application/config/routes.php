@@ -188,6 +188,8 @@ $route['(:any)/xls/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)'] = "user/sh
 $route['(:any)/collection/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)'] = "user/show_phonecard_collection/$1/$2/$3/$4/$5/$6/$7/$8";
 
 $route['profile/collection'] = "user/profileCollection";
+$route['profile/collection/new_list'] = "user/newList";
+$route['profile/collection/insert_list'] = "user/insertList";
 $route['(:any)'] = "user/view/$1"; // ESTA SIEMPRE DEBE IR DE ULTIMO, SIRVE PARA DIRIGIR A LOS USUARIOS A SU PAGINA
 
 

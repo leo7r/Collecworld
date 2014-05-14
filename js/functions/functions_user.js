@@ -79,27 +79,16 @@ function profileMenu( index ){
 
 function setHash( hash ){
 
-	
-
 	tok = hash.split('=');
 
-	
-
 	if ( window.location.hash.search(tok[0]) != -1 )
-
 		deleteHash(tok[0]);
 
-	
 
 	if ( window.location.hash )
-
 		window.location.hash+="&"+hash;
-
 	else
-
 		window.location.hash+=hash;
-
-	
 
 }
 
@@ -107,17 +96,12 @@ function setHash( hash ){
 
 function deleteHash( itm ){
 
-	
-
 	hash = window.location.hash;
-
-	
 
 	tok = hash.split('&');
 
 	nhash = '';
 
-	
 
 	for ( i=0 ; i<tok.length ; i++ ){
 
@@ -126,11 +110,7 @@ function deleteHash( itm ){
 			nhash+=tok[i]+'&';
 
 		}
-
 	}
-
-	
-
 	nhash = nhash.substr(0,nhash.length-1);
 
 	window.location.hash = nhash;
@@ -139,8 +119,6 @@ function deleteHash( itm ){
 
 
 function getHash( id ){
-
-	
 
 	try {
 
@@ -154,10 +132,7 @@ function getHash( id ){
 
 		ret = ret[0];
 
-		
-
 		return ret;
-
 	}
 
 	catch( e ){
@@ -167,6 +142,11 @@ function getHash( id ){
 	}
 
 }
+
+function newList( category ){
+	$("#account-content-right").load(path+'profile/collection/new_list',{category:category});
+}
+
 
 
 

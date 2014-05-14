@@ -18,8 +18,7 @@ class Init extends CW_Controller {
 		$this->load->view('templates/footer', $data);
 	}
 	
-	public function change_language( ){
-		echo $_SESSION['selected_lang'];
+	public function change_language( ){ 
 		$this->load->view('pages/goBack');
 	}
 	

@@ -170,7 +170,19 @@ class User extends CW_Controller {
 	
 	public function profileCollection(){ 
 	
-	echo 'as';
+		$this->load->view('pages/user/profile/collections');
+	
+	}
+	
+	public function newList(){ 
+		$data['category'] = $this->input->post('category');
+		$this->load->view('pages/user/profile/collections_new_list',$data);
+	
+	}
+	
+	public function insertList(){ 
+		$data['category'] = $this->input->post('category');
+		$this->load->view('pages/user/profile/collections_new_list',$data);
 	
 	}
 
