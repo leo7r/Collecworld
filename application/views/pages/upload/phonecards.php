@@ -604,11 +604,20 @@ function isIE(){
             <tr>
             	<td><span class="obb">* </span><?php echo $this->lang->line('circulacion'); ?>:</td>
                 <td>
-                	<input type="radio" name="sex" value="0"><?php echo $this->lang->line('normal'); ?>&nbsp;&nbsp;&nbsp;
-					<input type="radio" name="sex" value="1"><?php echo $this->lang->line('especial'); ?>
+                	<input type="radio" name="circulation" value="0"><?php echo $this->lang->line('normal'); ?>&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="circulation" value="1"><?php echo $this->lang->line('especial'); ?>
                 </td>
                 <td></td>
             </tr>
+            <tr>
+				<td><span class="obb">* </span><?php echo $this->lang->line('compania'); ?>: </td>
+				<td id="s_comp">
+					<select disabled="disabled" id="company" name="company">
+						<option selected="selected" value="-1"><?php echo $this->lang->line('seleccione'); ?></option>
+					</select>
+				</td>
+				<td class="reg_info"><?php echo $this->lang->line('compania_emisora_tarjeta'); ?></td>
+			</tr>
 			<tr>
 				<td><span class="obb">* </span><?php echo $this->lang->line('moneda'); ?>: </td>
 				<td id="s_curr">
@@ -617,13 +626,6 @@ function isIE(){
 					</select>
 				</td>
 				<td><a href="javascript:modalFeedbackCurrency()"><?php echo $this->lang->line('tu_moneda_no_aparece'); ?></a></td>
-			</tr>
-			<tr>
-				<td><span class="obb">* </span><?php echo $this->lang->line('compania'); ?>: </td>
-				<td id="s_comp">
-					<input type="text" id="companies" name="companies" class="upload-input">
-				</td>
-				<td class="reg_info"><?php echo $this->lang->line('compania_emisora_tarjeta'); ?> <?php echo $this->lang->line('se_recomienda_el_autocompletar'); ?></td>
 			</tr>
 			<tr>
 				<td></td>

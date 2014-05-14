@@ -102,7 +102,13 @@ function phonecard_onCountrySelected( dom ){
 	
 	if ( id_c != -1 ){
 		
-		$('#s_curr').load(path+'index.php/upload/currenciesByCountry', {categories_countries:id_c , category: 1});
+		$('#currency').load(path+'upload/currenciesByCountry', {categories_countries:id_c , category: 1},function(){
+			$(this).prop('disabled',false);
+		});
+		
+		$('#company').load(path+'upload/companyByCountry', {categories_countries:id_c , category: 1},function(){
+			$(this).prop('disabled',false);	
+		});
 		
 		/*
 		$("#catalog-code").load(path+'ajax/upload/catalogCodeByCountry.php',{country:id_c} , function(){

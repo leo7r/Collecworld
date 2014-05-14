@@ -50,15 +50,10 @@ class Upload extends CW_Controller {
 		$this->load->model('collecworld_model');
 		$denominations = $this->collecworld_model->get_currencies( $categories_countries , $category );
 		
-		echo '<select id="currency" name="currency">';
 		echo '<option selected="selected" value="-1">'.$this->lang->line('seleccione').'</option>';
-		
 		for ( $i = 0 ; $i < count($denominations) ; $i++ ){
 			echo '<option value="'.$denominations[$i]['id_phonecards_denomination'].'" >'.$denominations[$i]['denomination'].'</option>';
-		}
-		
-		echo '</select>';
-		
+		}		
 	}
 	
 	public function upload_go(){
