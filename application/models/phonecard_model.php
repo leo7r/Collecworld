@@ -208,6 +208,12 @@ class Phonecard_model extends CI_Model {
 
 	}
 	
+	public function get_countries(){
+		$query = $this->db->get('view_phonecards_countries');
+		
+		return $query->result_array(); 
+	}
+	
 	public function get_countries2(){
 
 		

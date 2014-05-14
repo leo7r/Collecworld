@@ -192,6 +192,8 @@ $lang['lista_ya_existe'] = 'this list already exists';
 $lang['faltantes_coleccion'] = 'What I lack in the collection';
 $lang['mostrar_mi_coleccion'] = 'Show my collection';
 $lang['nueva_imagen_cargada'] = 'New Image uploaded';
+$lang['normal'] = 'Normal';
+$lang['especial'] = 'Special';
 
 	//restablecer contraseÃ±a
 	$lang['restablecer_contrasena'] = 'Reset Password';
