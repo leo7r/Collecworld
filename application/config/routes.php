@@ -118,11 +118,7 @@ $route['edit/(phonecard|coin|banknote)/crop_imgs'] = "edit/crop_imgs/$1";
 
 /* Seccion Explorar */
 $route['explore'] = "explore/phonecard";
-$route['explore/(phonecard|coin|banknote)'] = "explore/$1";
-$route['explore/phonecard/(dated|undated|not-emmited)/(chip|magnetic-band|optical|remote-memory|induced)/([a-z]+)/([a-z0-9]+)/?([0-9]*)/([a-zA-Z0-9]+)/?([0-9]*)'] = "explore/explore_phonecards/$1/$2/$3/$4/$5/$6/$7";
-$route['explore/phonecard/(dated|undated|not-emmited)/(chip|magnetic-band|optical|remote-memory|induced)/([a-z]+)/([a-z0-9]+)/?([0-9]*)/([a-zA-Z0-9]+)/?([0-9]*)/no_variations'] = "explore/explore_phonecards/$1/$2/$3/$4/$5/$6/$7/0/1";
-$route['explore/phonecard/(dated|undated|not-emmited)/(chip|magnetic-band|optical|remote-memory|induced)/([a-z]+)/([a-z0-9]+)/?([0-9]*)/([a-zA-Z0-9]+)/?([0-9]*)/(by_catalog|by_reference|by_face_value|by_serie)'] = "explore/explore_phonecards/$1/$2/$3/$4/$5/$6/$7/$8";
-$route['explore/phonecard/(dated|undated|not-emmited)/(chip|magnetic-band|optical|remote-memory|induced)/([a-z]+)/([a-z0-9]+)/?([0-9]*)/([a-zA-Z0-9]+)/?([0-9]*)/(by_catalog|by_reference|by_face_value|by_serie)/no_variations'] = "explore/explore_phonecards/$1/$2/$3/$4/$5/$6/$7/$8/1";
+$route['explore/(phonecards|coins|banknotes)'] = "explore/explore_$1";
 $route['explore/coin/(total|normal|special|other)/([a-z]+)/(:num)/(:num)/(:num)/(:num)/([a-z0-9]+)/([a-z0-9]+)/(:num)'] = "explore/explore_coin/$1/$2/$3/$4/$5/$6/$7/$8/$9";
 $route['explore/coin/(total|normal|special|other)/([a-z]+)/(:num)/(:num)/(:num)/(:num)/([a-z0-9]+)/([a-z0-9]+)/(:num)/no_variations'] = "explore/explore_coin/$1/$2/$3/$4/$5/$6/$7/$8/0/1";
 $route['explore/banknote/(total|normal|special|other)/([a-z]+)/(:num)/(:num)/(:num)/(:num)/([a-z0-9]+)/(:num)'] = "explore/explore_banknote/$1/$2/$3/$4/$5/$6/$7/$8";

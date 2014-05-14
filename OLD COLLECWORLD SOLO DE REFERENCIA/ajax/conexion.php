@@ -11,10 +11,10 @@ if ( strpos($_SERVER['DOCUMENT_ROOT'],'wamp') == false ) {
 	$path = 'http://collecworld.com/';
 }
 else{
-	$server = 'localhost';
-	$bd = 'collecworld';
-	$bd_user = 'root';
-	$bd_pass = '';
+	$server = 'collecworld.com';
+	$bd = 'collecwo_test';
+	$bd_user = 'collecwo_beto';
+	$bd_pass = 'l12e10o90@l12';
 	
 	$path = 'http://localhost/collecworld/';
 }

@@ -1620,172 +1620,25 @@ class Phonecard_model extends CI_Model {
 
 	
 
-	public function explore_phonecards( $catalog , $system , $country , $company , $serie , $year , $page , $order , $no_variations ){
+	public function explore_phonecards($countries=NULL ,$catalog=NULL  ,  $companies=NULL, $serie=NULL, $system=NULL,$circulations=NULL , $year=NULL , $page=NULL , $order =NULL, $no_variations=NULL ){
 
-		
+	
 
-		// Catalog
+		$this->db->select('* ',FALSE);
 
-		if ( strcmp($catalog,'dated') == 0 ){
-
-			$where0 = 'p.not_emmited = 0 AND p.especial = 0 and p.order_date <> "Unknown"'; 
-
-		}
-
-		elseif ( strcmp($catalog,'undated') == 0 ){
-
-			$where0 = 'p.not_emmited = 0 AND p.especial = 0 and p.order_date = "Unknown"'; 
-
-		}
-
-		elseif ( strcmp($catalog,'not-emmited') == 0 ){
-
-			$where0 = 'p.not_emmited = 1 AND p.especial = 0'; 
-
-		}
-
-		else{
-
-			return;
-
-		}
-
-		
-
-		// System
-
-		if ( strcmp($system,'chip') == 0 ){
-
-			$where1 = 1; 
-
-		}
-
-		elseif ( strcmp($system,'magnetic-band') == 0 ){
-
-			$where1 = 2;
-
-		}
-
-		elseif ( strcmp($system,'optical') == 0 ){
-
-			$where1 = 3; 
-
-		}
-
-		elseif ( strcmp($system,'remote-memory') == 0 ){
-
-			$where1 = 4; 
-
-		}
-
-		elseif ( strcmp($system,'induced') == 0 ){
-
-			$where1 = 5; 
-
-		}
-
-		else{
-
-			return;
-
-		}
-
-		
-
-		$cou = $this->get_countries( array('abbreviation'=>$country) );
-
-		$com = $this->get_phonecards_companies( array('abbreviation'=>$company) );
-
-		
-
-		$this->db->select('SQL_CALC_FOUND_ROWS p.name as Name , ps.name as Serie , p.id_phonecards_systems as System , c.name as Country , pc.name as Company , p.issued_on , p.face_value , p.print_run , p.id_phonecards , p.image , p.image_reverse , p.known_date , p.exp_date , p.code , p.vertical_anverse , p.vertical_reverse , p.serie_number ,p.serie_known',FALSE);
-
-		$this->db->from('phonecards p , phonecards_companies pc , countries c , phonecards_series ps');
-
-		$this->db->where($where0);
-
-		$this->db->where('p.id_phonecards_systems',$where1);
-
-		
-
-		$this->db->where('p.id_countries',$cou[0]['id_countries']);
-
-		$this->db->where('p.id_phonecards_companies',$com[0]['id_phonecards_companies']);
-
-		
-
-		if ( $serie ){
-
-			$this->db->where('ps.id_phonecards_series',$serie);
-
-		}
-
-		
-
-		$this->db->where('p.id_countries = c.id_countries');
-
-		$this->db->where('p.id_phonecards_companies = pc.id_phonecards_companies');
-
-		$this->db->where('p.id_phonecards_series = ps.id_phonecards_series');
-
-				
+		$this->db->from('view_phonecards');
 
 		if ( $no_variations == 1 ){
 
-			$this->db->group_by('p.id_phonecards_companies , p.name, p.order_date, p.face_value');
+			$this->db->group_by('id_phonecards_companies , name, exp_date, face_value');
 
 		}
 
 		else{
 
-			$this->db->group_by('p.id_phonecards');
+			$this->db->group_by('id_phonecards');
 
 		}
-
-		if ( $order ){
-
-			
-
-			if ( strcmp($order,"by_reference") == 0 ){
-
-				$this->db->order_by('reference','desc');
-
-			}
-
-			elseif( strcmp($order,"by_face_value") == 0 ){
-
-				$this->db->order_by('face_value');
-
-			}
-
-			elseif( strcmp($order,"by_serie") == 0 ){
-
-				$this->db->order_by('Serie');
-
-			}
-
-			elseif( strcmp($order,"by_catalog") == 0 ){
-
-				$this->db->order_by('order_n , order_date , face_value , print_run , name , serie_number , id_phonecards');
-
-			}		
-
-		}
-
-		else{
-
-			$this->db->order_by('order_n , order_date , face_value , print_run , name , serie_number , id_phonecards');
-
-		}
-
-		
-
-		if ( strcmp($catalog,'dated') == 0 and strcmp($year,'Unknown') != 0 and strcmp(strtolower($year),'allyears') != 0 ){
-
-			$this->db->like('p.order_date',$year,'after');
-
-		}
-
 		
 
 		if ( $page and $page > 1 ){
