@@ -699,6 +699,25 @@ class User_model extends CI_Model {
 
 	}
 	
+	public function select_list($category, $name, $id_user){
+		
+		$this->db->select('*');
+		$this->db->from('lists');
+		$this->db->where('category',$category);
+		$this->db->where('name',$name);
+		$this->db->where('id_users',$id_user);
+		$query = $this->db->get();
+		
+		if ( $query->num_rows() == 1 ){
+			$res = $query->row_array(); 
+			
+			return $res;
+		}else{
+			return false;
+		}
+		
+	}
+	
 	public function insert_list(){
 		
 		

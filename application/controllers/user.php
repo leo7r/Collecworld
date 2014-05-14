@@ -176,9 +176,11 @@ class User extends CW_Controller {
 	
 	public function insertList(){ 
 		$data['category'] = $this->input->post('category');
-		$data['list'] = $this->input->post('list');
+		$data['name'] = $this->input->post('name');
 		$data['privacy'] = $this->input->post('privacy');
 		$data['id_user'] = $this->input->post('id_user');
+		
+		echo $list = $this->user_model->select_list($data['category'], $data['name'], $data['id_user']);
 		 
 	
 	}
