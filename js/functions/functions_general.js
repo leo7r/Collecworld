@@ -245,12 +245,10 @@ function launchMenu(){
 
 }
 
-// Carga las traducciones para ser usadas en el js
+// Carga las traducciones para ser usadas en el js, genera el menu de usuario
 function loadTranslation(){
 	
 	div = document.createElement('div');
-	
-	loadTranslation
 	
 	$.ajax({
 		type: "POST",
@@ -271,23 +269,21 @@ function loadTranslation(){
 			translation.cerrar_sesion+"$"+path+"index.php/out"
 			];
 	});
+}
+
+// Funcion para obtener info pasada como Hash (#) por la barra del navegador
+function getHash( id ){
 	
-	
-	/*$(div).load(path+'ajax/loadTranslation.php',{ trans: translations.join('$') },function(){
-		
-		translation = JSON.parse(div.innerHTML);
-		
-		menu0 = [
-			translation.mi_cuenta+"$"+path+"index.php/account",
-			translation.mis_colecciones+"$"+path+"index.php/account/#sec=1",
-			translation.amigos+"$"+path+"index.php/account/#sec=2",
-			translation.eventos+"$"+path+"index.php/account/#sec=3",
-			translation.comercios+"$"+path+"index.php/account/#sec=4",
-			translation.mensajes+"$"+path+"index.php/account/#sec=5",
-			translation.configuracion+"$"+path+"index.php/account/#sec=7",
-			translation.ayuda+"$"+path+"index.php/help",
-			translation.cerrar_sesion+"$"+path+"index.php/out"
-			];
-	});
-	*/
+	try {
+		var hash = window.location.hash;
+		ret = hash.split(id+"=");
+		ret = ret[1];
+		ret = ret.split("&");
+		ret = ret[0];
+
+		return ret;
+	}
+	catch( e ){
+		return false;
+	}
 }
