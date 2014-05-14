@@ -42,12 +42,7 @@
 			
 		});
 		
-	</script>
-	
-	<!-- meta -->
-	
-	<meta name="google-translate-customization" content="64a6e296f8dffe2-b7346d0c51cebaf8-g721599485280e466-13"></meta>
-	<meta property="og:description" content="All your collections in one place, Organize it online, trade with other collectors around the world, explore other collections and find the one you need."/>
+	</script> 
 	<script type="text/javascript">
 	
 	  var _gaq = _gaq || [];

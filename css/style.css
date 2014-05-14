@@ -2117,12 +2117,10 @@ border-bottom:solid 1px #f6f6f6;
 .account-collections{
 height:202px;
 margin-left:auto;
-margin-right:auto;
-margin-top:10px;
+margin-right:auto; 
 padding-left:4px;
 padding-right:4px;
-list-style:none;
-margin-top:10px;
+list-style:none; 
 border-top:solid 1px #ddd;
 padding:0;
 }
@@ -2133,6 +2131,7 @@ width:200px;
 float:left;
 margin-left:4px;
 margin-right:4px;
+margin-top:10px;
 background:#f0f0f0;
 border:solid 1px #ddd;
 }
