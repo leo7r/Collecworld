@@ -72,7 +72,7 @@ $db['default']['hostname'] = 'collecworld.com:3306';
 $db['default']['username'] = 'collecwo_beto';
 $db['default']['password'] = "l12e10o90@l12";
 $db['default']['database'] = 'collecwo_test';
->>>>>>> 7cadea0940e0d1b3b820e7d4b41c86256a76c16f
+ 
 
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
