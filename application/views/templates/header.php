@@ -1,4 +1,20 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!--
+      Happy collecting
+ 
+        ..-"""""-..
+       .'    ___    '.
+      /    ."\  `\    \
+     ;    /, (    |    ;
+    ;    /_   '._ /     ;
+    |     |-  '._`)     |
+    ;     '-;-'  \      ;
+     ;      /    \\    ;
+      \    '.__..-'   /
+       '._ 1 9 9 9 _.'
+          ""-----""
+       COLLECWORLD.COM
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -42,12 +58,7 @@
 			
 		});
 		
-	</script>
-	
-	<!-- meta -->
-	
-	<meta name="google-translate-customization" content="64a6e296f8dffe2-b7346d0c51cebaf8-g721599485280e466-13"></meta>
-	<meta property="og:description" content="All your collections in one place, Organize it online, trade with other collectors around the world, explore other collections and find the one you need."/>
+	</script> 
 	<script type="text/javascript">
 	
 	  var _gaq = _gaq || [];
@@ -91,11 +102,11 @@
             <div id="search-top">
                 
                 <?php
-                    if ( isset($_SESSION['user']) && $_SESSION['status'] == 1 && isset($num_feedbacks) && $num_feedbacks > 0 ){
+                   /* if ( isset($_SESSION['user']) && $_SESSION['status'] == 1 && isset($num_feedbacks) && $num_feedbacks > 0 ){
                         ?>
                         <a href="<?php echo base_url(); ?>answer_feedback">Sugerencias (<?php echo $num_feedbacks; ?>)</a>
                         <?php	
-                    }
+                    }*/
                 ?>
                 
                 <img id="search-go" src="<?php echo base_url(); ?>img/search2.png" onClick="if(searchTop()=='true'){showGlobalInfo('<?php echo  $this->lang->line('palabras_con_3_caracteres'); ?>');}" />

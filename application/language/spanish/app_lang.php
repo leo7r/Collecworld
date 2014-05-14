@@ -194,6 +194,8 @@ $lang['lista_ya_existe'] = 'esta lista ya existe';
 $lang['faltantes_coleccion'] = 'Lo que me falta de la colecci&oacute;n';
 $lang['mostrar_mi_coleccion'] = 'Mostrar mi colecci&oacute;n';
 $lang['nueva_imagen_cargada'] = 'Nueva Imagen Cargada';
+$lang['normal'] = 'Normal';
+$lang['especial'] = 'Especial';
 
 	//restablecer contraseÃ±a
 	$lang['restablecer_contrasena'] = 'Restablecer ContraseÃ±a';
@@ -554,15 +556,15 @@ $lang['profile_creado_una'] = 'has creado un ';
 //Profile - Colecctions
 $lang['lista_nueva'] = 'Nuevo listado';
 $lang['editar_lista'] = 'Editar lista';
-$lang['nueva_lista_tarjetas_telefonicas'] = 'Nueva Lista de Colecci&oacute;n de Tarjetas Telef&oacute;nicas';
-$lang['nueva_lista_monedas'] = 'Nueva Lista de Colecci&oacute;n de Monedas';
-$lang['nueva_lista_billetes'] = 'Nueva Lista de Colecci&oacute;n de Billetes';
-$lang['nueva_lista_estampillas'] = 'Nueva Lista de Colecci&oacute;n de Estampillas';
+$lang['nueva_lista_tarjetas_telefonicas'] = 'Nueva Lista de Tarjetas Telef&oacute;nicas';
+$lang['nueva_lista_monedas'] = 'Nueva Lista de Monedas';
+$lang['nueva_lista_billetes'] = 'Nueva Lista de Billetes';
+$lang['nueva_lista_estampillas'] = 'Nueva Lista de Estampillas';
 $lang['crear_nueva_lista'] = 'Crear nuevo listado';
-$lang['profile_mis_colecciones_tarjetas'] = 'Mi Colecci&oacute;n de Tarjetas Telef&oacute;nicas';
-$lang['profile_mis_colecciones_monedas'] = 'Mi Colecci&oacute;n de Monedas';
-$lang['profile_mis_colecciones_billetes'] = 'Mi Colecci&oacute;n de Billetes';
-$lang['profile_mis_colecciones_estampillas'] = 'Mi Colecci&oacute;n de Estampillas';
+$lang['profile_mis_colecciones_tarjetas'] = 'Mis Listas de Tarjetas Telef&oacute;nicas';
+$lang['profile_mis_colecciones_monedas'] = 'Mis Listas de Monedas';
+$lang['profile_mis_colecciones_billetes'] = 'Mis Listas de Billetes';
+$lang['profile_mis_colecciones_estampillas'] = 'Mis Listas de Estampillas';
 $lang['profile_lista_esta_vacia'] = 'Lista est&aacute; vacia';
 $lang['nueva_lista_esta_vacia'] = 'Tu lista nueva est&aacute; vacia';
 $lang['tu_puedes'] = 'Puedes';

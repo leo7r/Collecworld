@@ -1,3 +1,4 @@
+
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /*
@@ -78,7 +79,8 @@
 
 /* Seccion general de Collecworld */
 $route['default_controller'] = "welcome/view";
-$route['404_override'] = "welcome/view"; 
+$route['404_override'] = "welcome/view";
+$route['loadTranslation'] = "collecworld/loadTranslation";
 
 /* Seccion idioma */
 $route['change_language'] = "init/change_language";
@@ -104,6 +106,9 @@ $route['help/collecworld_community'] = "help/collecworld_community";
 
 /* Seccion subir */
 $route['upload'] = "upload/view";
+$route['upload/phonecards'] = "upload/loadPhonecards";
+$route['upload/currenciesByCountry'] = "upload/currenciesByCountry";
+
 $route['upload/restriction'] = "upload/restriction";
 $route['upload/upload_go'] = "upload/upload_go";
 $route['upload/upload_coin_go'] = "upload/upload_coin_go";
@@ -181,6 +186,11 @@ $route['sendFeedback'] = "user/sendFeedback";
 $route['(:any)/pdf/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)'] = "user/show_phonecard_collection_pdf/$1/$2/$3/$4/$5/$6/$7/$8";
 $route['(:any)/xls/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)'] = "user/show_phonecard_collection_xls/$1/$2/$3/$4/$5/$6/$7/$8";
 $route['(:any)/collection/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)'] = "user/show_phonecard_collection/$1/$2/$3/$4/$5/$6/$7/$8";
+
+$route['profile/collection'] = "user/profileCollection";
+$route['profile/collection/new_list'] = "user/newList";
+$route['profile/collection/insert_list'] = "user/insertList";
+$route['profile/collection/view_list'] = "user/viewList";
 $route['(:any)'] = "user/view/$1"; // ESTA SIEMPRE DEBE IR DE ULTIMO, SIRVE PARA DIRIGIR A LOS USUARIOS A SU PAGINA
 
 

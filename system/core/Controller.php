@@ -187,6 +187,7 @@ class CW_Controller extends CI_Controller{
 		del landing page.
 	*/
 	public function landingPageVerification(){
+		@session_start();
 		
 		if ( !isset($_SESSION['init']) ){
 		

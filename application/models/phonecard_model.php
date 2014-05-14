@@ -207,31 +207,13 @@ class Phonecard_model extends CI_Model {
 		return $query->result_array();		
 
 	}
-
 	
-
-	public function get_categories( $where = NULL){
-
+	public function get_countries(){
+		$query = $this->db->get('view_phonecards_countries');
 		
-
-		if ( !$where ){
-
-			$query = $this->db->get('categories');
-
-		}
-
-		else{
-
-			$query = $this->db->get_where('categories', $where );
-
-		}
-
-		
-
-		return $query->result_array();
-
+		return $query->result_array(); 
 	}
-
+	
 	public function get_countries2(){
 
 		

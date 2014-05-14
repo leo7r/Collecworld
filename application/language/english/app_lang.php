@@ -192,6 +192,8 @@ $lang['lista_ya_existe'] = 'this list already exists';
 $lang['faltantes_coleccion'] = 'What I lack in the collection';
 $lang['mostrar_mi_coleccion'] = 'Show my collection';
 $lang['nueva_imagen_cargada'] = 'New Image uploaded';
+$lang['normal'] = 'Normal';
+$lang['especial'] = 'Special';
 
 	//restablecer contraseÃ±a
 	$lang['restablecer_contrasena'] = 'Reset Password';
@@ -557,15 +559,15 @@ $lang['profile_creado_una'] = 'created an ';
 //Profile - Colecctions
 $lang['lista_nueva'] = 'New list';
 $lang['editar_lista'] = 'Edit list';
-$lang['nueva_lista_tarjetas_telefonicas'] = 'New Phonecard Collection List';
-$lang['nueva_lista_monedas'] = 'New Coin Collection List';
-$lang['nueva_lista_billetes'] = 'New Banknote Collection List';
-$lang['nueva_lista_estampillas'] = 'New Stamp Collection List';
+$lang['nueva_lista_tarjetas_telefonicas'] = 'New Phonecard List';
+$lang['nueva_lista_monedas'] = 'New Coin List';
+$lang['nueva_lista_billetes'] = 'New Banknote List';
+$lang['nueva_lista_estampillas'] = 'New Stamp List';
 $lang['crear_nueva_lista'] = 'Create New List';
-$lang['profile_mis_colecciones_tarjetas'] = 'My Phonecards collection';
-$lang['profile_mis_colecciones_monedas'] = 'My Coins collection';
-$lang['profile_mis_colecciones_billetes'] = 'My Banknotes collection';
-$lang['profile_mis_colecciones_estampillas'] = 'My Stamps collection';
+$lang['profile_mis_colecciones_tarjetas'] = 'My Phonecards List';
+$lang['profile_mis_colecciones_monedas'] = 'My Coins List';
+$lang['profile_mis_colecciones_billetes'] = 'My Banknotes List';
+$lang['profile_mis_colecciones_estampillas'] = 'My Stamps List';
 $lang['profile_lista_esta_vacia'] = 'List is empty';
 $lang['nueva_lista_esta_vacia'] = 'Your new list is empty';
 $lang['tu_puedes'] = 'You can';

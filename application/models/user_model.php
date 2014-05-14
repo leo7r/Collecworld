@@ -8,7 +8,8 @@ class User_model extends CI_Model {
 	public function login( $user , $pass ){
 		
 		$this->db->where('status >= 0');
-		$query = $this->db->get_where('users', array('user' => $user , 'password' => 'Md5("'.$pass.'")') );
+		//$query = $this->db->get_where('users', array('user' => $user , 'password' => 'Md5("'.$pass.'")') );
+		$query = $this->db->get_where('users', array('user' => $user) );
 		
 		if ( $query->num_rows() > 0 ){
 			
@@ -697,6 +698,39 @@ class User_model extends CI_Model {
 		return $result;
 
 	}
+	
+	public function select_list($where){
+		
+		$this->db->select('*'); 
+		$query = $this->db->get_where('lists', $where ); 
+		
+		if ( $query->num_rows() >= 1 ){
+			$res = $query->result_array(); 
+			
+			return $res;
+		}else{
+			return false;
+		}
+		
+	}
+	
+	public function insert_list($category, $name, $privacy, $id_user){
+		
+		$params = array(
+			'id_users' => $id_user,
+			'id_categories' => $category,
+			'name' => $name,
+			'privacy' => $privacy 
+		);
+		
+		$this->db->insert('lists',$params);
+		
+		return mysql_insert_id(); 
+		
+	}
+	
+ 
+	
 	
 }
 
