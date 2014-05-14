@@ -79,7 +79,8 @@
 
 /* Seccion general de Collecworld */
 $route['default_controller'] = "welcome/view";
-$route['404_override'] = "welcome/view"; 
+$route['404_override'] = "welcome/view";
+$route['loadTranslation'] = "collecworld/loadTranslation";
 
 /* Seccion idioma */
 $route['change_language'] = "init/change_language";
@@ -105,6 +106,8 @@ $route['help/collecworld_community'] = "help/collecworld_community";
 
 /* Seccion subir */
 $route['upload'] = "upload/view";
+$route['upload/phonecards'] = "upload/loadPhonecards";
+
 $route['upload/restriction'] = "upload/restriction";
 $route['upload/upload_go'] = "upload/upload_go";
 $route['upload/upload_coin_go'] = "upload/upload_coin_go";
