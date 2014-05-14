@@ -194,6 +194,8 @@ $lang['lista_ya_existe'] = 'esta lista ya existe';
 $lang['faltantes_coleccion'] = 'Lo que me falta de la colecci&oacute;n';
 $lang['mostrar_mi_coleccion'] = 'Mostrar mi colecci&oacute;n';
 $lang['nueva_imagen_cargada'] = 'Nueva Imagen Cargada';
+$lang['normal'] = 'Normal';
+$lang['especial'] = 'Especial';
 
 	//restablecer contraseÃ±a
 	$lang['restablecer_contrasena'] = 'Restablecer ContraseÃ±a';

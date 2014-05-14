@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-if ( strpos($_SERVER['DOCUMENT_ROOT'],'wamp') == false ) {
+/*if ( strpos($_SERVER['DOCUMENT_ROOT'],'wamp') == false ) {
 	$db['default']['hostname'] = 'localhost';
 	$db['default']['username'] = 'collecwo_beto';
 	$db['default']['password'] = "l12e10o90@l12";
@@ -59,7 +59,12 @@ else{
 	$db['default']['username'] = 'root';
 	$db['default']['password'] = "";
 	$db['default']['database'] = 'collecworld';
-}
+}*/
+
+$db['default']['hostname'] = 'collecworld.com:3306';
+$db['default']['username'] = 'collecwo_beto';
+$db['default']['password'] = "l12e10o90@l12";
+$db['default']['database'] = 'collecwo_test';
 
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';

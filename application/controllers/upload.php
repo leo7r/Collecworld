@@ -22,8 +22,7 @@ class Upload extends CW_Controller {
 		$this->load->model('collecworld_model');
 		$this->load->model('phonecard_model');
 		
-		$data['categories'] = $this->collecworld_model->get_categories();		
-		$data['countries'] = $this->collecworld_model->get_countries();
+		$data['categories'] = $this->collecworld_model->get_categories();
 		$data['tags'] = $this->phonecard_model->get_tags();
 		$data['logos'] = $this->phonecard_model->get_logos();
 		
@@ -32,10 +31,34 @@ class Upload extends CW_Controller {
 		$this->load->view('templates/footer', $data);		
 	}
 	
+	// Funcion que carga el formulario de Tarjetas
 	public function loadPhonecards(){
-		echo 'hola';
-		//$data['title'] = 'Upload Phonecard';
-		//$this->load->view('pages/upload/phonecards', $data);
+		$data['title'] = 'Upload Phonecard';
+		
+		$this->load->model('phonecard_model');
+		$data['countries'] = $this->phonecard_model->get_countries();
+		
+		$this->load->view('pages/upload/phonecards', $data);
+	}
+	
+	// Funcion para saber las monedas de un pais dentro de una categoria
+	public function currenciesByCountry(){
+		
+		$categories_countries = $this->input->post('categories_countries');
+		$category = $this->input->post('category');
+		
+		$this->load->model('collecworld_model');
+		$denominations = $this->collecworld_model->get_currencies( $categories_countries , $category );
+		
+		echo '<select id="currency" name="currency">';
+		echo '<option selected="selected" value="-1">'.$this->lang->line('seleccione').'</option>';
+		
+		for ( $i = 0 ; $i < count($denominations) ; $i++ ){
+			echo '<option value="'.$denominations[$i]['id_phonecards_denomination'].'" >'.$denominations[$i]['denomination'].'</option>';
+		}
+		
+		echo '</select>';
+		
 	}
 	
 	public function upload_go(){

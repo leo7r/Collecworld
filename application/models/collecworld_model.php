@@ -316,6 +316,24 @@ class Collecworld_model extends CI_Model {
 		return $query->result_array();
 	}
 	
+	public function get_currencies( $categories_countries , $category ){
+		
+		$this->db->select('id_phonecards_denomination, denomination');
+		
+		switch( $category ){
+			case 1:
+				$this->db->from('view_phonecards_denomination');
+				break;
+		}
+		
+		$this->db->where('id_categories_countries',$categories_countries);
+		$query = $this->db->get();
+		
+		//echo $this->db->last_query();
+		
+		return $query->result_array();
+	}
+	
 }
 
 ?>

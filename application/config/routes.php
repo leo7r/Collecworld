@@ -107,6 +107,7 @@ $route['help/collecworld_community'] = "help/collecworld_community";
 /* Seccion subir */
 $route['upload'] = "upload/view";
 $route['upload/phonecards'] = "upload/loadPhonecards";
+$route['upload/currenciesByCountry'] = "upload/currenciesByCountry";
 
 $route['upload/restriction'] = "upload/restriction";
 $route['upload/upload_go'] = "upload/upload_go";

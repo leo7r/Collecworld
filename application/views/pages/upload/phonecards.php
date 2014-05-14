@@ -1,72 +1,6 @@
 <script>
 
 	var file = -1;
-
-	function send(){
-		name = document.getElementById('name').value;
-		serie = document.getElementById('serie').value;
-		country = document.getElementById('country').value;
-		
-		companies = document.getElementById('companies').value;
-		
-		system = document.getElementById('system').value;
-		
-		date_year = parseInt(document.getElementById('date_year').value);
-		date_month = parseInt(document.getElementById('date_month').value);
-		date_day = parseInt(document.getElementById('date_day').value);
-		
-		date_year = (date_year < 2013 && date_year > 1000 );
-		date_month = (date_month < 13 && date_month > 0 );
-		date_day = (date_day < 32 && date_day > 0 );
-		
-		date = date_year && date_month && date_day;
-		
-		faceValue = document.getElementById('faceValue').value;
-		currency = document.getElementById('currency').value;
-		printRun = document.getElementById('printRun').value;
-		
-		//alert(currency);
-		alert(name+' | '+serie+' | '+country+' | '+companies+' | '+system+' | '+date+' | '+faceValue+' | '+currency+' | '+printRun+' | '+file);
-		
-		if ( name.length != 0 && serie.length != 0 && country != -1 
-		&& companies.length != 0 && system != -1 && date
-		&& faceValue.length != 0 && currency != -1 && printRun.length != 0 && file != -1 ){
-			
-			//insertPhonecard( name , serie , companies , country , system , date , faceValue , currency , printRun );
-			
-			alert('done');
-			//document.getElementById('#form0').submit();
-			
-		}
-		
-	}
-	
-	function setComp( dom ){
-	
-		index = dom.selectedIndex;
-		id_c = dom.options[index].value;
-		
-		if ( id_c != -1 ){
-			$('#s_curr').load(path+'ajax/upload/currenciesByCountry.php', {country:id_c});
-			
-			catalog_code = document.getElementById('catalog-code');
-			
-			$(catalog_code).load(path+'ajax/upload/catalogCodeByCountry.php',{country:id_c} , function(){
-				
-				if ( catalog_code.innerHTML.length > 0 ) 
-					$("#catalog-tr").css({display:'table-row'});
-				else
-					$("#catalog-tr").css({display:'none'});
-			});
-			
-			$('#system').prop('disabled',false);
-			setSystemType( document.getElementById('system') );
-		}
-		else{
-			document.getElementById('s_curr').innerHTML = '<select disabled="disabled" id="currency" name="currency"><option selected="selected" value="-1"><?php echo $lang['seleccione']; ?></option></select>';
-		}
-		
-	}
 	
 	function setSerie( dom ){
 	
@@ -112,14 +46,14 @@
 				$("#variation1_list").load(path+'ajax/upload/typesBySystem.php',{system:id_s,country:id_c});
 				$("#variation1").css({display:'table-row'});
 				$("#variation2").css({display:'table-row'});
-				$("#variation3_text").html('<?php echo $lang['variacion_descriptiva']; ?>:');				
-				$("#variation3_info").html('<?php echo $lang['ayuda_variante_descriptiva']; ?>');
+				$("#variation3_text").html('<?php echo $this->lang->line('variacion_descriptiva'); ?>:');				
+				$("#variation3_info").html('<?php echo $this->lang->line('ayuda_variante_descriptiva'); ?>');
 				break;
 			case 2:
 			case 4:
 				$("#variation1 , #variation2").css({display:'none'});
-				$("#variation3_text").html('<?php echo $lang['variacion_descriptiva']; ?>:');				
-				$("#variation3_info").html('<?php echo $lang['ayuda_variante_descriptiva']; ?>');
+				$("#variation3_text").html('<?php echo $this->lang->line('variacion_descriptiva'); ?>:');				
+				$("#variation3_info").html('<?php echo $this->lang->line('ayuda_variante_descriptiva'); ?>');
 				break;
 				
 			default:
@@ -273,20 +207,7 @@
 			$('#tag_tr'+(num+1)).css({display:''});
 		
 	}
-	
-	function modalPhonecard( param ){
-	
-		_p = $(document).getUrlParam(param);
-		_p = parseInt(_p);
 		
-		if ( !_p )
-			_p = param;
-	
-		$("#modal-phonecard").load(path+'ajax/showPhonecard.php',{p:_p,backs:'../'},function(){
-			$("#modalP").click();
-		});
-	}
-	
 	function allowOne( id , dom ){
 		
 		bool = dom.checked;
@@ -313,53 +234,6 @@
 		
 		$("#"+id).css({display:'none'});
 	
-	}
-	
-	function sendForm( num ){
-		var values = $("#form0").serialize();
-		$.post(path+"index.php/upload/restriction", values, function(data) {
-		text = '';
-		
-		if ( $("#name").val().length == 0 ){
-			
-			text+='-<?php echo $lang[nombre_no_valido]."</br>"; ?>';
-		}
-		if ( $("#companies").val().length == 0 ){
-			text+='-<?php echo $lang[compania_no_valida]."</br>"; ?>';
-		}
-		if ( document.getElementById('country').selectedIndex == -1 || $("#country").val() == -1 ){
-			text+='-<?php echo $lang[pais_no_valido]."</br>"; ?>';
-		}
-		if ( $("#currency").val() == -1 ){
-			text+='-<?php echo $lang[moneda_no_valida]."</br>"; ?>';
-		}
-		if ( $("#system").val() == -1 ){
-			text+='-<?php echo $lang[sistema_no_valido]."</br>"; ?>';
-		}
-		if ( $("#date_year").val().length == 0 && $("#date_ex_year").val().length == 0 && $("#date_known_year").val().length == 0 ){
-			if ( $("#order_n").val().length == 0 ){
-				text+='-<?php echo $lang[numero_de_pedido_o_fecha]."</br>"; ?>';
-			}
-		}
-		text+=data;	
-		
-		if ( text.length == 0 ){
-			if ( num == 1 ){
-				$("#saveInfo").val('1');
-			}else if(num == 2){
-				$("#saveInfo").val('2');
-			}
-			
-			$("#name,#country,#companies,#currency,#system,#serie,#serie_n,#serie2,#serie_n2,#printRun,#printRun2,#faceValue,#tag0,#tag1,#tag2,#tag3").prop('disabled', false);
-			$("#date_year,#date_month,#date_day,#date_known_year,#date_known_month,#date_known_day,#date_ex_year,#date_ex_month,#date_ex_day,#order_n").prop('disabled',false);
-			
-			$("#uploading-images").css({ display: 'inherit' });
-			$("#form0").submit();
-		}
-		else{
-			showGlobalInfo(text);
-		}
-	},'json');
 	}
 	
 	function onlyOneInput( dom , id ){
@@ -424,21 +298,21 @@
 				var img_status = $(document).getUrlParam("img");
 				
 				if ( err > 0 ){
-					document.getElementById("warning-info").innerHTML = '<?php echo $lang['error_tarjeta_repetida']; ?><br /><br />';
-					document.getElementById("warning-info").innerHTML+= '<span class="google-button" onclick="modalPhonecard(\'err\');" ><?php echo $lang['ver']; ?></span>';
+					document.getElementById("warning-info").innerHTML = '<?php echo $this->lang->line('error_tarjeta_repetida'); ?><br /><br />';
+					document.getElementById("warning-info").innerHTML+= '<span class="google-button" onclick="modalPhonecard(\'err\');" ><?php echo $this->lang->line('ver'); ?></span>';
 					
 					if ( img_status == -1 ){
-						document.getElementById("warning-info").innerHTML+= "<br><?php echo $lang['error_tarjeta_sin_imagen']; ?><span class=\"google-button\" ><?php echo $lang['error_agregar_imagen']; ?></span>";
+						document.getElementById("warning-info").innerHTML+= "<br><?php echo $this->lang->line('error_tarjeta_sin_imagen'); ?><span class=\"google-button\" ><?php echo $this->lang->line('error_agregar_imagen'); ?></span>";
 					}
 					
 				}
 				else{
-					document.getElementById("warning-info").innerHTML = '<?php echo $lang['error_cargando_tarjetas']; ?>';
+					document.getElementById("warning-info").innerHTML = '<?php echo $this->lang->line('error_cargando_tarjetas'); ?>';
 				}	
 			}
 			else{
 				if ( err == -1 ){
-					document.getElementById("warning-info").innerHTML = '<?php echo $lang['error_imagenes']; ?>';
+					document.getElementById("warning-info").innerHTML = '<?php echo $this->lang->line('error_imagenes'); ?>';
 				}
 			}
 		}
@@ -479,7 +353,7 @@
 		}
 		
 		//c_input.selectedIndex = g_country;
-		setComp(c_input);
+		phonecard_onCountrySelected(c_input);
 		
 		
 		// Set Name
@@ -658,9 +532,6 @@ function isIE(){
 }
 
 @session_start();
-$countries = $_SESSION['countries'];
-$tags_list = $_SESSION['tags'];
-$logos_list = $_SESSION['logos'];
 
 ?>
 <a id="modalP" style="display:none;" rel="leanModal" href="#modal-phonecard">a</a>
@@ -669,24 +540,24 @@ $logos_list = $_SESSION['logos'];
 <div id="modal-feedback"></div>
 
 <div id="info-info" >
-	- <?php echo $lang['rellena_los_campos_con_la_informacion']; ?>.
+	- <?php echo $this->lang->line('rellena_los_campos_con_la_informacion'); ?>.
 	<br />
     <br />
-	- <?php echo $lang['si_algun_campo_no_existe']; ?>.
+	- <?php echo $this->lang->line('si_algun_campo_no_existe'); ?>.
 </div>
 
 <div id="upload-error" style="display:none;">
 	<div id="warning-in">
 		<div class="title_warning">
 			<img src="<?php echo $path; ?>img/alert.png" height="16" width="16" />
-			<?php echo $lang['tu_tarjeta_telefonica']; ?> <span style="text-decoration:underline;"><?php echo $lang['no_pudo']; ?></span> <?php echo $lang['ser_cargada']; ?>
+			<?php echo $this->lang->line('tu_tarjeta_telefonica'); ?> <span style="text-decoration:underline;"><?php echo $this->lang->line('no_pudo'); ?></span> <?php echo $this->lang->line('ser_cargada'); ?>
 		</div>
 	</div>
 	<div id="warning-info">
-		<?php echo $lang['diculpa_tuvimos_un_problema_cargando_tu']; ?> <b><?php echo $lang['tarjeta_telefonica']; ?></b>. <?php echo $lang['intentalo_mas_tarde']; ?>.
+		<?php echo $this->lang->line('diculpa_tuvimos_un_problema_cargando_tu'); ?> <b><?php echo $this->lang->line('tarjeta_telefonica'); ?></b>. <?php echo $this->lang->line('intentalo_mas_tarde'); ?>.
 		<br />
 		<br />
-		<a href="#"> <?php echo $lang['contactanos']; ?></a>
+		<a href="#"> <?php echo $this->lang->line('contactanos'); ?></a>
 	</div>
 </div>
 
@@ -694,134 +565,142 @@ $logos_list = $_SESSION['logos'];
 	<div id="done-in">
 		<div class="title_warning">
 			<img src="<?php echo $path; ?>img/done.png" height="16" width="16" />
-			<?php echo $lang['tu_tarjeta_ha_sido_cargada']; ?>!
+			<?php echo $this->lang->line('tu_tarjeta_ha_sido_cargada'); ?>!
 		</div>
 	</div>
 	<div id="done-info">
-		<span class="google-button" onclick="modalPhonecard('don');"><?php echo $lang['ver']; ?></span>
+		<span class="google-button" onclick="modalPhonecard('don');"><?php echo $this->lang->line('ver'); ?></span>
         &nbsp;&nbsp;&nbsp;
-        <span class="google-button" onclick="setFormVisible();"><?php echo $lang['cargar_nueva_tarjeta_telefonica']; ?></span>
+        <span class="google-button" onclick="setFormVisible();"><?php echo $this->lang->line('cargar_nueva_tarjeta_telefonica'); ?></span>
 	</div>
 </div>
 
 <div id="upload-pc" class="box1">
-
+	
 	<form id="form0" action="<?php echo $path; ?>index.php/upload/upload_go" method="post" accept-charset="utf-8" enctype="multipart/form-data">	
         <div id="upload-title">
-            <span><?php echo $lang['cargar_tarjeta_telefonica']; ?></span>
-            <img id="upload-help" src="<?php echo $path; ?>img/help2.png" height="20" width="20" onmouseover="showInfo( this , '<?php echo $lang['antes_de_cargar_una_tarjeta_telefonica']; ?>.' )">
-            <input type="reset" value="<?php echo $lang['restablecer']; ?>" id="upload-colab" class="google-button" >
+            <span><?php echo $this->lang->line('cargar_tarjeta_telefonica'); ?></span>
+            <img id="upload-help" src="<?php echo $path; ?>img/help2.png" height="20" width="20" onmouseover="showInfo( this , '<?php echo $this->lang->line('antes_de_cargar_una_tarjeta_telefonica'); ?>.' )">
+            <input type="reset" value="<?php echo $this->lang->line('restablecer'); ?>" id="upload-colab" class="google-button" >
         </div>
         <div id="upload-required">
-            * &mdash; <?php echo $lang['campos_obligatorios']; ?>
+            * &mdash; <?php echo $this->lang->line('campos_obligatorios'); ?>
         </div>	
 		<table cellspacing="5px">
 			<tr>
-				<td><span class="obb">* </span><?php echo $lang['pais']; ?>: </td>
+				<td><span class="obb">* </span><?php echo $this->lang->line('pais'); ?>: </td>
 				<td>
-					<select id="country" name="country" onChange="setComp(this);">
-						<option selected="selected" value="-1" ><?php echo $lang['seleccione']; ?></option>
+					<select id="country" name="country" onChange="phonecard_onCountrySelected(this);">
+						<option selected="selected" value="-1" ><?php echo $this->lang->line('seleccione'); ?></option>
 						<?php
 							for ($i=0 ; $i < count($countries) ; $i++){
-								echo '<option value="'.$countries[$i]['id_countries'].'" >'.$countries[$i]['name'].'</option>';
+								echo '<option value="'.$countries[$i]['id_categories_countries'].'" >'.$countries[$i]['countries'].'</option>';
 							}
 						?>							
 					</select>
 				</td>
-				<td><a href="javascript:modalFeedbackCountry()"><?php echo $lang['tu_pais_no_aparece']; ?></a></td>
+				<td><a href="javascript:modalFeedbackCountry()"><?php echo $this->lang->line('tu_pais_no_aparece'); ?></a></td>
 			</tr>
+            <tr>
+            	<td><span class="obb">* </span><?php echo $this->lang->line('circulacion'); ?>:</td>
+                <td>
+                	<input type="radio" name="sex" value="0"><?php echo $this->lang->line('normal'); ?>&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="sex" value="1"><?php echo $this->lang->line('especial'); ?>
+                </td>
+                <td></td>
+            </tr>
 			<tr>
-				<td><span class="obb">* </span><?php echo $lang['moneda']; ?>: </td>
+				<td><span class="obb">* </span><?php echo $this->lang->line('moneda'); ?>: </td>
 				<td id="s_curr">
 					<select disabled="disabled" id="currency" name="currency">
-						<option selected="selected" value="-1"><?php echo $lang['seleccione']; ?></option>
+						<option selected="selected" value="-1"><?php echo $this->lang->line('seleccione'); ?></option>
 					</select>
 				</td>
-				<td><a href="javascript:modalFeedbackCurrency()"><?php echo $lang['tu_moneda_no_aparece']; ?></a></td>
+				<td><a href="javascript:modalFeedbackCurrency()"><?php echo $this->lang->line('tu_moneda_no_aparece'); ?></a></td>
 			</tr>
 			<tr>
-				<td><span class="obb">* </span><?php echo $lang['compania']; ?>: </td>
+				<td><span class="obb">* </span><?php echo $this->lang->line('compania'); ?>: </td>
 				<td id="s_comp">
 					<input type="text" id="companies" name="companies" class="upload-input">
 				</td>
-				<td class="reg_info"><?php echo $lang['compania_emisora_tarjeta']; ?> <?php echo $lang['se_recomienda_el_autocompletar']; ?></td>
+				<td class="reg_info"><?php echo $this->lang->line('compania_emisora_tarjeta'); ?> <?php echo $this->lang->line('se_recomienda_el_autocompletar'); ?></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>
-					<span onmouseover="showInfo( this , '<?php echo $lang['ayuda_tarjetas_uso_interno']; ?>' )" style="font-size:14px; cursor:default;">
+					<span onmouseover="showInfo( this , '<?php echo $this->lang->line('ayuda_tarjetas_uso_interno'); ?>' )" style="font-size:14px; cursor:default;">
 						<input type="checkbox" name="not_emmited" id="not_emmited" onclick="catalog_allow_one(this);" />
-						<span><?php echo $lang['tarjetas_compania_uso_interno']; ?></span>
+						<span><?php echo $this->lang->line('tarjetas_compania_uso_interno'); ?></span>
 					</span>
 				</td>
-				<td class="reg_info"><?php echo $lang['pruebas_demostraciones_licitaciones']; ?></td>
+				<td class="reg_info"><?php echo $this->lang->line('pruebas_demostraciones_licitaciones'); ?></td>
 			</tr>                 
 
 			<tr id="system_tr">
-				<td><span class="obb">* </span><?php echo $lang['sistema']; ?>: </td>
+				<td><span class="obb">* </span><?php echo $this->lang->line('sistema'); ?>: </td>
 				<td>
 					<select disabled="disabled" id="system" name="system" style="width:150px;" onchange="setSystemType(this);"  >
-						<option selected="selected" value="-1" ><?php echo $lang['seleccione']; ?></option>
-						<option value="1" ><?php echo $lang['chip']; ?></option>
-						<option value="2" ><?php echo $lang['banda_magnetica']; ?></option>
-						<option value="3" ><?php echo $lang['sistema_optico']; ?></option>
-						<option value="4" ><?php echo $lang['memoria_remota']; ?></option>
-						<option value="5" ><?php echo $lang['sistema_inducido']; ?></option>		
+						<option selected="selected" value="-1" ><?php echo $this->lang->line('seleccione'); ?></option>
+						<option value="1" ><?php echo $this->lang->line('chip'); ?></option>
+						<option value="2" ><?php echo $this->lang->line('banda_magnetica'); ?></option>
+						<option value="3" ><?php echo $this->lang->line('sistema_optico'); ?></option>
+						<option value="4" ><?php echo $this->lang->line('memoria_remota'); ?></option>
+						<option value="5" ><?php echo $this->lang->line('sistema_inducido'); ?></option>		
 					</select>
 				</td>
-				<td><a href="javascript:modalFeedbackSystem()"><?php echo $lang['tu_sistema_no_aparece']; ?></a></td>
+				<td><a href="javascript:modalFeedbackSystem()"><?php echo $this->lang->line('tu_sistema_no_aparece'); ?></a></td>
 			</tr>
 			<tr>
-				<td><span class="obb">* </span><?php echo $lang['nombre']; ?>: </td>
+				<td><span class="obb">* </span><?php echo $this->lang->line('nombre'); ?>: </td>
 				<td><input type="text" id="name" name="name" class="upload-input"></td>
-				<td class="reg_info"><?php echo $lang['nombre_tarjeta_telefonica']; ?></td>
+				<td class="reg_info"><?php echo $this->lang->line('nombre_tarjeta_telefonica'); ?></td>
 			</tr>
 			<tr id="catalog-tr" style="display:none">
-				<td><?php echo $lang['catalogo_referencia']; ?>: </td>
+				<td><?php echo $this->lang->line('catalogo_referencia'); ?>: </td>
 				<td>
 					<span id="catalog-code"></span>
 					<input type="text" id="reference" name="reference" class="catalog-input" />
 				</td>
-				<td><a href="javascript:modalFeedbackReferenceCatalog()"><?php echo $lang['problemas_catalogo_referencia']; ?></a></td>
+				<td><a href="javascript:modalFeedbackReferenceCatalog()"><?php echo $this->lang->line('problemas_catalogo_referencia'); ?></a></td>
 			</tr>
 			<tr>
-				<td><?php echo $lang['serie_1']; ?>: </td>
+				<td><?php echo $this->lang->line('serie_1'); ?>: </td>
 				<td id="s_ser">
 					<div class="reg_info">
-						<span><?php echo $lang['nombre']; ?></span>
-						<span style="float:right; margin-right:5px;"><?php echo $lang['numero']; ?></span>
+						<span><?php echo $this->lang->line('nombre'); ?></span>
+						<span style="float:right; margin-right:5px;"><?php echo $this->lang->line('numero'); ?></span>
 					</div>
 					<input type="text" id="serie" name="serie" value="" class="upload-input2" onkeyup="onlyOneInput(this,'serie2');onlyOneInput(this,'serie_n2');">
 					<input type="text" id="serie_n" name="serie_n" class="upload-num" onkeyup="onlyOneInput(this,'serie_n2');onlyOneInput(this,'serie2');" >
 				</td>
-				<td class="reg_info"><?php echo $lang['impreso_en_tarjeta_telefonica']; ?><br /><?php echo $lang['deje_en_blanco']; ?></td>
+				<td class="reg_info"><?php echo $this->lang->line('impreso_en_tarjeta_telefonica'); ?><br /><?php echo $this->lang->line('deje_en_blanco'); ?></td>
 			</tr>
 			<tr>
 				<td>Serie 2: </td>
 				<td id="s_ser2">
 					<div class="reg_info">
-						<span><?php echo $lang['nombre']; ?></span>
-						<span style="float:right; margin-right:5px;"><?php echo $lang['numero']; ?></span>
+						<span><?php echo $this->lang->line('nombre'); ?></span>
+						<span style="float:right; margin-right:5px;"><?php echo $this->lang->line('numero'); ?></span>
 					</div>
 					<input type="text" id="serie2" name="serie2" value="" class="upload-input2" onkeyup="onlyOneInput(this,'serie');onlyOneInput(this,'serie_n');" >
 					<input type="text" id="serie_n2" name="serie_n2" class="upload-num" onkeyup="onlyOneInput(this,'serie_n');onlyOneInput(this,'serie');" >
 				</td>
-				<td class="reg_info"><?php echo $lang['no_impreso_en_tarjeta_telefonica']; ?><br /><?php echo $lang['conocimiento_general']; ?></td>
+				<td class="reg_info"><?php echo $this->lang->line('no_impreso_en_tarjeta_telefonica'); ?><br /><?php echo $this->lang->line('conocimiento_general'); ?></td>
 			</tr>
 			<tr>
-				<td><?php echo $lang['tiraje_1']; ?>: </td>
+				<td><?php echo $this->lang->line('tiraje_1'); ?>: </td>
 				<td><input type="text" id="printRun" name="printRun" onkeypress="onlyNumbers(event);onlyOneInput(this,'printRun2');" class="upload-input" ></td>
-				<td class="reg_info"><?php echo $lang['ejemplo_20000']; ?><br /><?php echo $lang['deje_en_blanco']; ?></td>
+				<td class="reg_info"><?php echo $this->lang->line('ejemplo_20000'); ?><br /><?php echo $this->lang->line('deje_en_blanco'); ?></td>
 			</tr>
 			<tr>
-				<td><?php echo $lang['tiraje_2']; ?>: </td>
+				<td><?php echo $this->lang->line('tiraje_2'); ?>: </td>
 				<td><input type="text" id="printRun2" name="printRun2" onkeypress="onlyNumbers(event);onlyOneInput(this,'printRun');" class="upload-input" ></td>
-				<td class="reg_info"><?php echo $lang['no_impreso_en_tarjeta_telefonica']; ?><br /><?php echo $lang['valor_aproximado_conocido']; ?></td>
+				<td class="reg_info"><?php echo $this->lang->line('no_impreso_en_tarjeta_telefonica'); ?><br /><?php echo $this->lang->line('valor_aproximado_conocido'); ?></td>
 			</tr>
 			<tr>
-				<td><?php echo $lang['emitida']; ?>: </td>
+				<td><?php echo $this->lang->line('emitida'); ?>: </td>
 				<td id="upload-date">
-					<div>&nbsp;&nbsp;&nbsp;<?php echo $lang['ano']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $lang['mes']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $lang['dia']; ?></div>
+					<div>&nbsp;&nbsp;&nbsp;<?php echo $this->lang->line('ano'); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->lang->line('mes'); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->lang->line('dia'); ?></div>
 					<div>
 						<input type="text" id="date_year" name="date_year" class="upload-date1" onkeyup="verifyDate( event , this , 'year' );nextIn(this,4,0);onlyOneDate(this,'date_known');" onkeypress="onlyNumbers(event)" maxlength="4">
 						/
@@ -830,10 +709,10 @@ $logos_list = $_SESSION['logos'];
 						<input type="text" id="date_day" name="date_day" class="upload-date0" onkeypress="onlyNumbers(event)" onKeyUp="verifyDate( event , this , 'day' );"  maxlength="2">
 					</div>
 				</td>
-				<td class="reg_info"><?php echo $lang['impreso_en_tarjeta_telefonica']; ?><br /><?php echo $lang['deje_en_blanco']; ?></td>
+				<td class="reg_info"><?php echo $this->lang->line('impreso_en_tarjeta_telefonica'); ?><br /><?php echo $this->lang->line('deje_en_blanco'); ?></td>
 			</tr>
 			<tr>
-				<td><?php echo $lang['fecha_vencimiento']; ?>: </td>
+				<td><?php echo $this->lang->line('fecha_vencimiento'); ?>: </td>
 				<td id="upload-date_ex">
 					<div>
 						<input type="text" id="date_ex_year" name="date_ex_year" class="upload-date1" onkeyup="verifyDate( event , this , 'year' );nextIn2(this,4,0);" onkeypress="onlyNumbers(event)"  maxlength="4">
@@ -843,10 +722,10 @@ $logos_list = $_SESSION['logos'];
 						<input type="text" id="date_ex_day" name="date_ex_day" class="upload-date0" onkeypress="onlyNumbers(event)" onKeyUp="verifyDate( event , this , 'day' )"  maxlength="2">
 					</div>
 				</td>
-				<td class="reg_info"><?php echo $lang['no_impreso_en_tarjeta_telefonica']; ?><br /><?php echo $lang['deje_en_blanco']; ?></td>
+				<td class="reg_info"><?php echo $this->lang->line('no_impreso_en_tarjeta_telefonica'); ?><br /><?php echo $this->lang->line('deje_en_blanco'); ?></td>
 			</tr>
 			<tr>
-				<td><?php echo $lang['fecha_conocida']; ?>: </td>
+				<td><?php echo $this->lang->line('fecha_conocida'); ?>: </td>
 				<td id="upload-date_kwown">
 					<div>
 						<input type="text" id="date_known_year" name="date_known_year" class="upload-date1" onkeyup="verifyDate( event , this , 'year' );nextIn3(this,4,0);onlyOneDate(this,'date');" onkeypress="onlyNumbers(event)"  maxlength="4">
@@ -856,35 +735,35 @@ $logos_list = $_SESSION['logos'];
 						<input type="text" id="date_known_day" name="date_known_day" class="upload-date0" onkeypress="onlyNumbers(event)" onKeyUp="verifyDate( event , this , 'day' )"  maxlength="2">
 					</div>
 				</td>
-				<td class="reg_info"><?php echo $lang['fecha_conocida_no_impresa']; ?></td>
+				<td class="reg_info"><?php echo $this->lang->line('fecha_conocida_no_impresa'); ?></td>
 			</tr>
 			<tr>
-				<td onmouseover="showInfo(this,'Manual sort field, only in the absence of dates')"><?php echo $lang['numero_de_orden']; ?>: </td>
+				<td onmouseover="showInfo(this,'Manual sort field, only in the absence of dates')"><?php echo $this->lang->line('numero_de_orden'); ?>: </td>
 				<td><input type="text" id="order_n" name="order_n" class="upload-num" onkeypress="onlyNumbers(event)"  /></td>
-				<td class="reg_info"><?php echo $lang['numero_de_orden_explicacion']; ?></td>
+				<td class="reg_info"><?php echo $this->lang->line('numero_de_orden_explicacion'); ?></td>
 			</tr>
 			<tr>
-				<td><?php echo $lang['valor_nominal']; ?>: </td>
+				<td><?php echo $this->lang->line('valor_nominal'); ?>: </td>
 				<td><input type="text" id="faceValue" name="faceValue" onkeypress="onlyNumbers(event)"  class="upload-input"></td>
-				<td class="reg_info"><?php echo $lang['ejemplo_20000']; ?><br /><?php echo $lang['deje_en_blanco']; ?></td>
+				<td class="reg_info"><?php echo $this->lang->line('ejemplo_20000'); ?><br /><?php echo $this->lang->line('deje_en_blanco'); ?></td>
 			</tr>
 			<tr>
-				<td><?php echo $lang['imagen_anverso']; ?>: </td>
+				<td><?php echo $this->lang->line('imagen_anverso'); ?>: </td>
 				<td id="i_img">
 					<input type="file" style="display:none;" id="i_file" name="i_file" accept="image/*" onchange="img_loaded(0);" />
-					<input class="google-button" type="button" value="<?php echo $lang['examinar']; ?>" onclick="document.getElementById('i_file').click();" />
+					<input class="google-button" type="button" value="<?php echo $this->lang->line('examinar'); ?>" onclick="document.getElementById('i_file').click();" />
 					<span id="upload-img-info"></span>
 				</td>
-				<td id="i_info" class="reg_info"><?php echo $lang['por_lo_menos_600_300']; ?></td>
+				<td id="i_info" class="reg_info"><?php echo $this->lang->line('por_lo_menos_600_300'); ?></td>
 			</tr>
 			<tr>
-				<td><?php echo $lang['imagen_reverso']; ?>: </td>
+				<td><?php echo $this->lang->line('imagen_reverso'); ?>: </td>
 				<td id="i_img_r">
 					<input type="file" style="display:none;" id="i_file_r" name="i_file_r" accept="image/*" onchange="img_loaded(1);" />
-					<input class="google-button" type="button" value="<?php echo $lang['examinar']; ?>" onclick="document.getElementById('i_file_r').click();" />
+					<input class="google-button" type="button" value="<?php echo $this->lang->line('examinar'); ?>" onclick="document.getElementById('i_file_r').click();" />
 					<span id="upload-img-info-r"></span>
 				</td>
-				<td id="i_info-r" class="reg_info"><?php echo $lang['por_lo_menos_600_300']; ?></td>
+				<td id="i_info-r" class="reg_info"><?php echo $this->lang->line('por_lo_menos_600_300'); ?></td>
 			</tr>
 			<?php
 				$tags = '';
@@ -894,20 +773,20 @@ $logos_list = $_SESSION['logos'];
 				}
 			?>
 			<tr>
-				<td><?php echo $lang['tematica']; ?>: </td>
+				<td><?php echo $this->lang->line('tematica'); ?>: </td>
 				<td>
 					<select id="tag0" name="tag0" onchange="setTag(0);" >
-						<option value="-1" ><?php echo $lang['seleccione']; ?></option>
+						<option value="-1" ><?php echo $this->lang->line('seleccione'); ?></option>
 						<?php echo $tags; ?>
 					</select>
 				</td>
-				<td class="reg_info"><?php echo $lang['opcional']; ?></td>
+				<td class="reg_info"><?php echo $this->lang->line('opcional'); ?></td>
 			</tr>
 			<tr id="tag_tr1" style="display:none;">
 				<td></td>
 				<td>
 					<select id="tag1" name="tag1" onchange="setTag(1);" >
-						<option value="-1" ><?php echo $lang['seleccione']; ?></option>
+						<option value="-1" ><?php echo $this->lang->line('seleccione'); ?></option>
 						<?php echo $tags; ?>
 					</select>
 				</td>
@@ -916,7 +795,7 @@ $logos_list = $_SESSION['logos'];
 				<td></td>
 				<td>
 					<select id="tag2" name="tag2" onchange="setTag(2);" >
-						<option value="-1" ><?php echo $lang['seleccione']; ?></option>
+						<option value="-1" ><?php echo $this->lang->line('seleccione'); ?></option>
 						<?php echo $tags; ?>
 					</select>
 				</td>
@@ -925,16 +804,16 @@ $logos_list = $_SESSION['logos'];
 				<td></td>
 				<td>
 					<select id="tag3" name="tag3" onchange="setTag(3);" >
-						<option value="-1" ><?php echo $lang['seleccione']; ?></option>
+						<option value="-1" ><?php echo $this->lang->line('seleccione'); ?></option>
 						<?php echo $tags; ?>
 					</select>
 				</td>
 			</tr>
 			<tr id="variation1" style="display:none;">
-				<td><?php echo $lang['variante_1_chip']; ?>: </td>
+				<td><?php echo $this->lang->line('variante_1_chip'); ?>: </td>
 				<td>
 					<span class="google-button" onclick="showSystemTypes();">
-						<?php echo $lang['seleccione']; ?>
+						<?php echo $this->lang->line('seleccione'); ?>
 						<img style="position:relative; top:4px; left:4px;" src="<?php echo $path; ?>img/arrow-down.png" width="16" height="16"/>
 					</span>
 					<div id="variation1_list" style="display:none;">
@@ -942,14 +821,14 @@ $logos_list = $_SESSION['logos'];
 					</div>
 				</td>
 				<td>
-					<a href="javascript:modalFeedbackSystemType()"><?php echo $lang['tu_chip_no_aparece']; ?></a>
+					<a href="javascript:modalFeedbackSystemType()"><?php echo $this->lang->line('tu_chip_no_aparece'); ?></a>
 				</td>
 			</tr>
 			<tr id="variation2" style="display:none;">
-				<td><?php echo $lang['variante_2_logo']; ?>: </td>
+				<td><?php echo $this->lang->line('variante_2_logo'); ?>: </td>
 				<td>
 					<span class="google-button" onclick="showLogoTypes();">
-						<?php echo $lang['seleccione']; ?>
+						<?php echo $this->lang->line('seleccione'); ?>
 						<img style="position:relative; top:4px; left:4px;" src="<?php echo $path; ?>img/arrow-down.png" width="16" height="16"/>
 					</span>
 					<div id="variation2_list" style="display:none">
@@ -974,18 +853,18 @@ $logos_list = $_SESSION['logos'];
 						</table>
 					</div>
 				</td>
-				<td><a href="javascript:modalFeedbackLogo()"><?php echo $lang['tu_logo_no_aparece']; ?></a></td>
+				<td><a href="javascript:modalFeedbackLogo()"><?php echo $this->lang->line('tu_logo_no_aparece'); ?></a></td>
 			</tr>
 			<tr id="variation3">
-				<td id="variation3_text"><?php echo $lang['variacion_descriptiva']; ?>:</td>
+				<td id="variation3_text"><?php echo $this->lang->line('variacion_descriptiva'); ?>:</td>
 				<td>
 					<textarea class="input1" name="var3" style="height:100px;" ></textarea>
 				</td>
-				<td id="variation3_info" class="reg_info"><?php echo $lang['ayuda_variante_descriptiva']; ?></td>
+				<td id="variation3_info" class="reg_info"><?php echo $this->lang->line('ayuda_variante_descriptiva'); ?></td>
 			</tr>
 			
             <tr>
-				<td><?php echo $lang['precio_estimado_dol']; ?>: </td>
+				<td><?php echo $this->lang->line('precio_estimado_dol'); ?>: </td>
 				<td>
                 	<table>
                     	<tr>
@@ -1022,13 +901,13 @@ $logos_list = $_SESSION['logos'];
 		
 		<div style="margin-top:10px; margin-bottom:10px; margin-left:15px;">
 			<input type="hidden" id="saveInfo" name="saveInfo" value="" />
-			<span onclick="sendForm();" class="google-button google-button-blue"><?php echo $lang['cargar']; ?></span>
-			<span onclick="sendForm(2);" class="google-button google-button-red" onmouseover="showInfo( this , '<?php echo $lang['opcion_para_cargar_variante']; ?>' )" ><?php echo $lang['cargar_y_salvar_informacion']; ?></span>
+			<span onclick="phonecard_sendForm();" class="google-button google-button-blue"><?php echo $this->lang->line('cargar'); ?></span>
+			<span onclick="phonecard_sendForm(2);" class="google-button google-button-red" onmouseover="showInfo( this , '<?php echo $this->lang->line('opcion_para_cargar_variante'); ?>' )" ><?php echo $this->lang->line('cargar_y_salvar_informacion'); ?></span>
 			<div id="uploading-images" >
 				<table>
 					<tr>
 						<td><img src="<?php echo $path; ?>img/ajax-loader.gif" /></td>
-						<td><?php echo $lang['cargando_imagenes']; ?></td>
+						<td><?php echo $this->lang->line('cargando_imagenes'); ?></td>
 					</tr>
 				</table>
 			</div>
