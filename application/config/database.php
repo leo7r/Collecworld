@@ -61,26 +61,14 @@ else{
 	$db['default']['password'] = "l12e10o90@l12";
 	$db['default']['database'] = 'collecwo_test';
 }
-=======
-<<<<<<< HEAD
-	$db['default']['hostname'] = 'collecworld.com:3306';
-	$db['default']['username'] = 'collecwo_beto';
-	$db['default']['password'] = 'l12e10o90@l12';
-	$db['default']['database'] = 'collecwo_test';
-}
-=======
-	$db['default']['hostname'] = 'localhost';
-	$db['default']['username'] = 'root';
-	$db['default']['password'] = "";
-	$db['default']['database'] = 'collecworld';
-}*/
+*/
 
 $db['default']['hostname'] = 'collecworld.com:3306';
 $db['default']['username'] = 'collecwo_beto';
 $db['default']['password'] = "l12e10o90@l12";
 $db['default']['database'] = 'collecwo_test';
  
->>>>>>> a120d4d7cb35d21b6997a9be8da70e43761f045c
+
 
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
