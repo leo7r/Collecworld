@@ -164,7 +164,7 @@ function createList( category ){
 			
 		}else{ 
 			
-			$("#account-content-right").load(path+'profile/collection/view_list',{id_lists:div.innerHTML, category:category},function(){ 
+			$("#account-content-right").load(path+'profile/collection/view_list',{id_lists:div.innerHTML},function(){ 
 				showGlobalInfo(translation.lista_creada);
 			
 			});
@@ -178,7 +178,31 @@ function viewList( dom ){
 	
 	list = $(dom).val(); 
 	
-	$("#account-content-right").load(path+'profile/collection/view_list',{list:list});
+	$("#account-content-right").load(path+'profile/collection/view_list',{id_lists:list});
+}
+
+function editList(){	
+
+	var name = document.getElementById('list_name').value;
+	var privacy = document.getElementById('list_priv').selectedIndex;
+	var id_lists = document.getElementById('id_lists').value;
+	var id_users = document.getElementById('id_users').value;
+	
+	var div = document.createElement('div');
+	 
+	$(div).load(path+'profile/collection/edit_list',{name:name, privacy:privacy, id_lists:id_lists, id_users:id_users},function(){ 
+	 	if(div.innerHTML==false){
+			
+			showGlobalInfo(translation.lista_ya_existe);
+			
+		}else{ 
+		
+			profileMenu(2);
+	
+			showGlobalInfo(div.innerHTML+' '+translation.editada);	
+		}
+	});
+
 }
 
 

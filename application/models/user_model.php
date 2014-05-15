@@ -729,6 +729,19 @@ class User_model extends CI_Model {
 		
 	}
 	
+	public function update_list($name, $privacy, $id_lists){
+		
+		$params = array( 
+			'name' => $name,
+			'privacy' => $privacy 
+		);
+		
+		$this->db->update('lists',$params,array("id_lists"=>$id_lists));
+		
+		return;
+		
+	}
+	
  
 	
 	
