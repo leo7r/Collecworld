@@ -161,6 +161,29 @@
 		</script>					
 	</div>
 
+	<div id="content-in2">
+		<div id="explore_sort1" class="box1" >
+			<table width="100%">
+				<tr  style="text-align:center">
+					<td colspan="2"><?php echo $this->lang->line('explorar'); ?></td>
+				</tr>
+				<tr>
+					<td><?php echo $this->lang->line('seleccionar_pais'); ?>:&nbsp;</td>
+					<td> <select name="countries" id="countries"></select></td>
+				</tr>
+				<tr>
+					<td><?php echo $this->lang->line('seleccionar_catalogo'); ?>:&nbsp;</td>
+					<td><select name="countries" id="countries" readonly></select></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="submit" value="Enviar" />
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
 	<div id="content-in">
 		<input type="hidden" id="explore_url" value="" />
         
