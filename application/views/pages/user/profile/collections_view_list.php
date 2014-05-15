@@ -43,13 +43,13 @@ if (!in_array($nameL, $default_list)){
     <table id="collections-table" cellpadding="2" >
      <?php if($list > 5){ ?>
         <tr>
-            <td>Name: &nbsp; <input type="text" name="list_name" id="list_name" value="<?php echo $list['name']; ?>" /></td>
-            <td colspan="2">Privacy: &nbsp; 
+            <td><?php echo $this->lang->line('nombre'); ?>: &nbsp; <input type="text" name="list_name" id="list_name" value="<?php echo $list['name']; ?>" /></td>
+            <td colspan="2"><?php echo $this->lang->line('privacidad'); ?>: &nbsp; 
                 <select name="list_priv" id="list_priv">
                     <option value="<?php echo $list['privacy']; ?>"><?php echo $priv; ?></option>
-                    <?php if($list['status']!=0){ ?><option value="0"><?php echo $this->lang->line('publico'); ?></option> <?php } ?>
-                    <?php if($list['status']!=1){ ?><option value="1"><?php echo $this->lang->line('amigos'); ?></option> <?php } ?>
-                    <?php if($list['status']!=2){ ?><option value="2"><?php echo $this->lang->line('solo_yo'); ?></option> <?php } ?>
+                    <?php if($list['privacy']!=0){ ?><option value="0"><?php echo $this->lang->line('publico'); ?></option> <?php } ?>
+                    <?php if($list['privacy']!=1){ ?><option value="1"><?php echo $this->lang->line('amigos'); ?></option> <?php } ?>
+                    <?php if($list['privacy']!=2){ ?><option value="2"><?php echo $this->lang->line('solo_yo'); ?></option> <?php } ?>
                 </select>
             </td>
             <td><span class="google-button" onClick="editList();" ><?php echo $this->lang->line('editar_lista'); ?></span></td>
@@ -63,3 +63,7 @@ if (!in_array($nameL, $default_list)){
 <hr>
 
 <!-- MUESTRO EL EXPLORAR DE LISTAS SI TIENE ARTICULOS-->
+<div id="collection-list-content">
+
+
+</div>
