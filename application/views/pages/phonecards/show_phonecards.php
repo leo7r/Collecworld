@@ -169,11 +169,25 @@
 				</tr>
 				<tr>
 					<td><?php echo $this->lang->line('seleccionar_pais'); ?>:&nbsp;</td>
-					<td> <select name="countries" id="countries"></select></td>
+					<td> <select name="countries" id="countries">
+						<?php foreach ($countries as $countries) {
+							echo "<OPTION>".$countries['countries']."</OPTION>";
+						}
+?>
+					</select></td>
 				</tr>
 				<tr>
 					<td><?php echo $this->lang->line('seleccionar_catalogo'); ?>:&nbsp;</td>
-					<td><select name="countries" id="countries" readonly></select></td>
+					<td><select name="countries" id="countries" readonly>
+						<option>
+							CollecWorld
+						</option>
+						<?php foreach ($catalogs as $catalogs) {
+						?>	# code...
+						
+						<option value=""></option>
+						<?php } ?>
+					</select></td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -184,7 +198,7 @@
 		</div>
 	</div>
 
-	<div id="content-in">
+	<div id="content-in3">
 		<input type="hidden" id="explore_url" value="" />
         
       <table width="100%">

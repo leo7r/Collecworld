@@ -214,15 +214,24 @@ min-width: 960px;
 }
 
 #content-in{
-max-width:1000px;
-width: 100%;
+width:1000px;
 margin-left:auto;
 margin-right:auto;
 padding:10px;
 min-height:580px;
 border-left: solid 1px #ddd;
 border-right: solid 1px #ddd;
-display: inline-block;
+}
+#content-in3{
+width: 100%; 
+ max-width:1000px;
+margin-left:auto;
+margin-right:auto;
+padding:10px;
+min-height:580px;
+border-left: solid 1px #ddd;
+border-right: solid 1px #ddd;
+  display: inline-block;
 vertical-align: top;
 }
 #content-in2 {
