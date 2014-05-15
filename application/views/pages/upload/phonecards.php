@@ -31,39 +31,6 @@
 		
 	}
 	
-	function setSystemType( dom ){
-		
-		index = dom.selectedIndex;
-		index_c = document.getElementById('country').selectedIndex;
-		
-		
-		id_s = parseInt(dom.options[index].value);
-		id_c = parseInt(document.getElementById('country').options[index_c].value);
-		
-		switch ( id_s ){
-			
-			case 1:
-				$("#variation1_list").load(path+'ajax/upload/typesBySystem.php',{system:id_s,country:id_c});
-				$("#variation1").css({display:'table-row'});
-				$("#variation2").css({display:'table-row'});
-				$("#variation3_text").html('<?php echo $this->lang->line('variacion_descriptiva'); ?>:');				
-				$("#variation3_info").html('<?php echo $this->lang->line('ayuda_variante_descriptiva'); ?>');
-				break;
-			case 2:
-			case 4:
-				$("#variation1 , #variation2").css({display:'none'});
-				$("#variation3_text").html('<?php echo $this->lang->line('variacion_descriptiva'); ?>:');				
-				$("#variation3_info").html('<?php echo $this->lang->line('ayuda_variante_descriptiva'); ?>');
-				break;
-				
-			default:
-				$("#variation1 , #variation2").css({display:'none'});
-				break;
-			
-		}
-		
-	}
-	
 	function inputNumber( dom ){
 	
 		/*if ( event.keyCode != 8 && ( event.keyCode < 48 || event.keyCode > 57 ) ){
@@ -604,39 +571,21 @@ function isIE(){
             <tr>
             	<td><span class="obb">* </span><?php echo $this->lang->line('circulacion'); ?>:</td>
                 <td>
-                	<input type="radio" name="sex" value="0"><?php echo $this->lang->line('normal'); ?>&nbsp;&nbsp;&nbsp;
-					<input type="radio" name="sex" value="1"><?php echo $this->lang->line('especial'); ?>
+                	<input type="radio" name="circulation" value="0"><?php echo $this->lang->line('normal'); ?>&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="circulation" value="1"><?php echo $this->lang->line('especial'); ?>
                 </td>
                 <td></td>
             </tr>
-			<tr>
-				<td><span class="obb">* </span><?php echo $this->lang->line('moneda'); ?>: </td>
-				<td id="s_curr">
-					<select disabled="disabled" id="currency" name="currency">
+            <tr>
+				<td><span class="obb">* </span><?php echo $this->lang->line('compania'); ?>: </td>
+				<td id="s_comp">
+					<select disabled="disabled" id="company" name="company">
 						<option selected="selected" value="-1"><?php echo $this->lang->line('seleccione'); ?></option>
 					</select>
 				</td>
-				<td><a href="javascript:modalFeedbackCurrency()"><?php echo $this->lang->line('tu_moneda_no_aparece'); ?></a></td>
+				<td class="reg_info"><?php echo $this->lang->line('compania_emisora_tarjeta'); ?></td>
 			</tr>
-			<tr>
-				<td><span class="obb">* </span><?php echo $this->lang->line('compania'); ?>: </td>
-				<td id="s_comp">
-					<input type="text" id="companies" name="companies" class="upload-input">
-				</td>
-				<td class="reg_info"><?php echo $this->lang->line('compania_emisora_tarjeta'); ?> <?php echo $this->lang->line('se_recomienda_el_autocompletar'); ?></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<span onmouseover="showInfo( this , '<?php echo $this->lang->line('ayuda_tarjetas_uso_interno'); ?>' )" style="font-size:14px; cursor:default;">
-						<input type="checkbox" name="not_emmited" id="not_emmited" onclick="catalog_allow_one(this);" />
-						<span><?php echo $this->lang->line('tarjetas_compania_uso_interno'); ?></span>
-					</span>
-				</td>
-				<td class="reg_info"><?php echo $this->lang->line('pruebas_demostraciones_licitaciones'); ?></td>
-			</tr>                 
-
-			<tr id="system_tr">
+            <tr id="system_tr">
 				<td><span class="obb">* </span><?php echo $this->lang->line('sistema'); ?>: </td>
 				<td>
 					<select disabled="disabled" id="system" name="system" style="width:150px;" onchange="setSystemType(this);"  >
@@ -655,37 +604,36 @@ function isIE(){
 				<td><input type="text" id="name" name="name" class="upload-input"></td>
 				<td class="reg_info"><?php echo $this->lang->line('nombre_tarjeta_telefonica'); ?></td>
 			</tr>
-			<tr id="catalog-tr" style="display:none">
+			<tr id="catalog-tr">
 				<td><?php echo $this->lang->line('catalogo_referencia'); ?>: </td>
 				<td>
-					<span id="catalog-code"></span>
-					<input type="text" id="reference" name="reference" class="catalog-input" />
+					<select onChange="loadCatalogSection(1)" disabled="disabled" class="catalog-select" id="catalog" name="catalog">
+						<option selected="selected" value="-1"><?php echo $this->lang->line('seleccione'); ?></option>                    	
+                    </select>
 				</td>
 				<td><a href="javascript:modalFeedbackReferenceCatalog()"><?php echo $this->lang->line('problemas_catalogo_referencia'); ?></a></td>
 			</tr>
 			<tr>
-				<td><?php echo $this->lang->line('serie_1'); ?>: </td>
+				<td><span class="obb">* </span><?php echo $this->lang->line('moneda'); ?>: </td>
+				<td id="s_curr">
+					<select disabled="disabled" id="currency" name="currency">
+						<option selected="selected" value="-1"><?php echo $this->lang->line('seleccione'); ?></option>
+					</select>
+				</td>
+				<td><a href="javascript:modalFeedbackCurrency()"><?php echo $this->lang->line('tu_moneda_no_aparece'); ?></a></td>
+			</tr>
+			<tr>
+				<td><?php echo $this->lang->line('serie'); ?>: </td>
 				<td id="s_ser">
 					<div class="reg_info">
 						<span><?php echo $this->lang->line('nombre'); ?></span>
 						<span style="float:right; margin-right:5px;"><?php echo $this->lang->line('numero'); ?></span>
 					</div>
 					<input type="text" id="serie" name="serie" value="" class="upload-input2" onkeyup="onlyOneInput(this,'serie2');onlyOneInput(this,'serie_n2');">
+                    &nbsp;&nbsp;
 					<input type="text" id="serie_n" name="serie_n" class="upload-num" onkeyup="onlyOneInput(this,'serie_n2');onlyOneInput(this,'serie2');" >
 				</td>
 				<td class="reg_info"><?php echo $this->lang->line('impreso_en_tarjeta_telefonica'); ?><br /><?php echo $this->lang->line('deje_en_blanco'); ?></td>
-			</tr>
-			<tr>
-				<td>Serie 2: </td>
-				<td id="s_ser2">
-					<div class="reg_info">
-						<span><?php echo $this->lang->line('nombre'); ?></span>
-						<span style="float:right; margin-right:5px;"><?php echo $this->lang->line('numero'); ?></span>
-					</div>
-					<input type="text" id="serie2" name="serie2" value="" class="upload-input2" onkeyup="onlyOneInput(this,'serie');onlyOneInput(this,'serie_n');" >
-					<input type="text" id="serie_n2" name="serie_n2" class="upload-num" onkeyup="onlyOneInput(this,'serie_n');onlyOneInput(this,'serie');" >
-				</td>
-				<td class="reg_info"><?php echo $this->lang->line('no_impreso_en_tarjeta_telefonica'); ?><br /><?php echo $this->lang->line('conocimiento_general'); ?></td>
 			</tr>
 			<tr>
 				<td><?php echo $this->lang->line('tiraje_1'); ?>: </td>
@@ -840,9 +788,9 @@ function isIE(){
 								?>
 								
 								<tr <?php echo $i % 2 == 0 ? '':'class="odd"'; ?> >
-									<td><input onchange="allowOne('variation2_list',this);"  type="checkbox" value="<?php echo $logos_list[$i]['id_phonecards_logo']; ?>" name="variation2_<?php echo $i; ?>" /></td>
+									<td><input onchange="allowOne('variation2_list',this);"  type="checkbox" value="<?php echo $logos_list[$i]['id_phonecards_logos']; ?>" name="variation2_<?php echo $i; ?>" /></td>
 									<td><?php echo $logos_list[$i]['name']; ?></td>
-									<td><img class="variation_table_images" src="<?php echo $path; ?>upload/logo/<?php echo $logos_list[$i]['id_phonecards_logo']; ?>.jpg" onmouseover="showInfo3(this,1,<?php echo $logos_list[$i]['id_phonecards_logo']; ?>,1);" /></td>
+									<td><img class="variation_table_images" src="<?php echo $path; ?>upload/logo/<?php echo $logos_list[$i]['id_phonecards_logos']; ?>.jpg" onmouseover="showInfo3(this,1,<?php echo $logos_list[$i]['id_phonecards_logos']; ?>,1);" /></td>
 								</tr>
 								<?php
 							}

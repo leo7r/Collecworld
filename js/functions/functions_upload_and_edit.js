@@ -95,6 +95,7 @@ function phonecard_sendForm( num ){
 	}
 }
 
+// Cosas que hacer una vez que seleccionas un pais
 function phonecard_onCountrySelected( dom ){
 		
 	index = dom.selectedIndex;
@@ -102,18 +103,22 @@ function phonecard_onCountrySelected( dom ){
 	
 	if ( id_c != -1 ){
 		
-		$('#s_curr').load(path+'index.php/upload/currenciesByCountry', {categories_countries:id_c , category: 1});
+		$('#company').load(path+'upload/phonecard_companyByCountry', {categories_countries:id_c},function(){
+			$(this).prop('disabled',false);	
+		});
 		
-		/*
-		$("#catalog-code").load(path+'ajax/upload/catalogCodeByCountry.php',{country:id_c} , function(){
-			
-			if ( catalog_code.innerHTML.length > 0 ) 
-				$("#catalog-tr").css({display:'table-row'});
-			else
-				$("#catalog-tr").css({display:'none'});
+		$('#currency').load(path+'upload/currenciesByCountry', {categories_countries:id_c , category: 1},function(){
+			$(this).prop('disabled',false);
 		});
 		
 		$('#system').prop('disabled',false);
+		
+		$("#catalog").load(path+'upload/phonecard_getCatalogsByCountry',{categories_countries:id_c},function(){
+			$(this).prop("disabled",false);			
+			loadCatalogSection( 1 , null );
+		});
+		
+		/*		
 		setSystemType( document.getElementById('system') );
 		*/
 	}
@@ -122,4 +127,116 @@ function phonecard_onCountrySelected( dom ){
 		document.getElementById('s_curr').innerHTML += '<option selected="selected" value="-1"><?php echo $this->lang->line(\'seleccione\'); ?></option></select>';
 	}
 	
+}
+
+// Dado un sistema, cargar las variantes si son pertinentes
+function setSystemType( dom ){
+		
+	index = dom.selectedIndex;
+	index_c = document.getElementById('country').selectedIndex;
+	
+	// Sistema
+	id_s = parseInt(dom.options[index].value);
+	
+	// Pais
+	id_c = parseInt(document.getElementById('country').options[index_c].value);
+	
+	switch ( id_s ){
+		
+		case 1:
+			$("#variation1_list").load(path+'upload/phonecard_typesBySystem',{system:id_s,country:id_c});
+			$("#variation1").css({display:'table-row'});
+			$("#variation2").css({display:'table-row'});
+			//$("#variation3_text").html('<?php echo $this->lang->line("variacion_descriptiva"); ?>:');				
+			//$("#variation3_info").html('<?php echo $this->lang->line("ayuda_variante_descriptiva"); ?>');
+			break;
+		case 2:
+		case 4:
+			$("#variation1 , #variation2").css({display:'none'});
+			//$("#variation3_text").html('<?php echo $this->lang->line("variacion_descriptiva"); ?>:');				
+			//$("#variation3_info").html('<?php echo $this->lang->line("ayuda_variante_descriptiva"); ?>');
+			break;
+			
+		default:
+			$("#variation1 , #variation2").css({display:'none'});
+			break;
+		
+	}
+	
+}
+
+// Mostrar la lista de variantes de sistema
+function showSystemTypes(){
+
+	if ( $("#variation1_list").css('display') == 'none' ){
+		$("#variation1_list").css({ display:'' });
+	}
+	else{
+		$("#variation1_list").css({ display:'none' });
+	}
+}
+
+// Mostrar la lista de logos
+function showLogoTypes(){
+
+	if ( $("#variation2_list").css('display') == 'none' ){
+		$("#variation2_list").css({ display:'' });
+	}
+	else{
+		$("#variation2_list").css({ display:'none' });
+	}
+}
+
+// Funcion que carga las secciones de un catalogo
+function loadCatalogSection( level , parent ){
+	
+	sel = document.createElement('select');
+	$(sel).addClass("catalog-select");
+	$(sel).attr("name","section_"+level);
+	$(sel).attr("id","section_"+level);
+	
+	// Si estoy seleccionando catalogo, borro todo lo que habia previamente
+	if ( level == 1 && !parent ){
+		for ( i = 1 ; i < 10 ; i++ ){
+			$( "select[name^='section_"+(level+i)+"']" ).remove();
+		}
+		
+		$( "input[name='catalog_code']" ).remove();
+	}
+	
+	$(sel).load(path+'upload/phonecard_loadCatalogSection',{id_catalog:$("#catalog").val(),level:level,parent:parent},function(){
+		
+		$("#catalog").parent().append(this);
+		
+		// Si no tiene opciones, quiere decir que es final asi que muestro el codigo
+		if ( $("select#section_"+level+" option").length  == 0 ){
+			code = document.createElement('input');
+			$(code).attr("type","text");
+			$(code).attr("name","catalog_code");
+			$(code).addClass("upload-num");
+			$("#catalog").parent().append(code);
+			$(this).remove();
+			return;
+		}
+		
+		$(this).change(function(){
+			
+			// Si estoy seleccionando, borro todo lo que habia que fuese de otra seccion mas adelante
+			for ( i = 1 ; i < 10 ; i++ ){
+				$( "select[name^='section_"+(level+i)+"']" ).remove();
+			}
+			
+			$( "input[name='catalog_code']" ).remove();
+			
+			// Cargo las secciones
+			loadCatalogSection(level+1,$(this).val());
+		});
+		
+		// Si solo hay una opcion, selecciona de una vez.
+		if ( $("select#section_"+level+" option").length  == 1 ){
+			loadCatalogSection(level+1,$(this).val());
+		}
+				
+	});
+		
 }

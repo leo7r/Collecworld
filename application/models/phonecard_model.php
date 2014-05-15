@@ -214,6 +214,25 @@ class Phonecard_model extends CI_Model {
 		return $query->result_array(); 
 	}
 	
+	public function get_system_types( $system , $categories_countries ){
+		
+		$this->db->where('id_categories_countries',$categories_countries);
+		$this->db->where('id_phonecards_systems',$system);
+		$this->db->order_by('order_number, systems_type');
+		$query = $this->db->get('view_phonecards_systems_type');
+		
+		if ( $query->num_rows() == 0 ){
+			
+			$this->db->select('id_phonecards_systems_type, image as systems_image, name as systems_type');
+			$this->db->from('phonecards_systems_type');
+			$this->db->where('id_phonecards_systems',$system);
+			$this->db->order_by('order_number, systems_type');
+			$query = $this->db->get();
+		}
+		
+		return $query->result_array();
+	}
+	
 	public function get_countries2(){
 
 		
@@ -262,23 +281,11 @@ class Phonecard_model extends CI_Model {
 
 	
 
-	public function get_phonecards_companies( $where = NULL ){
-
-		
-
-		if ( !$where ){
-
-			$query = $this->db->get('phonecards_companies');
-
-		}
-
-		else{
-
-			$query = $this->db->get_where('phonecards_companies', $where );
-
-		}
-
-		
+	public function get_companies( $country ){
+	
+		$this->db->where('id_categories_countries',$country);
+		$this->db->group_by('id_phonecards_companies');
+		$query = $this->db->get('view_phonecards_companies_series');
 
 		return $query->result_array();		
 
@@ -327,15 +334,9 @@ class Phonecard_model extends CI_Model {
 	
 
 	public function get_logos(){
-
 		
-
 		$query = $this->db->get('phonecards_logos');
-
-		
-
 		return $query->result_array();		
-
 	}
 
 	

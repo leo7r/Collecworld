@@ -4250,3 +4250,7 @@ background:none;
 #user_collection_table td{
 	border-bottom:solid 1px #ddd;
 }
+
+.catalog-select{
+	width:auto;	
+}

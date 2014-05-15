@@ -21,13 +21,13 @@
             
 			<select id="pc-select" class="collections-input" onChange="viewList(this)">
 				<option value="0" selected="selected"><?php echo $this->lang->line('seleccione'); ?></option>
-				<option value="coleccion"><?php echo $this->lang->line('coleccion'); ?></option>
-				<option value="deseo"><?php echo $this->lang->line('deseo'); ?></option>
-				<option value="intercambio"><?php echo $this->lang->line('intercambio'); ?></option>
-				<option value="venta"><?php echo $this->lang->line('venta'); ?></option> 
+				<option value="collection"><?php echo $this->lang->line('coleccion'); ?></option>
+				<option value="wish"><?php echo $this->lang->line('deseo'); ?></option>
+				<option value="exchange"><?php echo $this->lang->line('intercambio'); ?></option>
+				<option value="sell"><?php echo $this->lang->line('venta'); ?></option> 
                 <?php
 				foreach($phonecards_list as $phonecard){
-					 $default_list = array("coleccion", "deseo", "intercambio", "venta");
+					 $default_list = array("collection", "wish", "exchange", "sell");
 					 
 					 if (!in_array($phonecard['name'], $default_list))
 						 echo '<option value="'.$phonecard['id_lists'].'">'.$phonecard['name'].'</option>';				 

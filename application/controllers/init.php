@@ -4,7 +4,7 @@ class Init extends CW_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		error_reporting(0);
+		//error_reporting(0);
 	}
 	
 	

@@ -37,6 +37,7 @@ class Upload extends CW_Controller {
 		
 		$this->load->model('phonecard_model');
 		$data['countries'] = $this->phonecard_model->get_countries();
+		$data['logos_list'] = $this->phonecard_model->get_logos();
 		
 		$this->load->view('pages/upload/phonecards', $data);
 	}
@@ -50,14 +51,77 @@ class Upload extends CW_Controller {
 		$this->load->model('collecworld_model');
 		$denominations = $this->collecworld_model->get_currencies( $categories_countries , $category );
 		
-		echo '<select id="currency" name="currency">';
 		echo '<option selected="selected" value="-1">'.$this->lang->line('seleccione').'</option>';
-		
 		for ( $i = 0 ; $i < count($denominations) ; $i++ ){
 			echo '<option value="'.$denominations[$i]['id_phonecards_denomination'].'" >'.$denominations[$i]['denomination'].'</option>';
+		}		
+	}
+	
+	// Funcion para obtener companias de un pais
+	public function phonecard_companyByCountry(){
+		
+		$categories_countries = $this->input->post('categories_countries');
+		
+		$this->load->model('phonecard_model');
+		$companies = $this->phonecard_model->get_companies( $categories_countries );
+		
+		echo '<option selected="selected" value="-1">'.$this->lang->line('seleccione').'</option>';
+		for ( $i = 0 ; $i < count($companies) ; $i++ ){
+			echo '<option value="'.$companies[$i]['id_phonecards_companies'].'" >'.$companies[$i]['companies'].'</option>';
+		}
+	}
+	
+	// Funcion para obtener Tipos de sistema dado un sistema
+	public function phonecard_typesBySystem(){
+		
+		$categories_countries = $this->input->post('country');
+		$system = $this->input->post('system');
+		
+		$this->load->model('phonecard_model');
+		$types = $this->phonecard_model->get_system_types($system,$categories_countries);
+		
+		echo '<table id="variation1_table" style="margin:0;">';
+		
+		for ( $i = 0 ; $i < count($types) ; $i++ ){
+			echo '<tr ' . $i % 2 == 0 ? '':'class="odd"' . ' >';
+			echo '<td><input onChange="allowOne(\'variation1_list\',this);" type="checkbox" value="'.$types[$i]['id_phonecards_systems_type'].'" name="sys_type'.$i.'" /></td>';
+			echo '<td>'.$types[$i]['systems_type'].'</td>';
+			echo '<td>';
+			echo '<img class="variation_table_images" src="'.base_url().'upload/'.$types[$i]['systems_image'].'" onMouseover="showInfo3(this,0,'.$types[$i]['id_phonecards_systems_type'].',1);" />';
+			echo '</td>';
+			echo '</tr>';
 		}
 		
-		echo '</select>';
+		echo '<input type="hidden" value="" id="var1" name="var1" /></table>';
+	}
+	
+	// Funcion para obtener los catalogos de referencia por pais 
+	public function phonecard_getCatalogsByCountry(){
+			
+		$categories_countries = $this->input->post('categories_countries');
+		
+		$this->load->model('collecworld_model');
+		$catalogs = $this->collecworld_model->get_catalogs( $categories_countries );
+		
+		
+		for ( $i = 0 ; $i < count($catalogs) ; $i++ ){
+			echo '<option value="'.$catalogs[$i]['id_catalogs'].'">'.$catalogs[$i]['abbreviation'].'</option>';	
+		}
+	}
+	
+	// Funcion para obtener las secciones de un catalogo, dados un nivel, id_catalog y parent
+	public function phonecard_loadCatalogSection(){
+			
+		$level = $this->input->post('level');
+		$id_catalog = $this->input->post('id_catalog');
+		$parent = $this->input->post('parent');
+		
+		$this->load->model('collecworld_model');
+		$sections = $this->collecworld_model->get_catalog_sections( $id_catalog , $level , $parent );
+		
+		for ( $i = 0 ; $i < count($sections) ; $i++ ){
+			echo '<option value="'.$sections[$i]['id_catalogs_sections'].'">'.$sections[$i]['abbreviation'].'</option>';	
+		}
 		
 	}
 	
