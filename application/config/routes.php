@@ -108,6 +108,10 @@ $route['help/collecworld_community'] = "help/collecworld_community";
 $route['upload'] = "upload/view";
 $route['upload/phonecards'] = "upload/loadPhonecards";
 $route['upload/currenciesByCountry'] = "upload/currenciesByCountry";
+$route['upload/phonecard_companyByCountry'] = "upload/phonecard_companyByCountry";
+$route['upload/phonecard_typesBySystem'] = "upload/phonecard_typesBySystem";
+$route['upload/phonecard_getCatalogsByCountry'] = "upload/phonecard_getCatalogsByCountry";
+$route['upload/phonecard_loadCatalogSection'] = "upload/phonecard_loadCatalogSection";
 
 $route['upload/restriction'] = "upload/restriction";
 $route['upload/upload_go'] = "upload/upload_go";

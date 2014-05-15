@@ -334,6 +334,26 @@ class Collecworld_model extends CI_Model {
 		return $query->result_array();
 	}
 	
+	public function get_catalogs( $categories_countries ){
+		
+		$query = $this->db->get_where('catalogs', array( 'id_categories_countries' => $categories_countries ) );
+		
+		return $query->result_array();
+	}
+	
+	public function get_catalog_sections( $id_catalog , $level , $parent ){
+		
+		$this->db->where('id_catalogs',$id_catalog);
+		$this->db->where('level',$level);
+		
+		if ( $parent ){
+			$this->db->where('parent',$parent);
+		}
+		
+		$query = $this->db->get('catalogs_sections');
+		return $query->result_array();
+	}
+	
 }
 
 ?>
