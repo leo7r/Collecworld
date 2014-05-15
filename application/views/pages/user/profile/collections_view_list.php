@@ -64,6 +64,60 @@ if (!in_array($nameL, $default_list)){
 
 <!-- MUESTRO EL EXPLORAR DE LISTAS SI TIENE ARTICULOS-->
 <div id="collection-list-content">
+<?php
 
+	if($list_items){
+		
+		?>
+		
+        <div class="title42">1. <?php echo $this->lang->line('seleccionar_pais'); ?></div>
+        
+        <table id="collection_countries" cellpadding="10">
+			<?php
+            
+            for ( $i = 0 ; $i < mysql_num_rows($countries_cursor) ; $i++ ){
+                $c_datos = mysql_fetch_array($countries_cursor);
+                
+                if ( $i % 4 == 0 ){
+                    echo '<tr>';	
+                }
+                ?>
+                
+                <td>
+                    <div class="collection-step2" 
+                        onClick="phonecards_collections_select( <?php echo $_SESSION['id_users']; ?> ,
+                        <?php echo $list; ?> , <?php echo $c_datos['id_countries']; ?> )">
+                          
+                        <br>
+                        <?php echo $c_datos['name']; ?>
+                        <br>
+                        (<?php echo $c_datos['count']; ?>)
+                    </div>
+                </td>
+                
+                <?php
+                
+                if ( $i % 4 == 3 ){
+                    echo '</tr>';	
+                }
+            }
+            ?>
+        </table>
+        
+		<?php
+		
+	}else{
+		
+		?>
+        <div id="info-info">
+            <?php echo $this->lang->line('tu'); ?> <?php echo $list['name'] ?> <?php echo $this->lang->line('profile_lista_esta_vacia'); ?>.
+            <br />
+            <?php echo $this->lang->line('tu_puedes'); ?><a href="<?php echo base_url(); ?>explore/phonecard"><?php echo $this->lang->line('explorar'); ?></a> <?php echo $this->lang->line('o'); ?> <a href="javascript:$('#search').focus();"><?php echo $this->lang->line('buscar'); ?></a> <?php echo $this->lang->line('para_completar_tu_coleccion'); ?>
+        </div>
+        <?php
+		
+	}
+
+?>
 
 </div>

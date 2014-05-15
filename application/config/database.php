@@ -59,23 +59,10 @@ if ( $local ){
 else{
 	$db['default']['hostname'] = 'collecworld.com:3306';
 	$db['default']['username'] = 'collecwo_beto';
-	$db['default']['password'] = "l12e10o90@l12";
-<<<<<<< HEAD
+	$db['default']['password'] = "l12e10o90@l12"; 
 	$db['default']['database'] = 'collecwo_test';
 }
-*/
-
-$db['default']['hostname'] = 'collecworld.com:3306';
-$db['default']['username'] = 'collecwo_beto';
-$db['default']['password'] = "l12e10o90@l12";
-$db['default']['database'] = 'collecwo_test';
- 
-
-=======
-	$db['default']['database'] = 'collecwo_test';	
-}
->>>>>>> 9a9a46be0c0cb1bc87a8b90d976b2dfb5c7e0966
-
+  
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

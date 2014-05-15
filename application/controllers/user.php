@@ -215,23 +215,37 @@ class User extends CW_Controller {
 		if(is_numeric($id_lists)){ 
 		
 			$list = $this->user_model->select_list(array("id_lists" => $id_lists));
-			$data['list'] = $list[0];  
+			$data['list'] = $list[0]; 
+			
+			$data['list_items'] = $this->user_model->select_list_items(array("id_lists" => $id_lists)); 
 			 
 		}else{  
 		
-			$data['list']['table_name'] = $id_lists;
-			$data['list']['id_categories'] = 1; 
+			$list = $this->user_model->select_list(array("name" => $id_lists));
 			
-			switch($id_lists){
-				case 'collection' : $data['list']['name'] = $this->lang->line('coleccion');
-				break;
-				case 'wish' : $data['list']['name'] = $this->lang->line('deseo');
-				break;
-				case 'exchange' : $data['list']['name'] = $this->lang->line('intercambio');
-				break;
-				case 'sell' : $data['list']['name'] = $this->lang->line('venta');
-				break;
+			if($list){
+				
+				$data['list'] = $list[0];
+				$data['list_items'] = $this->user_model->select_list_items(array("id_lists" => $id_lists)); 
+				
+			}else{
+		
+				$data['list']['table_name'] = $id_lists;
+				$data['list']['id_categories'] = 1; 
+				$data['list_items'] = '';
+				
+				switch($id_lists){
+					case 'collection' : $data['list']['name'] = $this->lang->line('coleccion');
+					break;
+					case 'wish' : $data['list']['name'] = $this->lang->line('deseo');
+					break;
+					case 'exchange' : $data['list']['name'] = $this->lang->line('intercambio');
+					break;
+					case 'sell' : $data['list']['name'] = $this->lang->line('venta');
+					break;
+				}
 			}
+			
 			
 		}
 		 

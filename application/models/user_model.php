@@ -742,6 +742,21 @@ class User_model extends CI_Model {
 		
 	}
 	
+	public function select_list_items($where){
+		
+		$this->db->select('*'); 
+		$query = $this->db->get_where('view_phonecards_lists', $where ); 
+		
+		if ( $query->num_rows() >= 1 ){
+			$res = $query->result_array(); 
+			
+			return $res;
+		}else{
+			return false;
+		}
+		
+	}
+	
  
 	
 	
