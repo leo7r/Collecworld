@@ -205,5 +205,31 @@ function editList(){
 
 }
 
+//EXPLORAR LISTAS
+ 
+function collectionListShowCatalogs( id_lists, id_countries ){	
+  	 
+	$("#collection-list-content").load(path+'profile/collection/show_catalogs',{id_lists:id_lists, id_countries:id_countries});
+
+}
+
+function collectionListShowCirculations( id_lists, id_countries ){	
+  	 
+	$("#collection-list-content").load(path+'profile/collection/show_circulations',{id_lists:id_lists, id_countries:id_countries});
+
+}
+
+function collectionListShowCompanies( id_lists, id_countries, phonecards_circulation ){	
+  	 
+	$("#collection-list-content").load(path+'profile/collection/show_companies',{id_lists:id_lists, id_countries:id_countries, phonecards_circulation:phonecards_circulation});
+
+}
+
+function collectionListShowSystems( id_lists, id_countries, phonecards_circulation, id_phonecards_companies ){	
+  	 
+	$("#collection-list-content").load(path+'profile/collection/show_systems',{id_lists:id_lists, id_countries:id_countries, phonecards_circulation:phonecards_circulation});
+
+}
+
 
 

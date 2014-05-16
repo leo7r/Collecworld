@@ -217,8 +217,8 @@ class User extends CW_Controller {
 			$list = $this->user_model->select_list(array("id_lists" => $id_lists));
 			$data['list'] = $list[0]; 
 			
-			$data['list_items'] = $this->user_model->select_list_items(array("id_lists" => $id_lists)); 
-			 
+			$data['list_items'] = $this->user_model->select_list_items_countries(array("id_lists" => $id_lists)); 
+			  
 		}else{  
 		
 			$list = $this->user_model->select_list(array("name" => $id_lists));
@@ -226,7 +226,7 @@ class User extends CW_Controller {
 			if($list){
 				
 				$data['list'] = $list[0];
-				$data['list_items'] = $this->user_model->select_list_items(array("id_lists" => $id_lists)); 
+				$data['list_items'] = $this->user_model->select_list_items_countries(array("id_lists" => $id_lists)); 
 				
 			}else{
 		
@@ -281,6 +281,41 @@ class User extends CW_Controller {
 			echo false;
 			
 		}
+	
+	}
+	 
+	public function listShowCatalogs(){ 
+	 	
+		$id_lists = $this->input->post('id_lists');	
+		$id_countries = $this->input->post('id_countries');	
+		
+		$data['list_item_cw'] = $this->user_model->select_list_items_countries(array("id_lists" => $id_lists)); 
+		$data['list_item_cw'] = $data['list_item_cw'][0];
+		 
+		$this->load->view('pages/user/profile/collections_view_list_catalogs',$data);
+	
+	} 
+	
+	public function listShowCirculations(){ 
+	 	
+		$id_lists = $this->input->post('id_lists');	
+		$id_countries = $this->input->post('id_countries');	
+		
+		$data['list_items'] = $this->user_model->select_list_items_circulations(array("id_lists" => $id_lists, "id_countries" => $id_countries));  
+		 
+		$this->load->view('pages/user/profile/collections_view_list_circulations',$data);
+	
+	}
+	
+	public function listShowCompanies(){ 
+	 	
+		$id_lists = $this->input->post('id_lists');	
+		$id_countries = $this->input->post('id_countries');	
+		$phonecards_circulation = $this->input->post('phonecards_circulation');	
+		
+		$data['list_items'] = $this->user_model->select_list_items_companies(array("id_lists" => $id_lists, "id_countries" => $id_countries, "phonecards_circulation" => $phonecards_circulation));  
+		 
+		$this->load->view('pages/user/profile/collections_view_list_companies',$data);
 	
 	}
 
