@@ -7,9 +7,16 @@ class Phonecard_model extends CI_Model {
 	public function __construct(){
 
 		$this->load->database();
-
+		$this->load->model('collecworld_model');
 	}
 
+	public function print_vars( $array ){
+		
+		foreach ($array as $key => $value ){
+			echo $key.':'.$value;
+			echo '<br>';
+		}
+	}
 	
 
 	public function get_phonecard ( $where = NULL ){
@@ -369,29 +376,46 @@ class Phonecard_model extends CI_Model {
 		
 
 	}
-
 	
+	public function get_system_country( $id_cat_countries , $id_phonecards_systems , $sys_type = NULL ){
+			
+			$params = array(
+				'id_categories_countries' => $id_cat_countries,
+				'id_phonecards_systems' => $id_phonecards_systems,
+				'id_phonecards_systems_type' => $sys_type
+			);
+						
+			$query = $this->db->get_where('phonecards_systems_countries', $params );
+			
+			$arr = $query->result_array();
+			
+			return $query->num_rows() > 0 ? $arr[0] : NULL;
+	}
 
 	public function insert_phonecard( $data ){
 		@session_start();
 		
-		$country = $this->input->post('country');
+		$country = $this->input->post('countries');
 		$circulation = $this->input->post('circulation');
-		$companies = $this->input->post('companies');
+		$company = $this->input->post('company');
 		$system = $this->input->post('system');
 		$name = $this->input->post('phonecard_name');
-		
+				
 		// Si no estan los campos necesarios, retorno error
-		if ( !$country or !$companies or !$system or !$name ){
+		if ( !$country or !$company or !$system or !$name ){
 			return array(false,NULL);
 		}		
 		
 		$serie = $this->input->post('serie');
+		$serie = $this->get_or_create_serie($serie,$company);
+		$serie = $serie['id_phonecards_series'];
+		
 		$serie_n = $this->input->post('serie_n');
+		$this->collecworld_model->transformToNull($serie_n);
 		$denomination = $this->input->post('currency');	
 		$face_value = $this->input->post('faceValue');
 		$issued_on = $this->get_date('date_year','date_month','date_day');
-		$known_date = $this->input->post('date_known');
+		$known_date = $this->input->post('date_known') ? 0:1;
 		$exp_date = $this->get_date('date_ex_year','date_ex_month','date_ex_day');
 		$order_n = $this->input->post('order_n');
 		$print_run = $this->input->post('printRun');
@@ -402,10 +426,9 @@ class Phonecard_model extends CI_Model {
 		$var3 = $this->input->post('var3');
 		$save_info = $this->input->post('saveInfo');
 		
-		if ( $serie ){
-			$serie = $this->get_or_create_serie($serie,$companies);
-			$serie = $serie['id_phonecards_series'];
-		}
+		
+		$sys_cou = $this->get_system_country($country,$system);
+		$id_pho_sys_cou = $sys_cou['id_phonecards_systems_countries'];
 		
 		// Verificando si estoy intentando subir una tarjeta que ya su
 		// catalogo fue cerrado
@@ -413,18 +436,25 @@ class Phonecard_model extends CI_Model {
 			'name' => $name,
 			'phonecards_circulation' => $circulation,
 			'id_phonecards_series' => $serie ,
-			'serie_number' => $serie_n ,
-			'id_phonecards_companies' => $companies ,
-			//'id_countries' => $country , ERROR
-			//'id_phonecards_systems' => $system , ERROR
-			'issued_on' => $issued_on ,
-			'exp_date' => $exp_date ,
-			'known_date' => $known_date ,
-			'face_value' => $face_value ,
-			'id_phonecards_denomination' => $denomination ,
-			'print_run' => $print_run ,
+			'id_phonecards_systems_countries' => $id_pho_sys_cou,
 			'status' => 1
 		);
+		
+		// Opcionales
+		if ( $serie_n )
+			$variant_params['serie_number'] = $serie_n;
+		if ( $serie_n )
+			$variant_params['issued_on'] = $issued_on;
+		if ( $serie_n )
+			$variant_params['exp_date'] = $exp_date;
+		if ( $serie_n )
+			$variant_params['face_value'] = $face_value;
+		if ( $serie_n )
+			$variant_params['id_phonecards_denomination'] = $id_phonecards_denomination;
+		if ( $serie_n )
+			$variant_params['print_run'] = $print_run;
+		
+		$this->print_vars( $variant_params );
 		
 		$isVariant = $this->get_phonecard($variant_params);
 		if ( count($isVariant) > 0 ){
@@ -432,17 +462,23 @@ class Phonecard_model extends CI_Model {
 		}
 		
 		// Construyo los parametros para comprobar si no esta duplicada
-		$params_duplicate = $variant_params;
-		$params_duplicate['id_phonecards_logos'] = $var2;
-		$params_duplicate['descriptive_variation'] = $var3;
+		$params_duplicate = $variant_params;		
+		if ( $var2 )
+			$params_duplicate['id_phonecards_logos'] = $var2;
+		if ( $var3 )
+			$params_duplicate['descriptive_variation'] = $var3;
 		
 		// Construyo los parametros de la tarjeta final
 		$params = $params_duplicate;
 		$params['id_users'] = $_SESSION['id_users'];
-		$params['order_n'] = $order_n;
 		$params['status'] = 0;
-		$params['image'] = $img_anverse;
-		$params['image_reverse'] = $img_reverse;
+		
+		if ( $order_n )
+			$params['order_n'] = $order_n;
+		if ( $img_anverse )
+			$params['image'] = $img_anverse;
+		if ( $img_reverse )
+			$params['image_reverse'] = $img_reverse;
 				
 		// Verifico si ya esta cargada una tarjeta con la misma informacion
 		$isRepeated = $this->db->get_where('phonecards',$params_duplicate);
@@ -459,7 +495,6 @@ class Phonecard_model extends CI_Model {
 
 		$query = $this->db->get_where('phonecards',$params);
 		$res = $query->result_array();		
-		$this->load->model('collecworld_model');
 		
 		// Cargo el catalogo de referencia
 		$catalog_code = $this->input->post('catalog_code');		
@@ -529,12 +564,8 @@ class Phonecard_model extends CI_Model {
 
 		$name = $this->input->post('name');
 
-		
-
 		if ( !$country or !$currency or !$companies or !$system or !$name ){
-
 			return array(false,NULL);
-
 		}
 
 		
@@ -999,45 +1030,33 @@ class Phonecard_model extends CI_Model {
 	
 
 	public function get_or_create_serie( $name , $id_company ){
-
-	
-
-		$series = $this->get_phonecards_series(array('name'=>$name , 'id_phonecards_companies'=>$id_company));
-
 		
+		$params = array('id_phonecards_companies'=>$id_company);
+		$params['name']	= $name ? $name : NULL;
+		
+		$series = $this->get_phonecards_series($params);
 
 		if ( count($series) == 0 ){
 
-			
-
-			$this->insert_phonecards_serie($name,$id_company,0);
-
-			$ret = $this->get_phonecards_series(array('name'=>$name , 'id_phonecards_companies'=>$id_company));	
-
-			
-
-			return $ret[0];		
-
+			$this->insert_phonecards_serie($name,$id_company);
+			$ret = $this->get_phonecards_series($params);	
+			return $ret[0];
 		}
-
 		else{
-
 			return $series[0];
-
 		}
-
 	}
 
 	
 
-	public function insert_phonecards_serie( $name , $id_company , $status ){
+	public function insert_phonecards_serie( $name , $id_company ){
 
+		$params = array('id_phonecards_companies'=>$id_company);
 		
-
-		$this->db->insert('phonecards_series',array('name'=>$name,'id_phonecards_companies'=>$id_company,'status'=>$status));
-
+		if ( $name )
+			$params['name'] = $name;
 		
-
+		$this->db->insert('phonecards_series',$params);
 	}
 
 	

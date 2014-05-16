@@ -36,6 +36,7 @@
 	// To start
 	$(document).ready(function(){
 		
+		
 		pForm = document.getElementById('form0');
 		pForm.setAttribute('enctype', 'multipart/form-data');
 		pForm.setAttribute('encoding', 'multipart/form-data');
@@ -114,7 +115,7 @@
 			}
 		}
 		
-		//c_input.selectedIndex = g_country;
+		c_input.selectedIndex = g_country;
 		phonecard_onCountrySelected(c_input);
 		
 		

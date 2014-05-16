@@ -382,6 +382,11 @@ class Collecworld_model extends CI_Model {
 		
 	}
 	
+	public function transformToNull( $var ){
+		if ( strlen($var) == 0 )
+			$var = NULL;
+	}
+	
 }
 
 ?>

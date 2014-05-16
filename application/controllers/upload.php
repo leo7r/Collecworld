@@ -146,7 +146,7 @@ class Upload extends CW_Controller {
 		$data['notifications'] = $this->getUserNotifications();
 		$data['title'] = 'Crop images for '.$this->input->post('name');
 				
-		$config['upload_path'] = './uploads/img/';
+		$config['upload_path'] = base_url().'uploads/phonecards/';
 		$config['allowed_types'] = 'gif|jpg|png|jpeg';
 		$rnd = rand(0,1000);
 		$r2 = strval(time())+strval($rnd);
@@ -201,7 +201,7 @@ class Upload extends CW_Controller {
 		
 		$this->load->model('phonecard_model');
 		$pc = $this->phonecard_model->insert_phonecard( $data );
-		
+				
 		return;
 		echo "<script src='/javascripts/application.js' type='text/javascript' charset='utf-8' async defer> alert('".$pc[0]."')</script>";
 		
