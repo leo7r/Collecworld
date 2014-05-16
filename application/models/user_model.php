@@ -792,6 +792,27 @@ class User_model extends CI_Model {
 		 
 	}
 	
+	public function select_list_items_systems($where){
+		  
+		$this->db->group_by('id_phonecards_systems');
+		$this->db->order_by('systems');  
+		$this->db->select('*'); 
+		$this->db->select('count(id_phonecards) as count');   
+		$query = $this->db->get_where('view_phonecards_lists', $where ); 
+		
+		return $res = $query->result_array(); 
+		 
+	}
+	
+	public function select_list_items_phonecards_cw($where){
+		    
+		$this->db->select('*');    
+		$query = $this->db->get_where('view_phonecards_lists', $where ); 
+		
+		return $res = $query->result_array(); 
+		 
+	}
+	
  
 	
 	

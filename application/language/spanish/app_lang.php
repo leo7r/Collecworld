@@ -196,6 +196,8 @@ $lang['mostrar_mi_coleccion'] = 'Mostrar mi colecci&oacute;n';
 $lang['nueva_imagen_cargada'] = 'Nueva Imagen Cargada';
 $lang['normal'] = 'Normal';
 $lang['especial'] = 'Especial';
+$lang['c_normal'] = 'C.Normal';
+$lang['c_especial'] = 'C.Especial';
 
 	//restablecer contraseÃ±a
 	$lang['restablecer_contrasena'] = 'Restablecer ContraseÃ±a';
@@ -426,9 +428,7 @@ $lang['especial'] = 'Especial';
 	$lang['subtitulo'] = 'Subt&iacute;tulo';
 	$lang['circulacion'] = 'Circulaci&oacute;n';
 	$lang['circulacion_especial'] = 'Circulaci&oacute;n Especial';
-	$lang['circulacion_normal'] = 'Circulaci&oacute;n Normal'; 
-	$lang['especial'] = 'Especial';
-	$lang['normal'] = 'Normal'; 
+	$lang['circulacion_normal'] = 'Circulaci&oacute;n Normal';  
 	$lang['conmemorativas_numismaticas'] = 'Conmemorativas, numism&aacute;ticas';
 	$lang['ensayos_pruebas_otras'] = 'Ensayos, pruebas, otras';
 	$lang['emitida_greg'] = 'Fecha de emisi&oacute;n (Gregoriano)'; 
@@ -1251,6 +1251,7 @@ $lang['imagen_anverso'] = 'Imagen del anverso';
 $lang['imagen_reverso'] = 'Imagen del reverso';
 $lang['variante_1_chip'] = 'Variante 1 (Chip)';
 $lang['variante_2_logo'] = 'Variante 2 (Logo)';
+$lang['variante_descriptiva'] = 'Variante Descriptiva';
 $lang['logo'] = 'Logo';
 $lang['tipo_sistema'] = 'Tipo de sistema';
 $lang['ayuda_variante_descriptiva'] = 'Si tu tarjeta telef&oacute;nica posee otra variante, explica esta aqu&iacute;.';

@@ -201,6 +201,10 @@ $route['(:any)/collection/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)'] = "
 	$route['profile/collection/show_catalogs'] = "user/listShowCatalogs";
 	$route['profile/collection/show_circulations'] = "user/listShowCirculations";
 	$route['profile/collection/show_companies'] = "user/listShowCompanies";
+	$route['profile/collection/show_systems'] = "user/listShowSystems";
+	$route['(:any)/collection/(:num)/(:num)/(:num)/(:num)/(:num)'] = "user/listShowPhonecards/$2/$3/$4/$5/$6";
+	
+	
 $route['(:any)'] = "user/view/$1"; // ESTA SIEMPRE DEBE IR DE ULTIMO, SIRVE PARA DIRIGIR A LOS USUARIOS A SU PAGINA
 
 
