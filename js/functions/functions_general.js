@@ -287,3 +287,131 @@ function getHash( id ){
 		return false;
 	}
 }
+
+function showInfo( dom , info ){
+
+	var x = $(dom).position().left;
+	var y = $(dom).position().top;
+	var height = $(dom).height();
+
+	out_div = document.createElement('div');
+
+	$(out_div).addClass('out-new-info');
+
+	pointer = document.createElement('div');
+	$(pointer).addClass('new-info-pointer');
+	div = document.createElement('div');
+	div.innerHTML = info;
+
+	$(div).addClass('new-info');
+
+	$(out_div).css({ position: 'absolute' , left: x , top: y+height+3});
+	out_div.appendChild(pointer);
+	out_div.appendChild(div);
+	document.getElementById('content').appendChild(out_div);
+
+	fun = function(){$(".out-new-info").animate({opacity:0},100,function(){$(this).remove();});}
+
+	$(dom).mouseout( fun );
+}
+
+
+function showInfo3(dom , num , id , float){
+		
+	var x = $(dom).position().left;
+	var y = $(dom).position().top;
+		
+	out_div = document.createElement('div');
+	$(out_div).addClass('new-info2');
+	$(out_div).addClass('out-new-info');
+	
+	$(out_div).load(path+'upload/info_chip_logo',{num:num,id:id,src:dom.src},function(){
+		
+		if ( float ){
+			$(out_div).css({ position: 'absolute' , left: x+80 , top: y});
+			dom.parentNode.appendChild(out_div);
+		}
+		else{
+			dom.parentNode.appendChild(out_div);
+		}
+		
+		fun = function(){$(".out-new-info").animate({opacity:0},300,function(){$(this).remove();});}
+		$(dom).mouseout( fun );
+	});
+}
+
+
+function showInfo2( dom , info , num ){
+
+	var x = $(dom).position().left;
+	var y = $(dom).position().top;
+	out_div = document.createElement('div');
+
+	$(out_div).addClass('out-new-info');
+
+	if ( num == 2 || num == 3 )
+		$(out_div).css({position:'fixed'});
+
+	div = document.createElement('div');
+	left = document.createElement('div');
+	left.innerHTML = '<img src="'+dom.src+'" />';
+	$(left).addClass('new-info2-left');
+
+	if ( num == 1 || num == 3 )
+		$(left).addClass('logo-img');
+
+	right = document.createElement('div');
+
+	if ( num == 0 || num == 2 )
+		right.innerHTML = translation.informacion_sistema_pronto_disponible;
+	else
+		right.innerHTML = translation.informacion_logo_pronto_disponible;
+	
+	$(right).addClass('new-info2-right');
+	
+	div.appendChild(left);
+	div.appendChild(right);
+	$(div).addClass('new-info2');
+
+	if ( num == 0 || num == 1 )
+		$(out_div).css({ left: x+50 , top: y-(25+50) });
+	else
+		$(out_div).css({ left: x+300 , top: y-(25+10) });
+
+	out_div.appendChild(div);
+
+	document.getElementById('content').appendChild(out_div);
+	fun = function(){$(".out-new-info").animate({opacity:0},300,function(){$(this).remove();});}
+
+	$(dom).mouseout( fun );
+}
+
+function showInfoAndBanish( dom , top , left , title , info ){
+
+	msg = '<strong>'+title+': </strong><br><p>'+info+'</p>';
+
+	var x = $(dom).position().left;
+	var y = $(dom).position().top;
+
+	div = document.createElement('DIV');
+	div.className = 'infoo alert n-info';
+	div.innerHTML = msg;
+	document.getElementById('content').appendChild(div);
+
+	x0 = ( x > ($(window).width()/2) ) ?  (x+left)+'px' : (x+left)+'px' ;
+	y0 = ( y > ($(window).height()/2) ) ? y-($(div).height()+top)+"px" : y+($(div).height()+top)+"px" ;
+
+	$(div).css({ left: x0 , top: y0 });
+	$(div).delay(4000).animate({opacity:0},500,function(){$(this).remove();});
+}
+
+function showInfoAndBanishAbsolute( _top , _right , title , info ){
+
+	msg = '<strong>'+title+': </strong><br><p>'+info+'</p>';
+	div = document.createElement('DIV');
+	div.className = 'infoo alert n-info';
+	div.innerHTML = msg;
+	document.getElementById('content').appendChild(div);
+	$(div).css({ right: _right , top: _top });
+	$(div).delay(4000).animate({opacity:0},500,function(){$(this).remove();});
+}

@@ -10,6 +10,7 @@
 	
 	$(document).ready(function(){
 		
+		
 		var g_category = $(document).getUrlParam("cat");
 		
 		// Colocar categoria

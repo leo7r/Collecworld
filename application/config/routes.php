@@ -112,9 +112,10 @@ $route['upload/phonecard_companyByCountry'] = "upload/phonecard_companyByCountry
 $route['upload/phonecard_typesBySystem'] = "upload/phonecard_typesBySystem";
 $route['upload/phonecard_getCatalogsByCountry'] = "upload/phonecard_getCatalogsByCountry";
 $route['upload/phonecard_loadCatalogSection'] = "upload/phonecard_loadCatalogSection";
+$route['upload/info_chip_logo'] = "upload/info_chip_logo";
 
 $route['upload/restriction'] = "upload/restriction";
-$route['upload/upload_go'] = "upload/upload_go";
+$route['upload/phonecard_upload_go'] = "upload/phonecard_upload_go";
 $route['upload/upload_coin_go'] = "upload/upload_coin_go";
 $route['upload/upload_banknote_go'] = "upload/upload_banknote_go";
 $route['upload/crop_imgs'] = "upload/crop_imgs";

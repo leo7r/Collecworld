@@ -23,7 +23,6 @@ class Upload extends CW_Controller {
 		$this->load->model('phonecard_model');
 		
 		$data['categories'] = $this->collecworld_model->get_categories();
-		$data['tags'] = $this->phonecard_model->get_tags();
 		$data['logos'] = $this->phonecard_model->get_logos();
 		
 		$this->load->view('templates/header', $data);
@@ -36,8 +35,12 @@ class Upload extends CW_Controller {
 		$data['title'] = 'Upload Phonecard';
 		
 		$this->load->model('phonecard_model');
+		$this->load->model('collecworld_model');
+		
 		$data['countries'] = $this->phonecard_model->get_countries();
 		$data['logos_list'] = $this->phonecard_model->get_logos();
+		$data['prices_list'] = $this->collecworld_model->get_status( 1 );
+		$data['tags_list'] = $this->collecworld_model->get_tags();
 		
 		$this->load->view('pages/upload/phonecards', $data);
 	}
@@ -125,13 +128,25 @@ class Upload extends CW_Controller {
 		
 	}
 	
-	public function upload_go(){
+	// Funcion para obtener la informaciond de chips y logos
+	public function info_chip_logo(){
 		
+		$data['num'] = $this->input->post('num');
+		$data['id'] = $this->input->post('id');
+		$data['src'] = $this->input->post('src');
 		
+		$this->load->view('pages/upload/info_chip_logo', $data);		
+	}
+	
+	// Funcion que carga una tarjeta telefonica
+	public function phonecard_upload_go(){
+		
+		$this->landingPageVerification();
 		$data['collectibles_count'] = $this->getCollectiblesCount();
+		$data['notifications'] = $this->getUserNotifications();
 		$data['title'] = 'Crop images for '.$this->input->post('name');
 				
-		$config['upload_path'] = './upload/img/';
+		$config['upload_path'] = './uploads/img/';
 		$config['allowed_types'] = 'gif|jpg|png|jpeg';
 		$rnd = rand(0,1000);
 		$r2 = strval(time())+strval($rnd);
@@ -180,19 +195,25 @@ class Upload extends CW_Controller {
 			$system = $this->input->post('system');	
 			$name = $this->input->post('name');
 			
-			header('Location: '.base_url().'index.php/upload/?cat=1&err=-1&cou='.$country.'&cur='.$currency.'&com='.$companies.'&sys='.$system.'&nam='.$name);
+			header('Location: '.base_url().'upload/?cat=1&err=-1&cou='.$country.'&cur='.$currency.'&com='.$companies.'&sys='.$system.'&nam='.$name);
 			return;
 		}
 		
 		$this->load->model('phonecard_model');
 		$pc = $this->phonecard_model->insert_phonecard( $data );
+		
+		return;
 		echo "<script src='/javascripts/application.js' type='text/javascript' charset='utf-8' async defer> alert('".$pc[0]."')</script>";
+		
+		// Si se cargo la tarjeta en la base de datos,		
 		if ( $pc[0] ){
 			
+			// Si no tenia imagenes y no se queria guardar la informacion, estoy listo
 			if ( strcmp($data['anverse'],"") == 0 && strcmp($data['reverse'],"") == 0 && !$this->input->post('saveInfo') ){
-				header('Location: '.base_url().'index.php/upload/?cat=1&don='.$pc[1]['id_phonecards']);
+				header('Location: '.base_url().'upload/?cat=1&don='.$pc[1]['id_phonecards']);
 			}
 			else{
+				// Si no, cargo la vista del crop para las imagenes
 				$data['pc'] = $pc[1];
 				$data['companies'] = $this->input->post('companies');
 				$data['serie'] = $this->input->post('serie');
@@ -200,30 +221,28 @@ class Upload extends CW_Controller {
 								
 				$this->load->view('templates/header',$data);
 				$this->load->view('pages/upload-crop',$data);
+				$this->load->view('templates/footer',$data);
 			}
 			
 		}
 		else{
+			
+			// Si la tarjeta que intentamos subir ya esta cargada
 			if ( $pc[1] ){
 				$modif = 'cat=1&err='.$pc[1]['id_phonecards'].'&cur='.$pc[1]['id_currencies'].'&sys='.$pc[1]['id_phonecards_systems'];
 				$modif = $modif.'&com='.$this->input->post('companies').'&ser='.$this->input->post('serie').'&cou='.$pc[1]['id_countries'];
 			}
-			else{
-				
-				if ( isset($_SESSION['user']) ){
-					$this->load->model('user_model');
-					$data['notifications'] = $this->user_model->getNotifications();
-				}
-				
+			else{				
 				$this->load->view('templates/header',$data);
 				$this->load->view('pages/upload/no_upload_phonecard',$data);
 				$this->load->view('templates/footer',$data);
 				return;
 			}
 			
-			@unlink('./upload/img/'.$data['anverse']);
-			@unlink('./upload/img/'.$data['reverse']);
-			header('Location: '.base_url().'index.php/upload/?'.$modif);
+			// Borro las imagenes que subi, y retorno a la pagina de cargar para mostrar el error
+			@unlink('./uploads/img/'.$data['anverse']);
+			@unlink('./uploads/img/'.$data['reverse']);
+			header('Location: '.base_url().'upload/?'.$modif);
 		}		
 	}
 	

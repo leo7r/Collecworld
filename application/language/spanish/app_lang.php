@@ -406,6 +406,7 @@ $lang['especial'] = 'Especial';
 	$lang['variacion_descriptiva'] = 'Variante descriptiva';
 	$lang['emitida'] = 'Fecha de emisi&oacute;n';
 	$lang['fecha_conocida'] = 'Fecha conocida';
+	$lang['impreso_en_tarjeta'] = 'Impreso en la tarjeta';
 	$lang['fecha_vencimiento'] = 'Fecha de vencimiento';
 	$lang['tiraje'] = 'Tiraje';
 	$lang['valor_facial'] = 'Valor Nominal (precio)';

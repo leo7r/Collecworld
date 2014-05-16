@@ -354,6 +354,34 @@ class Collecworld_model extends CI_Model {
 		return $query->result_array();
 	}
 	
+	public function get_status( $id_categories ){
+		
+		$this->db->order_by('order_num');
+		$query = $this->db->get_where('status', array( 'id_categories' => $id_categories ) );		
+		
+		return $query->result_array();
+	}
+	
+	public function get_tags(){
+		
+		$this->db->order_by('name');
+		$query = $this->db->get('tags');		
+
+		return $query->result_array();
+	}
+	
+	public function insert_tag( $id_categories , $id_item , $id_tag ){
+		
+		$params = array('id_tags' => $id_tag , 'id_item' => $id_item , 'id_categories' => $id_categories);
+		
+		$query = $this->db->get_where('item_tags', $params );
+		
+		if ( $query->num_rows() == 0 ){
+			$this->db->insert('item_tags', $params );	
+		}
+		
+	}
+	
 }
 
 ?>

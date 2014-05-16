@@ -55,23 +55,20 @@ function phonecard_sendForm( num ){
 	
 	text = '';
 	
-	if ( $("#name").val().length == 0 ){
-		
-		text+='-<?php echo $this->lang->line(nombre_no_valido)."</br>"; ?>';
-	}
-	if ( $("#companies").val().length == 0 ){
-		text+='-<?php echo $this->lang->line(compania_no_valida)."</br>"; ?>';
-	}
-	if ( document.getElementById('country').selectedIndex == -1 || $("#country").val() == -1 ){
+	if ( $("#countries").val() == -1 ){
 		text+='-<?php echo $this->lang->line(pais_no_valido)."</br>"; ?>';
 	}
-	if ( $("#currency").val() == -1 ){
-		text+='-<?php echo $this->lang->line(moneda_no_valida)."</br>"; ?>';
+	if ( $("#company").val() == -1 ){
+		text+='-<?php echo $this->lang->line(compania_no_valida)."</br>"; ?>';
 	}
 	if ( $("#system").val() == -1 ){
 		text+='-<?php echo $this->lang->line(sistema_no_valido)."</br>"; ?>';
 	}
-	if ( $("#date_year").val().length == 0 && $("#date_ex_year").val().length == 0 && $("#date_known_year").val().length == 0 ){
+	if ( $("#phonecard_name").val().length == 0 ){
+		
+		text+='-<?php echo $this->lang->line(nombre_no_valido)."</br>"; ?>';
+	}
+	if ( $("#date_year").val().length == 0 && $("#date_ex_year").val().length == 0 ){
 		if ( $("#order_n").val().length == 0 ){
 			text+='-<?php echo $this->lang->line(numero_de_pedido_o_fecha)."</br>"; ?>';
 		}
@@ -84,7 +81,7 @@ function phonecard_sendForm( num ){
 			$("#saveInfo").val('2');
 		}
 		
-		$("#name,#country,#companies,#currency,#system,#serie,#serie_n,#serie2,#serie_n2,#printRun,#printRun2,#faceValue,#tag0,#tag1,#tag2,#tag3").prop('disabled', false);
+		$("#phonecard_name,#countries,#companies,#currency,#system,#serie,#serie_n,#serie2,#serie_n2,#printRun,#printRun2,#faceValue,#tag0,#tag1,#tag2,#tag3").prop('disabled', false);
 		$("#date_year,#date_month,#date_day,#date_known_year,#date_known_month,#date_known_day,#date_ex_year,#date_ex_month,#date_ex_day,#order_n").prop('disabled',false);
 		
 		$("#uploading-images").css({ display: 'inherit' });
@@ -98,8 +95,8 @@ function phonecard_sendForm( num ){
 // Cosas que hacer una vez que seleccionas un pais
 function phonecard_onCountrySelected( dom ){
 		
-	index = dom.selectedIndex;
-	id_c = dom.options[index].value;
+	//index = dom.selectedIndex;
+	id_c = $(dom).val();//dom.options[index].value;
 	
 	if ( id_c != -1 ){
 		
@@ -122,10 +119,6 @@ function phonecard_onCountrySelected( dom ){
 		setSystemType( document.getElementById('system') );
 		*/
 	}
-	else{
-		document.getElementById('s_curr').innerHTML = '<select disabled="disabled" id="currency" name="currency">';
-		document.getElementById('s_curr').innerHTML += '<option selected="selected" value="-1"><?php echo $this->lang->line(\'seleccione\'); ?></option></select>';
-	}
 	
 }
 
@@ -133,13 +126,13 @@ function phonecard_onCountrySelected( dom ){
 function setSystemType( dom ){
 		
 	index = dom.selectedIndex;
-	index_c = document.getElementById('country').selectedIndex;
+	index_c = document.getElementById('countries').selectedIndex;
 	
 	// Sistema
 	id_s = parseInt(dom.options[index].value);
 	
 	// Pais
-	id_c = parseInt(document.getElementById('country').options[index_c].value);
+	id_c = parseInt(document.getElementById('countries').options[index_c].value);
 	
 	switch ( id_s ){
 		
@@ -239,4 +232,118 @@ function loadCatalogSection( level , parent ){
 				
 	});
 		
+}
+
+// Funcion para abrir el siguiente tag
+function setTag( num ){
+	
+	sel = document.getElementById('tag'+num);
+	
+	if ( num > 0 ){
+		
+		sel = document.getElementById('tag'+num);
+		sel1 = document.getElementById('tag'+(num-1));
+		
+		cond = false;
+		
+		for ( i = 0 ; i < num ; i++ ){
+			cond = cond || ( sel.selectedIndex == document.getElementById('tag'+parseInt(i)).selectedIndex );
+		}
+		
+		if ( cond ){
+			sel.selectedIndex = 0;
+			return;
+		}
+		
+	}
+	
+	if ( num < 3 ){
+		$('#tag_tr'+(num+1)).css({display:''});
+	}
+}
+
+// Permite solo numeros en un input de texto
+function onlyNumbers(evt) {
+	
+  var theEvent = evt || window.event;
+  var key = theEvent.keyCode || theEvent.which;
+  key = String.fromCharCode( key );
+  var regex = /[0-9]|\./;
+  
+  if( !regex.test(key) ) {
+	theEvent.returnValue = false;
+	if(theEvent.preventDefault) theEvent.preventDefault();
+  }
+}
+
+// Verifica que un campo de fecha sea coherente
+function verifyDate( evt , dom , type ){
+	var theEvent = evt || window.event;
+	
+	value = $(dom).val();
+	var type_regex;
+	
+	switch( type ){
+	
+	case 'year':
+		type_regex = /^(?:1|2)[\d]{0,3}$/;
+		break;
+	case 'month':
+		type_regex = /^0[1-9]|1[012]|0|1$/;
+		break;
+	case 'day':
+		type_regex = /^0?[1-9]$|^[12][0-9]$|^3[01]$/;
+		break;
+	}	
+	if( !type_regex.test(value) ) {
+		$(dom).val(value.substr(0,value.length-1));
+	}
+}
+
+// Pasa de input en fechas cuando ya esta llena
+function nextIn( dom , num , code ){
+	
+	if ( code == 0 ){
+		if ( dom.value.length >= num ){
+			$("#date_month").focus();
+		}
+	}
+	else{
+		if ( dom.value.length >= num ){
+			$("#date_day").focus();
+		}
+	}
+	
+}
+
+// Auxiliar para pasar de input en fechas cuando ya esta llena
+function nextIn2( dom , num , code ){
+	
+	if ( code == 0 ){
+		if ( dom.value.length >= num ){
+			$("#date_ex_month").focus();
+		}
+	}
+	else{
+		if ( dom.value.length >= num ){
+			$("#date_ex_day").focus();
+		}
+	}
+	
+}
+
+// Auxiliar para pasar de input en fechas cuando ya esta llena
+function nextIn3( dom , num , code ){
+	
+	if ( code == 0 ){
+		if ( dom.value.length >= num ){
+			$("#date_known_month").focus();
+		}
+	}
+	else{
+		if ( dom.value.length >= num ){
+			$("#date_known_day").focus();
+		}
+	}
+	
 }

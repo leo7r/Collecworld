@@ -403,6 +403,7 @@ $lang['especial'] = 'Special';
 	$lang['sin_logo'] = 'No logo';
 	$lang['variacion_descriptiva'] = 'Descriptive variation';
 	$lang['emitida'] = 'Issued on';
+	$lang['impreso_en_tarjeta'] = 'Printed on phonecard';
 	$lang['fecha_conocida'] = 'Known date';
 	$lang['fecha_vencimiento'] = 'Expiration date';
 	$lang['tiraje'] = 'Print run';

@@ -314,23 +314,6 @@ class Phonecard_model extends CI_Model {
 		return $query->result_array();		
 
 	}
-
-	
-
-	public function get_tags(){
-
-		
-
-		$this->db->order_by('name');
-
-		$query = $this->db->get('tags');
-
-		
-
-		return $query->result_array();		
-
-	}
-
 	
 
 	public function get_logos(){
@@ -384,494 +367,130 @@ class Phonecard_model extends CI_Model {
 	
 
 	public function insert_phonecard( $data ){
-
-		
-
-		$country = $this->input->post('country');
-
-		$currency = $this->input->post('currency');
-
-		$companies = $this->input->post('companies');
-
-		$system = $this->input->post('system');
-
-		$name = $this->input->post('name');
-		
-		$ep_n = $this->input->post('ep_n');
-		
-		$ep_uf = $this->input->post('ep_uf');
-		
-		$ep_ug = $this->input->post('ep_ug');
-		
-		$ep_ud = $this->input->post('ep_ud');
-
-		
-
-		if ( !$country or !$currency or !$companies or !$system or !$name ){
-
-			return array(false,NULL);
-
-		}
-
-		
-
-		$abbr = $this->companyAbbr($companies);
-
-		
-
-		$companies = $this->get_or_create_company($companies,$country,$abbr);
-
-		$companies = $companies['id_phonecards_companies'];
-
-		
-
-		$not_emmited = $this->input->post('not_emmited');
-
-		if ( strcmp($not_emmited,'on') == 0 ){
-
-			$not_emmited = 1;
-
-		}
-
-		else{
-
-			$not_emmited = 0;
-
-		}
-
-
-
-		$especial= $this->input->post('especial');
-
-		if ( strcmp($especial,'on') == 0 ){
-
-			$especial= 1;
-
-		}
-
-		else{
-
-			$especial= 0;
-
-		}
-
-		
-
-		$order_n = $this->input->post('order_n');
-
-		$serie = $this->input->post('serie');
-
-		$serie_n = $this->input->post('serie_n');
-
-		$serie2 = $this->input->post('serie2');
-
-		$serie_n2 = $this->input->post('serie_n2');
-
-		
-
-		if ( $serie ){
-
-			$serie = $this->get_or_create_serie($serie,$companies);
-
-			$serie = $serie['id_phonecards_series'];
-
-			$serie_known = "0";
-
-		}
-
-		elseif ( !$serie and $serie2 ){
-
-			$serie = $this->get_or_create_serie($serie2,$companies);
-
-			$serie = $serie['id_phonecards_series'];
-
-			$serie_known = "1";
-
-		}
-
-		else{
-
-			$serie = $this->get_or_create_serie($serie,$companies);
-
-			$serie = $serie['id_phonecards_series'];
-
-			$serie_known = "0";
-
-		}
-
-		
-
-		if ( !$serie_n and $serie_n2 ){
-
-			$serie_n = $serie_n2;
-
-		}
-
-		
-
-		if ( !$serie_n )
-
-			$serie_n = 0;
-
-		
-
-		$print_run = $this->input->post('printRun');
-
-		$print_run2 = $this->input->post('printRun2');
-
-		$print_run_known = "";
-
-		
-
-		if ( !$print_run ){			
-
-			if ( $print_run2 ){
-
-				$print_run = $print_run2;
-
-				$print_run_known = "1";
-
-			}
-
-			else
-
-				$print_run = 0;
-
-		}
-
-		
-
-		$issued_on = $this->get_date('date_year','date_month','date_day');
-
-		$exp_date = $this->get_date('date_ex_year','date_ex_month','date_ex_day');
-
-		$known_date = $this->get_date('date_known_year','date_known_month','date_known_day');
-
-		
-
-		if ( $issued_on ){
-
-			$order_date = $issued_on;
-
-		}
-
-		else{
-
-			if ( $known_date ){
-
-				$order_date = $known_date;
-
-			}
-
-			else{
-
-				if ( $exp_date ){
-					
-					$kdate = date("Y/m/d", strtotime("-6 months", strtotime($exp_date)));
-					$known_date = $kdate;
-					$order_date = $known_date;
-				}
-
-				else{
-
-					$order_date = 'Unknown';
-
-				}
-
-			}
-
-		}
-
-		
-
-		$face_value = $this->input->post('faceValue');
-
-		if ( !$face_value )
-
-			$face_value = 0;
-
-		
-
-		$tags = '';
-
-		for ($i=0 ; $i < 4 ; $i++){
-
-			
-
-			$tag = $this->input->post('tag'.$i);
-
-			
-
-			if ( strcmp($tag,'-1') != 0 ){
-
-				$tags = $tags.$tag.',';
-
-			}
-
-			else{
-
-				break;
-
-			}
-
-		}
-
-		$tags = substr($tags,0,strlen($tags)-1);
-
-		
-
-		$var1 = $this->input->post('var1');
-
-		$var2 = $this->input->post('var2');
-
-		$var3 = $this->input->post('var3');
-
-		$est_price = $this->input->post('est_price');
-
-		$save_info = $this->input->post('saveInfo');
-
-		
-
-		$code = $this->phonecardCatalog( $country , $companies , $system , $not_emmited );
-
-		
-
-		$img_anverse = $data['anverse'];
-
-		$img_reverse = $data['reverse'];
-
-		
-
 		@session_start();
-
 		
-
+		$country = $this->input->post('country');
+		$circulation = $this->input->post('circulation');
+		$companies = $this->input->post('companies');
+		$system = $this->input->post('system');
+		$name = $this->input->post('phonecard_name');
+		
+		// Si no estan los campos necesarios, retorno error
+		if ( !$country or !$companies or !$system or !$name ){
+			return array(false,NULL);
+		}		
+		
+		$serie = $this->input->post('serie');
+		$serie_n = $this->input->post('serie_n');
+		$denomination = $this->input->post('currency');	
+		$face_value = $this->input->post('faceValue');
+		$issued_on = $this->get_date('date_year','date_month','date_day');
+		$known_date = $this->input->post('date_known');
+		$exp_date = $this->get_date('date_ex_year','date_ex_month','date_ex_day');
+		$order_n = $this->input->post('order_n');
+		$print_run = $this->input->post('printRun');
+		$img_anverse = $data['anverse'];
+		$img_reverse = $data['reverse'];
+		$var1 = $this->input->post('var1');
+		$var2 = $this->input->post('var2');
+		$var3 = $this->input->post('var3');
+		$save_info = $this->input->post('saveInfo');
+		
+		if ( $serie ){
+			$serie = $this->get_or_create_serie($serie,$companies);
+			$serie = $serie['id_phonecards_series'];
+		}
+		
+		// Verificando si estoy intentando subir una tarjeta que ya su
+		// catalogo fue cerrado
 		$variant_params = array(
-
 			'name' => $name,
-
+			'phonecards_circulation' => $circulation,
 			'id_phonecards_series' => $serie ,
-
 			'serie_number' => $serie_n ,
-
 			'id_phonecards_companies' => $companies ,
-
-			'id_countries' => $country ,
-
-			'id_phonecards_systems' => $system ,
-
+			//'id_countries' => $country , ERROR
+			//'id_phonecards_systems' => $system , ERROR
 			'issued_on' => $issued_on ,
-
 			'exp_date' => $exp_date ,
-
 			'known_date' => $known_date ,
-
 			'face_value' => $face_value ,
-
-			'id_currencies' => $currency ,
-
+			'id_phonecards_denomination' => $denomination ,
 			'print_run' => $print_run ,
-
-			'not_emmited' => $not_emmited ,
-
-			'especial' => $especial,
-			
-			'ep_n' => $ep_n,
-			
-			'ep_uf' => $ep_uf,
-			
-			'ep_ug' => $ep_ug,
-			
-			'ep_ud' => $ep_ud,
-
 			'status' => 1
-
 		);
-
 		
-
 		$isVariant = $this->get_phonecard($variant_params);
-
-		
-
 		if ( count($isVariant) > 0 ){
-
 			return array(false,false);
-
 		}
-
-
-
-		$params = array(
-
-			'code' => $code ,
-
-			'name' => $name ,
-
-			'id_phonecards_series' => $serie ,
-
-			'serie_number' => $serie_n ,
-
-			'id_phonecards_companies' => $companies ,
-
-			'id_countries' => $country ,
-
-			'id_phonecards_systems' => $system ,
-
-			'id_variation1' => $var1 ,
-
-			'id_variation2' => $var2 ,
-
-			'issued_on' => $issued_on ,
-
-			'exp_date' => $exp_date ,
-
-			'known_date' => $known_date ,
-
-			'face_value' => $face_value ,
-
-			'id_currencies' => $currency ,
-
-			'print_run' => $print_run ,
-
-			'image' => $img_anverse ,
-
-			'image_reverse' => $img_reverse ,
-
-			'views' => 0 ,
-
-			'registration_date' => time() ,
-
-			'tags' => $tags ,
-
-			'status' => 0 ,
-
-			'descriptive_variation' => $var3 ,
-
-			'user' => $_SESSION['user'] ,
-
-			'not_emmited' => $not_emmited ,
-
-			'especial' => $especial,
-
-			'est_price' => $est_price ,
-
-			'order_date' => $order_date ,
-
-			'serie_known' => $serie_known ,
-
-			'print_run_known' => $print_run_known ,
-
-			'vertical_anverse' => 0 ,
-
-			'vertical_reverse' => 0 ,
-
-			'order_n' => $order_n ,	
-
-		);
-
-
-
-		if ( strcmp($system,'1') == 0 ){
-
-			$params2 = array( 
-
-				'name' => $name ,
-
-				'id_phonecards_series' => $serie ,
-
-				'serie_number' => $serie_n ,
-
-				'id_phonecards_companies' => $companies ,
-
-				'id_currencies' => $currency ,
-
-				'order_date' => $order_date ,
-
-				'print_run' => $print_run ,
-
-				'face_value' => $face_value ,
-
-				'exp_date' => $exp_date ,
-
-				'id_countries' => $country ,
-
-				'id_phonecards_systems' => $system ,
-
-				'id_variation1' => $var1 ,
-
-				'id_variation2' => $var2,
-
-				'descriptive_variation' => $var3
-
-				);
-
-		}
-
-		else{
-
-			$params2 = array( 
-
-				'name' => $name ,
-
-				'id_phonecards_series' => $serie ,
-
-				'serie_number' => $serie_n ,
-
-				'id_phonecards_companies' => $companies ,
-
-				'id_currencies' => $currency ,
-
-				'order_date' => $order_date ,
-
-				'print_run' => $print_run ,
-
-				'face_value' => $face_value ,
-
-				'exp_date' => $exp_date ,
-
-				'id_countries' => $country ,
-
-				'id_phonecards_systems' => $system ,
-
-				'descriptive_variation' => $var3
-
-				);
-
-		}
-
 		
-
-		$isRepeated = $this->db->get_where('phonecards',$params2);
-
+		// Construyo los parametros para comprobar si no esta duplicada
+		$params_duplicate = $variant_params;
+		$params_duplicate['id_phonecards_logos'] = $var2;
+		$params_duplicate['descriptive_variation'] = $var3;
 		
-
+		// Construyo los parametros de la tarjeta final
+		$params = $params_duplicate;
+		$params['id_users'] = $_SESSION['id_users'];
+		$params['order_n'] = $order_n;
+		$params['status'] = 0;
+		$params['image'] = $img_anverse;
+		$params['image_reverse'] = $img_reverse;
+				
+		// Verifico si ya esta cargada una tarjeta con la misma informacion
+		$isRepeated = $this->db->get_where('phonecards',$params_duplicate);
+		
 		if ( $isRepeated->num_rows() > 0 ){
-
 			$res = $isRepeated->result_array();
-
-			
-
 			return array(false,$res[0]);
-
 		}
-
+		
+		echo var_dump($params);
 		
 
 		$this->db->insert('phonecards',$params);
 
-		
-
 		$query = $this->db->get_where('phonecards',$params);
-
-		$res = $query->result_array();
-
+		$res = $query->result_array();		
+		$this->load->model('collecworld_model');
 		
-
-		$this->set_activity( $res[0]['id_phonecards'] , $_SESSION['id_users'] , 0 );
-
+		// Cargo el catalogo de referencia
+		$catalog_code = $this->input->post('catalog_code');		
+		if ( $catalog_code ){
+			$catalog = $this->input->post('catalog');
+			
+			for ( $i = 10 ; $i > 0 ; $i-- ){
+				
+				$last_section = $this->input->post('section_'.$i);
+				if ( $last_section ) break;
+			}
+			
+			if ( $last_section > 0 ){
+				$this->db->insert('catalogs_item', array( 'id_items' => $res[0]['id_phonecards'] , 'id_catalogs_sections' => $last_section , 'code' => $catalog_code ) );	
+			}
+		}
 		
+		// Cargo los precios que colocaron para esa tarjeta
+		$status = $this->collecworld_model->get_status(1);
+		for ($i = 0 ; $i < count($status) ; $i++ ){
+			$price = $this->input->post('price_'+$status[$i]['id_status']);
+			$this->db->insert('phonecards_price', array( 'id_phonecards' => $res[0]['id_phonecards'] , 'id_status' => $status[$i]['id_status'] , 'price' => $price ) );
+		}
+		
+		// Cargo los tags para esa tarjeta
+		for ($i=0 ; $i < 4 ; $i++){
 
+			$tag = $this->input->post('tag'.$i);
+
+			if ( strcmp($tag,'-1') != 0 ){
+				$this->collecworld_model->insert_tag(1, $res[0]['id_phonecards'] , $tag );	
+			}
+			else{
+				break;
+			}
+		}
+		
 		return array(true,$res[0]);
 
 	}
