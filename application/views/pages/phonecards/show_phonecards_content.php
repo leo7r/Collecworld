@@ -107,7 +107,7 @@ for ( $i=0 ; $i < count($phonecards) ; $i++ ){
 
 		?>
 
-		<div class="item-content" <?php  echo 'style="height:270px;"' ?> >
+		<div class="item-content"  style="height:270px;" >
 
 		<?php
 
@@ -147,7 +147,7 @@ for ( $i=0 ; $i < count($phonecards) ; $i++ ){
 
 			<div class="explore-item-title" onClick="modalPhonecard(<?php echo $phonecards[$i]['id_phonecards']; ?>);">
 
-				<?php echo trimm($phonecards[$i]['name'],60).' '.(strcmp($phonecards[$i]['name'],'0') == 0 ? '':' - '.$phonecards[$i]['series']); ?>
+				<?php echo trimm($phonecards[$i]['phonecards_name'],60).' '.(strcmp($phonecards[$i]['phonecards_name'],'0') == 0 ? '':' - '.$phonecards[$i]['series']); ?>
 
 			</div>
 
@@ -176,7 +176,7 @@ for ( $i=0 ; $i < count($phonecards) ; $i++ ){
 					<tr>
 
                     
-						<td><strong><?php echo $this->lang->line('serie').$serie2; ?>:</strong><td>
+						<td><strong><?php echo $this->lang->line('serie'); ?>:</strong><td>
 						<td><?php echo trimm($phonecards[$i]['series'],17); ?></td>
 					</tr>
 
@@ -240,45 +240,9 @@ for ( $i=0 ; $i < count($phonecards) ; $i++ ){
 
 							<?php
 
-								switch ( $phonecards[$i]['System'] ){
+										echo $this->lang->line($phonecards[$i]['systems']);
 
-									case 1:
 
-										echo $this->lang->line('chip');
-
-										break;
-
-									case 2:
-
-										echo $this->lang->line('banda_magnetica');
-
-										break;
-
-									case 3:
-
-										echo $this->lang->line('sistema_optico');
-
-										break;
-
-									case 4:
-
-										echo $this->lang->line('memoria_remota');
-
-										break;
-
-									case 5:
-
-										echo $this->lang->line('sistema_inducido');
-
-										break;
-
-									default:
-
-										echo $this->lang->line('desconocido');;
-
-										break;
-
-								}
 
 							?>
 
@@ -294,7 +258,7 @@ for ( $i=0 ; $i < count($phonecards) ; $i++ ){
 
 					<img src="<?php echo $phonecards[$i]['image'] ? base_url().'upload/img/'.$phonecards[$i]['image'] : base_url().'img/default_phonecard.jpg'; ?>" 
 
-					height="<?php if ( intval($phonecards[$i]['vertical_anverse']) == 1 ) echo '305'; else echo '194'; ?>" width="<?php if ( intval($phonecards[$i]['vertical_anverse']) == 1 ) echo '194'; else echo '305'; ?>" />
+					height="205" width="194" />
 
 				</div>
 

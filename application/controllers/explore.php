@@ -64,6 +64,10 @@ class Explore extends CW_Controller {
 		$data['order'] = $order;
 		$data['no_variations'] = $no_variations;
 		
+		$data['countries'] = $this->phonecard_model->get_countries(); 
+ 		
+ 		$data['catalogs'] = $this->phonecard_model->get_catalogs(); 
+
 		$data['catalog'] = $catalog;
 		$data['system'] = $system;
 		$data['year'] = $year;

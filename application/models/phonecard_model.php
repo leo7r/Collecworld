@@ -213,6 +213,12 @@ class Phonecard_model extends CI_Model {
 		
 		return $query->result_array(); 
 	}
+
+		public function get_catalogs(){
+		$query = $this->db->get('catalogs');
+		
+		return $query->result_array(); 
+	}
 	
 	public function get_system_types( $system , $categories_countries ){
 		

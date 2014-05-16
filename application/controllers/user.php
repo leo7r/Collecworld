@@ -183,7 +183,7 @@ class User extends CW_Controller {
 		$data['id_user'] = $this->input->post('id_user');
 		
 		//verifica que el nombre no este entre las listas por defecto
-		$default_list = array("coleccion", "colección", "deseo", "intercambio", "venta");
+		$default_list = array("coleccion", "colección", "collection", "deseo", "wish", "intercambio", "exchange", "venta", "sell");
 		 
 		 if (in_array($data['name'], $default_list)) {
 			echo false;
@@ -209,10 +209,78 @@ class User extends CW_Controller {
 	}
 	
 	public function viewList(){ 
-		$data['category'] = $this->input->post('category');	
-		$data['id_lists'] = $this->input->post('id_lists');	
+	 	
+		$id_lists = $this->input->post('id_lists');	
+		 
+		if(is_numeric($id_lists)){ 
 		
+			$list = $this->user_model->select_list(array("id_lists" => $id_lists));
+			$data['list'] = $list[0]; 
+			
+			$data['list_items'] = $this->user_model->select_list_items(array("id_lists" => $id_lists)); 
+			 
+		}else{  
+		
+			$list = $this->user_model->select_list(array("name" => $id_lists));
+			
+			if($list){
+				
+				$data['list'] = $list[0];
+				$data['list_items'] = $this->user_model->select_list_items(array("id_lists" => $id_lists)); 
+				
+			}else{
+		
+				$data['list']['table_name'] = $id_lists;
+				$data['list']['id_categories'] = 1; 
+				$data['list_items'] = '';
+				
+				switch($id_lists){
+					case 'collection' : $data['list']['name'] = $this->lang->line('coleccion');
+					break;
+					case 'wish' : $data['list']['name'] = $this->lang->line('deseo');
+					break;
+					case 'exchange' : $data['list']['name'] = $this->lang->line('intercambio');
+					break;
+					case 'sell' : $data['list']['name'] = $this->lang->line('venta');
+					break;
+				}
+			}
+			
+			
+		}
+		 
 		$this->load->view('pages/user/profile/collections_view_list',$data);
+	
+	}
+	
+	public function editList(){  
+		$data['name'] = $this->input->post('name');
+		$data['privacy'] = $this->input->post('privacy');
+		$data['id_lists'] = $this->input->post('id_lists');
+		$data['id_users'] = $this->input->post('id_users');
+		
+		//verifica que el nombre no este entre las listas por defecto
+		$default_list = array("coleccion", "colección", "collection", "deseo", "wish", "intercambio", "exchange", "venta", "sell");
+		 
+		 if (in_array($data['name'], $default_list)) {
+			echo false;
+			return; 
+		 }
+		
+		//verifica que la lista no exista
+		$list = $this->user_model->select_list(array("name" => $data['name'], "privacy" => $data['privacy'], "id_users" => $data['id_users']));
+		
+		if($list == false){ 
+		
+			//actualiza la lista
+			$this->user_model->update_list($data['name'], $data['privacy'], $data['id_lists']);
+			
+			echo $data['name'];
+			
+		}else{ 
+			echo false;
+			
+		}
 	
 	}
 

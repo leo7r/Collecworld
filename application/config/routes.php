@@ -196,6 +196,7 @@ $route['profile/collection'] = "user/profileCollection";
 $route['profile/collection/new_list'] = "user/newList";
 $route['profile/collection/insert_list'] = "user/insertList";
 $route['profile/collection/view_list'] = "user/viewList";
+$route['profile/collection/edit_list'] = "user/editList";
 $route['(:any)'] = "user/view/$1"; // ESTA SIEMPRE DEBE IR DE ULTIMO, SIRVE PARA DIRIGIR A LOS USUARIOS A SU PAGINA
 
 

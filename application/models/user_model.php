@@ -729,6 +729,34 @@ class User_model extends CI_Model {
 		
 	}
 	
+	public function update_list($name, $privacy, $id_lists){
+		
+		$params = array( 
+			'name' => $name,
+			'privacy' => $privacy 
+		);
+		
+		$this->db->update('lists',$params,array("id_lists"=>$id_lists));
+		
+		return;
+		
+	}
+	
+	public function select_list_items($where){
+		
+		$this->db->select('*'); 
+		$query = $this->db->get_where('view_phonecards_lists', $where ); 
+		
+		if ( $query->num_rows() >= 1 ){
+			$res = $query->result_array(); 
+			
+			return $res;
+		}else{
+			return false;
+		}
+		
+	}
+	
  
 	
 	

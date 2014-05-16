@@ -222,6 +222,28 @@ min-height:580px;
 border-left: solid 1px #ddd;
 border-right: solid 1px #ddd;
 }
+#content-in3{
+width: 100%; 
+ max-width:1000px;
+margin-left:auto;
+margin-right:auto;
+padding:10px;
+min-height:580px;
+border-left: solid 1px #ddd;
+border-right: solid 1px #ddd;
+  display: inline-block;
+vertical-align: top;
+}
+#content-in2 {
+max-width:400px;
+width: 100%;
+margin-left:auto;
+margin-right:auto;
+padding:10px;
+min-height:580px;
+display: inline-block;
+vertical-align: top;
+}
 
 .in{
 margin:5px 16px 5px 16px;
@@ -4029,6 +4051,12 @@ color:#06f;
 #explore_sort{
 margin-left:10px;
 width:500px;
+padding:5px;
+}
+
+#explore_sort1{
+margin-left:10px;
+width:370px;
 padding:5px;
 }
 
