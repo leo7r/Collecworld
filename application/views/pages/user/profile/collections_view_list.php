@@ -74,9 +74,8 @@ if (!in_array($nameL, $default_list)){
         
         <table id="collection_countries" cellpadding="10">
 			<?php
-            
-            for ( $i = 0 ; $i < mysql_num_rows($countries_cursor) ; $i++ ){
-                $c_datos = mysql_fetch_array($countries_cursor);
+            $i=1;
+            foreach( $list_items as $list_item ){ 
                 
                 if ( $i % 4 == 0 ){
                     echo '<tr>';	
@@ -85,13 +84,12 @@ if (!in_array($nameL, $default_list)){
                 
                 <td>
                     <div class="collection-step2" 
-                        onClick="phonecards_collections_select( <?php echo $_SESSION['id_users']; ?> ,
-                        <?php echo $list; ?> , <?php echo $c_datos['id_countries']; ?> )">
+                        onClick="collectionListShowCatalogs(<?php echo $list['id_lists']; ?> , <?php echo $list_item['id_countries']; ?>)">
                           
                         <br>
-                        <?php echo $c_datos['name']; ?>
+                        <?php echo $list_item['countries']; ?>
                         <br>
-                        (<?php echo $c_datos['count']; ?>)
+                        (<?php echo $list_item['count']; ?>)
                     </div>
                 </td>
                 

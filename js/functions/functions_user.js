@@ -76,73 +76,6 @@ function profileMenu( index ){
 
 }
 
-
-function setHash( hash ){
-
-	tok = hash.split('=');
-
-	if ( window.location.hash.search(tok[0]) != -1 )
-		deleteHash(tok[0]);
-
-
-	if ( window.location.hash )
-		window.location.hash+="&"+hash;
-	else
-		window.location.hash+=hash;
-
-}
-
-
-
-function deleteHash( itm ){
-
-	hash = window.location.hash;
-
-	tok = hash.split('&');
-
-	nhash = '';
-
-
-	for ( i=0 ; i<tok.length ; i++ ){
-
-		if ( tok[i].search(itm) == -1 ){
-
-			nhash+=tok[i]+'&';
-
-		}
-	}
-	nhash = nhash.substr(0,nhash.length-1);
-
-	window.location.hash = nhash;
-
-}
-
-
-function getHash( id ){
-
-	try {
-
-		var hash = window.location.hash;
-
-		ret = hash.split(id+"=");
-
-		ret = ret[1];
-
-		ret = ret.split("&");
-
-		ret = ret[0];
-
-		return ret;
-	}
-
-	catch( e ){
-
-		return false;
-
-	}
-
-}
-
 function newList( category ){
 	$("#account-content-right").load(path+'profile/collection/new_list',{category:category});
 }
@@ -202,6 +135,38 @@ function editList(){
 			showGlobalInfo(div.innerHTML+' '+translation.editada);	
 		}
 	});
+
+}
+
+//EXPLORAR LISTAS
+ 
+function collectionListShowCatalogs( id_lists, id_countries ){	
+  	 
+	$("#collection-list-content").load(path+'profile/collection/show_catalogs',{id_lists:id_lists, id_countries:id_countries});
+
+}
+
+function collectionListShowCirculations( id_lists, id_countries ){	
+  	 
+	$("#collection-list-content").load(path+'profile/collection/show_circulations',{id_lists:id_lists, id_countries:id_countries});
+
+}
+
+function collectionListShowCompanies( id_lists, id_countries, phonecards_circulation ){	
+  	 
+	$("#collection-list-content").load(path+'profile/collection/show_companies',{id_lists:id_lists, id_countries:id_countries, phonecards_circulation:phonecards_circulation});
+
+}
+
+function collectionListShowSystems( id_lists, id_countries, phonecards_circulation, id_phonecards_companies ){	
+  	 
+	$("#collection-list-content").load(path+'profile/collection/show_systems',{id_lists:id_lists, id_countries:id_countries, phonecards_circulation:phonecards_circulation, id_phonecards_companies:id_phonecards_companies});
+
+}
+
+function collectionListShowPhonecardsCw( id_lists, id_countries, phonecards_circulation, id_phonecards_companies, id_phonecards_systems ){	
+  	 
+	$("#collection-list-content").load(path+'profile/collection/show_phonecards_cw',{id_lists:id_lists, id_countries:id_countries, phonecards_circulation:phonecards_circulation, id_phonecards_companies:id_phonecards_companies, id_phonecards_systems:id_phonecards_systems});
 
 }
 

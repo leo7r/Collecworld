@@ -755,6 +755,62 @@ class User_model extends CI_Model {
 			return false;
 		}
 		
+	} 
+	
+	public function select_list_items_countries($where){
+		
+		$this->db->group_by('id_countries'); 
+		$this->db->select('*'); 
+		$this->db->select('count(id_phonecards) as count'); 
+		$query = $this->db->get_where('view_phonecards_lists', $where ); 
+		
+		return $res = $query->result_array(); 
+		 
+	}
+	
+	public function select_list_items_circulations($where){
+		
+		$this->db->group_by('phonecards_circulation');
+		$this->db->order_by('phonecards_circulation');  
+		$this->db->select('*'); 
+		$this->db->select('count(id_phonecards) as count'); 
+		$query = $this->db->get_where('view_phonecards_lists', $where ); 
+		
+		return $res = $query->result_array(); 
+		 
+	}
+	
+	public function select_list_items_companies($where){
+		
+		$this->db->group_by('id_phonecards_companies');
+		$this->db->order_by('companies');  
+		$this->db->select('*'); 
+		$this->db->select('count(id_phonecards) as count'); 
+		$query = $this->db->get_where('view_phonecards_lists', $where ); 
+		
+		return $res = $query->result_array(); 
+		 
+	}
+	
+	public function select_list_items_systems($where){
+		  
+		$this->db->group_by('id_phonecards_systems');
+		$this->db->order_by('systems');  
+		$this->db->select('*'); 
+		$this->db->select('count(id_phonecards) as count');   
+		$query = $this->db->get_where('view_phonecards_lists', $where ); 
+		
+		return $res = $query->result_array(); 
+		 
+	}
+	
+	public function select_list_items_phonecards_cw($where){
+		    
+		$this->db->select('*');    
+		$query = $this->db->get_where('view_phonecards_lists', $where ); 
+		
+		return $res = $query->result_array(); 
+		 
 	}
 	
  

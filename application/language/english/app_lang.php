@@ -194,6 +194,9 @@ $lang['mostrar_mi_coleccion'] = 'Show my collection';
 $lang['nueva_imagen_cargada'] = 'New Image uploaded';
 $lang['normal'] = 'Normal';
 $lang['especial'] = 'Special';
+$lang['c_normal'] = 'C.Normal';
+$lang['c_especial'] = 'C.Special';
+
 
 	//restablecer contraseÃ±a
 	$lang['restablecer_contrasena'] = 'Reset Password';
@@ -322,10 +325,11 @@ $lang['especial'] = 'Special';
 	
 	//explorar general
 	$lang['seleccionar_pais'] = 'Select Country';
+	$lang['seleccionar_circulacion'] = 'Select Circulation';
 	$lang['seleccionar_compania'] = 'Select Company';
 	$lang['seleccionar_serie'] = 'Select Serie';
 	$lang['seleccionar_sistema'] = 'Select System';
-	$lang['seleccionar_catalogo'] = 'Select Catalog Type';
+	$lang['seleccionar_catalogo'] = 'Select Catalog';
 	$lang['ordenar_tarjetas_telefonicas_por']='Sort phonecards by';
 	$lang['ordenar_monedas_por']='Sort coins by';
 	$lang['ordenar_monedas_por']='Sort banknotes by';
@@ -403,7 +407,6 @@ $lang['especial'] = 'Special';
 	$lang['sin_logo'] = 'No logo';
 	$lang['variacion_descriptiva'] = 'Descriptive variation';
 	$lang['emitida'] = 'Issued on';
-	$lang['impreso_en_tarjeta'] = 'Printed on phonecard';
 	$lang['fecha_conocida'] = 'Known date';
 	$lang['fecha_vencimiento'] = 'Expiration date';
 	$lang['tiraje'] = 'Print run';
@@ -425,9 +428,8 @@ $lang['especial'] = 'Special';
 	$lang['denominacion'] = 'Denomination';
 	$lang['subtitulo'] = 'Subtitle';
 	$lang['circulacion'] = 'Circulation';
-	$lang['circulacion_total'] = 'Total circulation';
-	$lang['circulacion_normal'] = 'Normal circulation';
-	$lang['conmemorativas_numismaticas'] = 'Commemorative, numismatic';
+	$lang['circulacion_especial'] = 'Special circulation';
+	$lang['circulacion_normal'] = 'Normal circulation';  
 	$lang['ensayos_pruebas_otras'] = 'Test, tender, other';
 	$lang['emitida_greg'] = 'Issued on (Gregorian)'; 
 	$lang['emitida_isla'] = 'Issued on (Islamic)';
@@ -1248,6 +1250,7 @@ $lang['imagen_anverso'] = 'Anverse image';
 $lang['imagen_reverso'] = 'Reverse image';
 $lang['variante_1_chip'] = 'Variation 1 (Chip)';
 $lang['variante_2_logo'] = 'Variation 2 (Logo)';
+$lang['variante_descriptiva'] = 'Descriptive Variation';
 $lang['logo'] = 'Logo';
 $lang['tipo_sistema'] = 'System type';
 $lang['ayuda_variante_descriptiva'] = 'If your phonecard have another variation, explain it here.';
