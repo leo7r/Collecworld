@@ -311,7 +311,7 @@ function isIE(){
 <div id="upload-error" style="display:none;">
 	<div id="warning-in">
 		<div class="title_warning">
-			<img src="<?php echo $path; ?>img/alert.png" height="16" width="16" />
+			<img src="<?php echo base_url(); ?>img/alert.png" height="16" width="16" />
 			<?php echo $this->lang->line('tu_tarjeta_telefonica'); ?> <span style="text-decoration:underline;"><?php echo $this->lang->line('no_pudo'); ?></span> <?php echo $this->lang->line('ser_cargada'); ?>
 		</div>
 	</div>
@@ -326,7 +326,7 @@ function isIE(){
 <div id="upload-done" style="display:none;">
 	<div id="done-in">
 		<div class="title_warning">
-			<img src="<?php echo $path; ?>img/done.png" height="16" width="16" />
+			<img src="<?php echo base_url(); ?>img/done.png" height="16" width="16" />
 			<?php echo $this->lang->line('tu_tarjeta_ha_sido_cargada'); ?>!
 		</div>
 	</div>
@@ -339,10 +339,10 @@ function isIE(){
 
 <div id="upload-pc" class="box1">
 	
-	<form id="form0" action="<?php echo $path; ?>upload/phonecard_upload_go" method="post" accept-charset="utf-8" enctype="multipart/form-data">	
+	<form id="form0" action="<?php echo base_url(); ?>upload/phonecard_upload_go" method="post" accept-charset="utf-8" enctype="multipart/form-data">	
         <div id="upload-title">
             <span><?php echo $this->lang->line('cargar_tarjeta_telefonica'); ?></span>
-            <img id="upload-help" src="<?php echo $path; ?>img/help2.png" height="20" width="20" onmouseover="showInfo( this , '<?php echo $this->lang->line('antes_de_cargar_una_tarjeta_telefonica'); ?>.' )">
+            <img id="upload-help" src="<?php echo base_url(); ?>img/help2.png" height="20" width="20" onmouseover="showInfo( this , '<?php echo $this->lang->line('antes_de_cargar_una_tarjeta_telefonica'); ?>.' )">
             <input type="reset" value="<?php echo $this->lang->line('restablecer'); ?>" id="upload-colab" class="google-button" >
         </div>
         <div id="upload-required">
@@ -483,7 +483,7 @@ function isIE(){
 				<td>
 					<span class="google-button" onclick="showSystemTypes();">
 						<?php echo $this->lang->line('seleccione'); ?>
-						<img style="position:relative; top:4px; left:4px;" src="<?php echo $path; ?>img/arrow-down.png" width="16" height="16"/>
+						<img style="position:relative; top:4px; left:4px;" src="<?php echo base_url(); ?>img/arrow-down.png" width="16" height="16"/>
 					</span>
 					<div id="variation1_list" style="display:none;">
 						
@@ -498,7 +498,7 @@ function isIE(){
 				<td>
 					<span class="google-button" onclick="showLogoTypes();">
 						<?php echo $this->lang->line('seleccione'); ?>
-						<img style="position:relative; top:4px; left:4px;" src="<?php echo $path; ?>img/arrow-down.png" width="16" height="16"/>
+						<img style="position:relative; top:4px; left:4px;" src="<?php echo base_url(); ?>img/arrow-down.png" width="16" height="16"/>
 					</span>
 					<div id="variation2_list" style="display:none">
 						<table id="variation2_table" style="margin:0;">
@@ -511,7 +511,7 @@ function isIE(){
 								<tr <?php echo $i % 2 == 0 ? '':'class="odd"'; ?> >
 									<td><input onchange="allowOne('variation2_list',this);"  type="checkbox" value="<?php echo $logos_list[$i]['id_phonecards_logos']; ?>" name="variation2_<?php echo $i; ?>" /></td>
 									<td><?php echo $logos_list[$i]['name']; ?></td>
-									<td><img class="variation_table_images" src="<?php echo $path; ?>upload/logo/<?php echo $logos_list[$i]['id_phonecards_logos']; ?>.jpg" onmouseover="showInfo3(this,1,<?php echo $logos_list[$i]['id_phonecards_logos']; ?>,1);" /></td>
+									<td><img class="variation_table_images" src="<?php echo base_url(); ?>upload/logo/<?php echo $logos_list[$i]['id_phonecards_logos']; ?>.jpg" onmouseover="showInfo3(this,1,<?php echo $logos_list[$i]['id_phonecards_logos']; ?>,1);" /></td>
 								</tr>
 								<?php
 							}
@@ -546,7 +546,7 @@ function isIE(){
 				$tags = '';
 				
 				for ( $i = 0 ; $i < count($tags_list) ; $i++ ){
-					$tags = $tags.'<option value="'.$tags_list[$i]['id_tag'].'">'.$tags_list[$i]['name'].'</option>';
+					$tags = $tags.'<option value="'.$tags_list[$i]['id_tags'].'">'.$tags_list[$i]['name'].'</option>';
 				}
 			?>
 			<tr>
@@ -624,7 +624,7 @@ function isIE(){
 			<div id="uploading-images" >
 				<table>
 					<tr>
-						<td><img src="<?php echo $path; ?>img/ajax-loader.gif" /></td>
+						<td><img src="<?php echo base_url(); ?>img/ajax-loader.gif" /></td>
 						<td><?php echo $this->lang->line('cargando_imagenes'); ?></td>
 					</tr>
 				</table>

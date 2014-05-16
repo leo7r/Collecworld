@@ -3,7 +3,7 @@ class Upload extends CW_Controller {
 
 	function __construct(){
 		parent::__construct();
-		error_reporting(0);
+		//error_reporting(0);
 	}
 
 	// Funcion que maneja la entrada a Subir articulo
@@ -15,7 +15,7 @@ class Upload extends CW_Controller {
 		$data['title'] = 'Upload';
 			
 		if ( isset($_SESSION['user']) ){	
-			$u = $this->user_model->isUser(array('user'=>$usr));
+			$u = $this->user_model->isUser(array('user'=>$_SESSION['user']));
 			$data['intro_upload'] = $u['intro_upload'];
 		}
 		
