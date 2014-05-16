@@ -18,24 +18,16 @@ class Phonecard_model extends CI_Model {
 		}
 	}
 	
-
-	public function get_phonecard ( $where = NULL ){
-
-		
+	// Retorna la tarjeta, si se quiere revisar en la tabla original(phonecards) se debe
+	// poner original = true
+	public function get_phonecard( $where = NULL , $original = false ){
 
 		if ( !$where ){
-
 			$query = $this->db->get('phonecards');
-
 		}
-
 		else{
-
-			$query = $this->db->get_where('phonecards', $where );
-
+			$query = $this->db->get_where($original ? 'phonecards':'view_phonecards', $where );
 		}
-
-		
 
 		return $query->result_array();	
 
@@ -455,14 +447,14 @@ class Phonecard_model extends CI_Model {
 			$variant_params['exp_date'] = $exp_date;
 		if ( $face_value )
 			$variant_params['face_value'] = $face_value;
-		if ( $denomination )
+		if ( strcmp($denomination,'-1') != 0 )
 			$variant_params['id_phonecards_denomination'] = $denomination;
 		if ( $print_run )
 			$variant_params['print_run'] = $print_run;
 		
 		$this->print_vars( $variant_params );
 		
-		$isVariant = $this->get_phonecard($variant_params);
+		$isVariant = $this->get_phonecard($variant_params,true); // Quiero ver sobre la tabla en vez de sobre la vista
 		if ( count($isVariant) > 0 ){
 			return array(false,false);
 		}

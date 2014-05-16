@@ -92,15 +92,15 @@ function phonecard_sendForm( num ){
 	}
 }
 
-// Cosas que hacer una vez que seleccionas un pais
+// Cosas que hacer una vez que seleccionas un pais, sirve para editar y para subir
 function phonecard_onCountrySelected( dom ){
-		
-	//index = dom.selectedIndex;
-	id_c = $(dom).val();//dom.options[index].value;
+	
+	id_c = $(dom).val();
 	
 	if ( id_c != -1 ){
 		
-		$('#company').load(path+'upload/phonecard_companyByCountry', {categories_countries:id_c},function(){
+		
+		$('#company').load(path+'upload/phonecard_companyByCountry', { categories_countries:id_c },function(){
 			$(this).prop('disabled',false);	
 		});
 		
