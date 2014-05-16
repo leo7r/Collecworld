@@ -347,3 +347,32 @@ function nextIn3( dom , num , code ){
 	}
 	
 }
+
+// Permite que selecciones una sola variante de la lista
+function allowOne( id , dom ){
+		
+	bool = dom.checked;
+	checks = document.getElementById(id).getElementsByTagName('input');
+	
+	for ( i=0 ; i<checks.length ; i++){
+		checks[i].checked = false;
+	}
+	
+	dom.checked = bool;
+	
+	if ( id == 'variation1_list' ){
+		if ( bool )
+			document.getElementById('var1').value = dom.value;
+		else
+			document.getElementById('var1').value = '';
+	}
+	else{
+		if ( bool )
+			document.getElementById('var2').value = dom.value;
+		else
+			document.getElementById('').value = '';
+	}
+	
+	$("#"+id).css({display:'none'});
+
+}

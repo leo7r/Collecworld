@@ -381,9 +381,17 @@ class Phonecard_model extends CI_Model {
 			
 			$params = array(
 				'id_categories_countries' => $id_cat_countries,
-				'id_phonecards_systems' => $id_phonecards_systems,
-				'id_phonecards_systems_type' => $sys_type
+				'id_phonecards_systems' => $id_phonecards_systems
 			);
+			
+			if ( !$sys_type ){
+				$params['id_phonecards_systems_type'] = NULL;
+			}
+			else{
+				if ( strlen($sys_type) > 0 ){
+					$params['id_phonecards_systems_type'] = $sys_type;	
+				}
+			}
 						
 			$query = $this->db->get_where('phonecards_systems_countries', $params );
 			
@@ -411,7 +419,6 @@ class Phonecard_model extends CI_Model {
 		$serie = $serie['id_phonecards_series'];
 		
 		$serie_n = $this->input->post('serie_n');
-		$this->collecworld_model->transformToNull($serie_n);
 		$denomination = $this->input->post('currency');	
 		$face_value = $this->input->post('faceValue');
 		$issued_on = $this->get_date('date_year','date_month','date_day');
@@ -426,8 +433,7 @@ class Phonecard_model extends CI_Model {
 		$var3 = $this->input->post('var3');
 		$save_info = $this->input->post('saveInfo');
 		
-		
-		$sys_cou = $this->get_system_country($country,$system);
+		$sys_cou = $this->get_system_country($country,$system,$var1);
 		$id_pho_sys_cou = $sys_cou['id_phonecards_systems_countries'];
 		
 		// Verificando si estoy intentando subir una tarjeta que ya su
@@ -443,15 +449,15 @@ class Phonecard_model extends CI_Model {
 		// Opcionales
 		if ( $serie_n )
 			$variant_params['serie_number'] = $serie_n;
-		if ( $serie_n )
+		if ( $issued_on )
 			$variant_params['issued_on'] = $issued_on;
-		if ( $serie_n )
+		if ( $exp_date )
 			$variant_params['exp_date'] = $exp_date;
-		if ( $serie_n )
+		if ( $face_value )
 			$variant_params['face_value'] = $face_value;
-		if ( $serie_n )
-			$variant_params['id_phonecards_denomination'] = $id_phonecards_denomination;
-		if ( $serie_n )
+		if ( $denomination )
+			$variant_params['id_phonecards_denomination'] = $denomination;
+		if ( $print_run )
 			$variant_params['print_run'] = $print_run;
 		
 		$this->print_vars( $variant_params );
@@ -508,18 +514,19 @@ class Phonecard_model extends CI_Model {
 			}
 			
 			if ( $last_section > 0 ){
-				$this->db->insert('catalogs_item', array( 'id_items' => $res[0]['id_phonecards'] , 'id_catalogs_sections' => $last_section , 'code' => $catalog_code ) );	
+				$this->db->insert('catalogs_items', array( 'id_items' => $res[0]['id_phonecards'] , 'id_catalogs_sections' => $last_section , 'code' => $catalog_code ) );	
 			}
 		}
 		
 		// Cargo los precios que colocaron para esa tarjeta
 		$status = $this->collecworld_model->get_status(1);
 		for ($i = 0 ; $i < count($status) ; $i++ ){
-			$price = $this->input->post('price_'+$status[$i]['id_status']);
+			$price = $this->input->post('price_'.$status[$i]['id_status']);
 			$this->db->insert('phonecards_price', array( 'id_phonecards' => $res[0]['id_phonecards'] , 'id_status' => $status[$i]['id_status'] , 'price' => $price ) );
 		}
 		
 		// Cargo los tags para esa tarjeta
+		/*
 		for ($i=0 ; $i < 4 ; $i++){
 
 			$tag = $this->input->post('tag'.$i);
@@ -531,6 +538,7 @@ class Phonecard_model extends CI_Model {
 				break;
 			}
 		}
+		*/
 		
 		return array(true,$res[0]);
 
