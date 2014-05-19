@@ -79,8 +79,60 @@ class Explore extends CW_Controller {
 		}
 		
 		$this->load->view('templates/header', $data);
-		$this->load->view('pages/phonecards/show_phonecards', $data);
+		$this->load->view('pages/explores/phonecards/show_phonecards', $data);
 		$this->load->view('templates/footer', $data);
+	}
+
+	public function get_phonecards($id){
+		
+		if ( isset($_SESSION['user']) ){
+
+			$this->load->model('user_model');
+		
+			$usr = $_SESSION['user'];		
+		
+			$u = $this->user_model->isUser(array('user'=>$usr));
+			
+			$data['intro_show_phonecard'] = $u['intro_show_phonecard'];
+		}
+
+
+		//echo $catalog.' | '.$system.' | '.$country.' | '.$company.' | '.$serie.' | '.$year.' | '.$page;
+		
+		$data['title'] = 'Explore phonecards';
+				
+		$this->load->model('phonecard_model');
+		$explore = $this->phonecard_model->explore_phonecards();
+		$data['phonecards'] = $explore[1];
+		
+		$this->load->view('pages/explores/phonecards/ajax/showphonecards', $data);
+
+	}
+
+		public function get_phonecards_information($id){
+		
+		if ( isset($_SESSION['user']) ){
+
+			$this->load->model('user_model');
+		
+			$usr = $_SESSION['user'];		
+		
+			$u = $this->user_model->isUser(array('user'=>$usr));
+			
+			$data['intro_show_phonecard'] = $u['intro_show_phonecard'];
+		}
+
+
+		//echo $catalog.' | '.$system.' | '.$country.' | '.$company.' | '.$serie.' | '.$year.' | '.$page;
+		
+		$data['title'] = 'Explore phonecards';
+				
+		$this->load->model('phonecard_model');
+		$explore = $this->phonecard_model->explore_phonecards();
+		$data['phonecards'] = $explore[1];
+		
+		$this->load->view('pages/explores/phonecards/ajax/showphonecards/information', $data);
+
 	}
 	
 	

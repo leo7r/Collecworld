@@ -106,7 +106,7 @@ function curPageURL() {
 $id = $_REQUEST['p'];
 
 
-if ( strpos($_SERVER['DOCUMENT_ROOT'],'wamp') == false ) {
+if ( strpos($_SERVER['DOCUMENT_ROOT'],'xampp') == false ) {
 	include $_SERVER['DOCUMENT_ROOT'].'/ajax/conexion.php';
 	include $_SERVER['DOCUMENT_ROOT'].'/application/language/switch_language.php';
 	

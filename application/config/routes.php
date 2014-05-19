@@ -128,6 +128,8 @@ $route['edit/(phonecard|coin|banknote)/crop_imgs'] = "edit/crop_imgs/$1";
 
 /* Seccion Explorar */
 $route['explore'] = "explore/phonecard";
+$route['show_phonecards/(:num)'] = "explore/get_phonecards/$1";
+$route['showPhonecards/information/(:num)'] = "explore/get_phonecards_information/$1";
 $route['explore/(phonecards|coins|banknotes)'] = "explore/explore_$1";
 $route['explore/coin/(total|normal|special|other)/([a-z]+)/(:num)/(:num)/(:num)/(:num)/([a-z0-9]+)/([a-z0-9]+)/(:num)'] = "explore/explore_coin/$1/$2/$3/$4/$5/$6/$7/$8/$9";
 $route['explore/coin/(total|normal|special|other)/([a-z]+)/(:num)/(:num)/(:num)/(:num)/([a-z0-9]+)/([a-z0-9]+)/(:num)/no_variations'] = "explore/explore_coin/$1/$2/$3/$4/$5/$6/$7/$8/0/1";

@@ -21,21 +21,10 @@ class Phonecard_model extends CI_Model {
 
 	public function get_phonecard ( $where = NULL ){
 
-		
 
-		if ( !$where ){
 
-			$query = $this->db->get('phonecards');
+			$query = $this->db->get_where('phonecards', "id_phonecards=".$where );
 
-		}
-
-		else{
-
-			$query = $this->db->get_where('phonecards', $where );
-
-		}
-
-		
 
 		return $query->result_array();	
 
