@@ -272,22 +272,72 @@ function loadTranslation(){
 }
 
 // Funcion para obtener info pasada como Hash (#) por la barra del navegador
+
+function setHash( hash ){
+
+	tok = hash.split('=');
+
+	if ( window.location.hash.search(tok[0]) != -1 )
+		deleteHash(tok[0]);
+
+
+	if ( window.location.hash )
+		window.location.hash+="&"+hash;
+	else
+		window.location.hash+=hash;
+
+}
+
+
+
+function deleteHash( itm ){
+
+	hash = window.location.hash;
+
+	tok = hash.split('&');
+
+	nhash = '';
+
+
+	for ( i=0 ; i<tok.length ; i++ ){
+
+		if ( tok[i].search(itm) == -1 ){
+
+			nhash+=tok[i]+'&';
+
+		}
+	}
+	nhash = nhash.substr(0,nhash.length-1);
+
+	window.location.hash = nhash;
+
+}
+
+
 function getHash( id ){
-	
+
 	try {
+
 		var hash = window.location.hash;
+
 		ret = hash.split(id+"=");
+
 		ret = ret[1];
+
 		ret = ret.split("&");
+
 		ret = ret[0];
 
 		return ret;
 	}
-	catch( e ){
-		return false;
-	}
-}
 
+	catch( e ){
+
+		return false;
+
+	}
+
+}
 function showInfo( dom , info ){
 
 	var x = $(dom).position().left;

@@ -194,6 +194,9 @@ $lang['mostrar_mi_coleccion'] = 'Show my collection';
 $lang['nueva_imagen_cargada'] = 'New Image uploaded';
 $lang['normal'] = 'Normal';
 $lang['especial'] = 'Special';
+$lang['c_normal'] = 'C.Normal';
+$lang['c_especial'] = 'C.Special';
+
 
 	//restablecer contraseÃ±a
 	$lang['restablecer_contrasena'] = 'Reset Password';
@@ -426,9 +429,7 @@ $lang['especial'] = 'Special';
 	$lang['subtitulo'] = 'Subtitle';
 	$lang['circulacion'] = 'Circulation';
 	$lang['circulacion_especial'] = 'Special circulation';
-	$lang['circulacion_normal'] = 'Normal circulation'; 
-	$lang['especial'] = 'Special';
-	$lang['normal'] = 'Normal'; 
+	$lang['circulacion_normal'] = 'Normal circulation';  
 	$lang['ensayos_pruebas_otras'] = 'Test, tender, other';
 	$lang['emitida_greg'] = 'Issued on (Gregorian)'; 
 	$lang['emitida_isla'] = 'Issued on (Islamic)';
@@ -1249,6 +1250,7 @@ $lang['imagen_anverso'] = 'Anverse image';
 $lang['imagen_reverso'] = 'Reverse image';
 $lang['variante_1_chip'] = 'Variation 1 (Chip)';
 $lang['variante_2_logo'] = 'Variation 2 (Logo)';
+$lang['variante_descriptiva'] = 'Descriptive Variation';
 $lang['logo'] = 'Logo';
 $lang['tipo_sistema'] = 'System type';
 $lang['ayuda_variante_descriptiva'] = 'If your phonecard have another variation, explain it here.';

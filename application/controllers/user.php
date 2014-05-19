@@ -318,5 +318,36 @@ class User extends CW_Controller {
 		$this->load->view('pages/user/profile/collections_view_list_companies',$data);
 	
 	}
+	
+	public function listShowSystems(){ 
+	 	
+		$id_lists = $this->input->post('id_lists');	
+		$id_countries = $this->input->post('id_countries');	
+		$phonecards_circulation = $this->input->post('phonecards_circulation');	
+		$id_phonecards_companies = $this->input->post('id_phonecards_companies');	
+		
+		$data['list_items'] = $this->user_model->select_list_items_systems(array("id_lists" => $id_lists, "id_countries" => $id_countries, "phonecards_circulation" => $phonecards_circulation, "id_phonecards_companies" => $id_phonecards_companies));  		 
+		$this->load->view('pages/user/profile/collections_view_list_systems',$data);
+	
+	}
+	
+	public function listShowPhonecards( $id_lists, $id_countries, $phonecards_circulation, $id_phonecards_companies, $id_phonecards_systems ){ 
+		 
+		$this->landingPageVerification();
+		$data['collectibles_count'] = $this->getCollectiblesCount();
+		$data['notifications'] = $this->user_model->getNotifications(); 
+		
+		$data['title'] = ucfirst($_SESSION['user']).' - Collection';
+	
+		$this->load->view('templates/header',$data); 
+		
+		$data['list_items'] = $this->user_model->select_list_items_phonecards_cw(array("id_lists" => $id_lists, "id_countries" => $id_countries, "phonecards_circulation" => $phonecards_circulation, "id_phonecards_companies" => $id_phonecards_companies, "id_phonecards_systems" => $id_phonecards_systems));  		 
+		 
+					
+		$this->load->view('pages/user/profile/collections_view_list_phonecards_cw',$data);
+
+		$this->load->view('templates/footer',$data);
+	
+	}
 
 }

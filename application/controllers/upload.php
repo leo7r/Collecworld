@@ -42,7 +42,7 @@ class Upload extends CW_Controller {
 		$data['prices_list'] = $this->collecworld_model->get_status( 1 );
 		$data['tags_list'] = $this->collecworld_model->get_tags();
 		
-		$this->load->view('pages/upload/phonecards', $data);
+		$this->load->view('pages/upload/phonecards/phonecards', $data);
 	}
 	
 	// Funcion para saber las monedas de un pais dentro de una categoria
@@ -68,8 +68,8 @@ class Upload extends CW_Controller {
 		$this->load->model('phonecard_model');
 		$companies = $this->phonecard_model->get_companies( $categories_countries );
 		
-		echo '<option selected="selected" value="-1">'.$this->lang->line('seleccione').'</option>';
-		for ( $i = 0 ; $i < count($companies) ; $i++ ){
+		echo '<option value="-1">'.$this->lang->line('seleccione').'</option>';
+		for ( $i = 0 ; $i < count($companies) ; $i++ ){			
 			echo '<option value="'.$companies[$i]['id_phonecards_companies'].'" >'.$companies[$i]['companies'].'</option>';
 		}
 	}
@@ -151,10 +151,10 @@ class Upload extends CW_Controller {
 		$rnd = rand(0,1000);
 		$r2 = strval(time())+strval($rnd);
 		
-		$this->load->library('upload', $config);
+		$this->load->library('upload',$config);
 		
 		$image_data = array();
-
+		
 		if ( ! $this->upload->do_upload('i_file')){
 			$data['anverse'] = '';
 		}
@@ -201,9 +201,6 @@ class Upload extends CW_Controller {
 		
 		$this->load->model('phonecard_model');
 		$pc = $this->phonecard_model->insert_phonecard( $data );
-				
-		return;
-		echo "<script src='/javascripts/application.js' type='text/javascript' charset='utf-8' async defer> alert('".$pc[0]."')</script>";
 		
 		// Si se cargo la tarjeta en la base de datos,		
 		if ( $pc[0] ){
@@ -220,7 +217,7 @@ class Upload extends CW_Controller {
 				$data['saveInfo'] = $this->input->post('saveInfo');
 								
 				$this->load->view('templates/header',$data);
-				$this->load->view('pages/upload-crop',$data);
+				$this->load->view('pages/upload/phonecards/upload-crop',$data);
 				$this->load->view('templates/footer',$data);
 			}
 			

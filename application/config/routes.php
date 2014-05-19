@@ -121,10 +121,12 @@ $route['upload/upload_banknote_go'] = "upload/upload_banknote_go";
 $route['upload/crop_imgs'] = "upload/crop_imgs";
 
 /* Seccion editar */
-$route['edit/(phonecard|coin|banknote)/(:num)'] = "edit/view/$1/$2";
-$route['edit/(phonecard|coin|banknote)/new_image'] = "edit/upload_image/$1/";
-$route['edit/(phonecard|coin|banknote)/edit_go'] = "edit/edit_go/$1";
-$route['edit/(phonecard|coin|banknote)/crop_imgs'] = "edit/crop_imgs/$1";
+
+$route['edit/phonecard/(:num)'] = "edit/view_phonecard/$1/$2";
+//$route['edit/(phonecard|coin|banknote)/(:num)'] = "edit/view/$1/$2";
+//$route['edit/(phonecard|coin|banknote)/new_image'] = "edit/upload_image/$1/";
+//$route['edit/(phonecard|coin|banknote)/edit_go'] = "edit/edit_go/$1";
+//$route['edit/(phonecard|coin|banknote)/crop_imgs'] = "edit/crop_imgs/$1";
 
 /* Seccion Explorar */
 $route['explore'] = "explore/phonecard";
@@ -203,6 +205,10 @@ $route['(:any)/collection/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)/(:num)'] = "
 	$route['profile/collection/show_catalogs'] = "user/listShowCatalogs";
 	$route['profile/collection/show_circulations'] = "user/listShowCirculations";
 	$route['profile/collection/show_companies'] = "user/listShowCompanies";
+	$route['profile/collection/show_systems'] = "user/listShowSystems";
+	$route['(:any)/collection/(:num)/(:num)/(:num)/(:num)/(:num)'] = "user/listShowPhonecards/$2/$3/$4/$5/$6";
+	
+	
 $route['(:any)'] = "user/view/$1"; // ESTA SIEMPRE DEBE IR DE ULTIMO, SIRVE PARA DIRIGIR A LOS USUARIOS A SU PAGINA
 
 
